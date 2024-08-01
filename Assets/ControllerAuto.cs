@@ -28,10 +28,10 @@ public class ControllerAuto : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Rueda1.steerAngle = -40 * Input.GetAxis("Horizontal");
-        Rueda2.steerAngle = -40 * Input.GetAxis("Horizontal");
-        Rueda3.motorTorque = Velocidad * Input.GetAxis("Vertical");
-        Rueda4.motorTorque = Velocidad * Input.GetAxis("Vertical");
+        Rueda1.steerAngle = 40 * Input.GetAxis("Horizontal");
+        Rueda2.steerAngle = 40 * Input.GetAxis("Horizontal");
+        Rueda3.motorTorque = Velocidad * Input.GetAxis("Vertical") * -1;
+        Rueda4.motorTorque = Velocidad * Input.GetAxis("Vertical") * -1;
 
         if (Input.GetAxis("Vertical") == 0)
         {
