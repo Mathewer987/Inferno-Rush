@@ -12,6 +12,9 @@ public class ControllerAuto : MonoBehaviour
     public int Frenar = 50;
     public Transform Llanta1;
     public Transform Llanta2;
+    public float velocityAct;
+    public int VelocityMax = 2000;
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +25,7 @@ public class ControllerAuto : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        velocityAct = (2 * Mathf.PI * Rueda3.radius) * Rueda3.rpm * 60 / 100;
         Llanta1.localEulerAngles = new Vector3(0, Rueda1.steerAngle, 0);
         Llanta2.localEulerAngles = new Vector3(0, Rueda2.steerAngle, 0);
     }
