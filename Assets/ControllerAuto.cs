@@ -70,8 +70,18 @@ public class ControllerAuto : MonoBehaviour
 
         }
 
-        Rueda1.steerAngle = 40 * Input.GetAxis("Horizontal");
-        Rueda2.steerAngle = 40 * Input.GetAxis("Horizontal");
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            Rueda1.steerAngle = 70 * Input.GetAxis("Horizontal");
+            Rueda2.steerAngle = 70 * Input.GetAxis("Horizontal");
+        }
+
+        else
+        {
+            Rueda1.steerAngle = 40 * Input.GetAxis("Horizontal");
+            Rueda2.steerAngle = 40 * Input.GetAxis("Horizontal");
+        }
+        
        
 
         if (Input.GetAxis("Vertical") == 0)
