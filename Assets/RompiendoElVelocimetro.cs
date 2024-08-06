@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class RompiendoElVelocimetro : MonoBehaviour
 {
     public Rigidbody rigid;
-    public Image imagen; 
+    public Transform imagen; 
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +18,7 @@ public class RompiendoElVelocimetro : MonoBehaviour
     void Update()
     {
         float speed = rigid.velocity.magnitude;
-        imagen.transform.eulerAngles = new Vector3(0, 0, speed * -5 + 150);
+        imagen.eulerAngles = new Vector3(0, 0, speed * -4 + 150);
     }
+
 }

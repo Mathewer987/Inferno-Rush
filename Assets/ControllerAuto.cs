@@ -22,6 +22,8 @@ public class ControllerAuto : MonoBehaviour
     public GameObject LlantaAtrDer;
     public GameObject LlantaAtrIzq;
 
+    public Transform Autito;
+
     float VelocidadAtras;
 
 
@@ -42,6 +44,15 @@ public class ControllerAuto : MonoBehaviour
         Llanta2.localEulerAngles = new Vector3(0, Rueda2.steerAngle, 0);
         ActualizacionRuedas();
         VelocidadAtras = velocityAct * -1;
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            Vector3 ntPosicion = transform.position;
+            ntPosicion.y += 4;
+            transform.position = ntPosicion;
+
+        }
     }
 
     private void FixedUpdate()
