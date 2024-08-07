@@ -1137,19 +1137,20 @@ MonoBehaviour:
   Rueda2: {fileID: 11507418}
   Rueda3: {fileID: 106089464}
   Rueda4: {fileID: 1935893873}
-  Velocidad: 1000
-  Frenar: 50
+  Velocidad: 40000
+  Frenar: 40000
   Llanta1: {fileID: 334809930}
   Llanta2: {fileID: 170065709}
   Llanta3: {fileID: 161543554}
   Llanta4: {fileID: 496911509}
   velocityAct: 0
-  VelocityMax: 1000
+  VelocityMax: 130000
   LlantaAdDer: {fileID: 405747946}
   LlantaAdIzq: {fileID: 772428208}
   LlantaAtrDer: {fileID: 345401643}
   LlantaAtrIzq: {fileID: 614769612}
   Autito: {fileID: 1459286503}
+  driftLevel: 10
 --- !u!114 &1459286502
 MonoBehaviour:
   m_ObjectHideFlags: 0

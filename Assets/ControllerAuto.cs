@@ -26,14 +26,33 @@ public class ControllerAuto : MonoBehaviour
 
     float VelocidadAtras;
 
+    public int driftLevel = 1;
 
-
+    private WheelFrictionCurve driftForwardFriction;
+    private WheelFrictionCurve driftSidewaysFriction;
+    private WheelFrictionCurve normalForwardFriction;
+    private WheelFrictionCurve normalSidewaysFriction;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        normalForwardFriction = Rueda3.forwardFriction;
+        normalSidewaysFriction = Rueda3.sidewaysFriction;
 
+        driftForwardFriction = new WheelFrictionCurve();
+        driftForwardFriction.extremumSlip = 1f;
+        driftForwardFriction.extremumValue = 1f;
+        driftForwardFriction.asymptoteSlip = 1f;
+        driftForwardFriction.asymptoteValue = 1f;
+        driftForwardFriction.stiffness = 0.1f;
+
+        driftSidewaysFriction = new WheelFrictionCurve();
+        driftSidewaysFriction.extremumSlip = 0.5f;
+        driftSidewaysFriction.extremumValue = 1f;
+        driftSidewaysFriction.asymptoteSlip = 0.5f;
+        driftSidewaysFriction.asymptoteValue = 1f;
+        driftSidewaysFriction.stiffness = 0.1f;
     }
 
     // Update is called once per frame
@@ -62,39 +81,44 @@ public class ControllerAuto : MonoBehaviour
             Rueda3.motorTorque = Velocidad * Input.GetAxis("Vertical") * -1;
             Rueda4.motorTorque = Velocidad * Input.GetAxis("Vertical") * -1;
         }
-
         else
         {
             Rueda3.motorTorque = 0;
             Rueda4.motorTorque = 0;
-
         }
 
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
-            Rueda1.steerAngle = 70 * Input.GetAxis("Horizontal");
-            Rueda2.steerAngle = 70 * Input.GetAxis("Horizontal");
+            // Ajustar la rigidez de las fricciones de derrape basándonos en driftLevel
+            float driftStiffness = Mathf.Clamp(1f / driftLevel, 0.1f, 1f);
+            driftForwardFriction.stiffness = driftStiffness;
+            driftSidewaysFriction.stiffness = driftStiffness;
+
+            Rueda3.forwardFriction = driftForwardFriction;
+            Rueda3.sidewaysFriction = driftSidewaysFriction;
+            Rueda4.forwardFriction = driftForwardFriction;
+            Rueda4.sidewaysFriction = driftSidewaysFriction;
         }
 
         else
         {
+            Rueda3.forwardFriction = normalForwardFriction;
+            Rueda3.sidewaysFriction = normalSidewaysFriction;
+            Rueda4.forwardFriction = normalForwardFriction;
+            Rueda4.sidewaysFriction = normalSidewaysFriction;
             Rueda1.steerAngle = 40 * Input.GetAxis("Horizontal");
             Rueda2.steerAngle = 40 * Input.GetAxis("Horizontal");
         }
-        
-       
 
         if (Input.GetAxis("Vertical") == 0)
         {
             Rueda3.brakeTorque = Frenar;
             Rueda4.brakeTorque = Frenar;
         }
-
         else
         {
             Rueda3.brakeTorque = 0;
             Rueda4.brakeTorque = 0;
-
         }
     }
 
