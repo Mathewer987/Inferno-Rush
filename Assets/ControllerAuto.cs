@@ -26,7 +26,6 @@ public class ControllerAuto : MonoBehaviour
 
     float VelocidadAtras;
 
-    public int driftLevel = 1;
 
     private WheelFrictionCurve driftForwardFriction;
     private WheelFrictionCurve driftSidewaysFriction;
@@ -76,6 +75,11 @@ public class ControllerAuto : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Calcular la rigidez de derrape en función de la velocidad actual y el ángulo de giro
+        float speedFactor = VelocidadAtras / 100f;
+        float steeringFactor = Mathf.Abs(Input.GetAxis("Horizontal"));
+        float driftStiffness = Mathf.Clamp(1f / (speedFactor * steeringFactor + 1f), 0.1f, 1f);
+
         if (VelocidadAtras < VelocityMax)
         {
             Rueda3.motorTorque = Velocidad * Input.GetAxis("Vertical") * -1;
@@ -89,8 +93,7 @@ public class ControllerAuto : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
-            // Ajustar la rigidez de las fricciones de derrape basándonos en driftLevel
-            float driftStiffness = Mathf.Clamp(1f / driftLevel, 0.1f, 1f);
+            // Simular bloqueo de diferenciales y ajustar rigidez del derrape
             driftForwardFriction.stiffness = driftStiffness;
             driftSidewaysFriction.stiffness = driftStiffness;
 
@@ -99,15 +102,15 @@ public class ControllerAuto : MonoBehaviour
             Rueda4.forwardFriction = driftForwardFriction;
             Rueda4.sidewaysFriction = driftSidewaysFriction;
         }
-
         else
         {
+            // Volver a la fricción normal cuando no se está derrapando
             Rueda3.forwardFriction = normalForwardFriction;
             Rueda3.sidewaysFriction = normalSidewaysFriction;
             Rueda4.forwardFriction = normalForwardFriction;
             Rueda4.sidewaysFriction = normalSidewaysFriction;
-            Rueda1.steerAngle = 40 * Input.GetAxis("Horizontal");
-            Rueda2.steerAngle = 40 * Input.GetAxis("Horizontal");
+            Rueda1.steerAngle = 45 * Input.GetAxis("Horizontal");
+            Rueda2.steerAngle = 45 * Input.GetAxis("Horizontal");
         }
 
         if (Input.GetAxis("Vertical") == 0)
