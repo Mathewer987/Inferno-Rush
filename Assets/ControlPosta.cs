@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class ControlPosta : MonoBehaviour
 {
+    internal enum driveType{
+        frontWheelDrive,
+        rearWheelDrive,
+        allWheelDrive
+     }
 
+    [SerializeField]private driveType drive; 
+
+    private inputManager IM;
     public WheelCollider[] Ruedas = new WheelCollider[4];
     public GameObject[] wheelMesh = new GameObject[4];
     public float motorTorque = -200;
@@ -12,38 +20,53 @@ public class ControlPosta : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        getObjects();
     }
 
     private void FixedUpdate()
     {
 
         AnimacionRuedas();
+        Movela();
+        Rotala();
+       
+    }
 
-        if (Input.GetKey(KeyCode.W))
+    private void Movela()
+    {
+
+        float PotenciaTotal;
+
+        if(drive == driveType.allWheelDrive)
         {
             for (int i = 0; i < Ruedas.Length; i++)
             {
-                Ruedas[i].motorTorque = motorTorque;
+                Ruedas[i].motorTorque = IM.vertical * (motorTorque / 4) ;
             }
         }
-        
-        if (Input.GetAxis("Horizontal") !=0)
+        else if (drive == driveType.rearWheelDrive)
         {
-            for (int i = 0; i < Ruedas.Length - 2; i++)
+            for (int i = 2; i < Ruedas.Length; i++)
             {
-                Ruedas[i].steerAngle = Input.GetAxis("Horizontal") * doblarMax;
+                Ruedas[i].motorTorque = IM.vertical * (motorTorque / 2);
             }
         }
+
         else
         {
             for (int i = 0; i < Ruedas.Length - 2; i++)
             {
-                Ruedas[i].steerAngle = 0;
+                Ruedas[i].motorTorque = IM.vertical * (motorTorque / 2);
             }
-        }
+        }      
+    }
 
-       
+    private void Rotala()
+    {
+        for (int i = 0; i < Ruedas.Length - 2; i++)
+        {
+            Ruedas[i].steerAngle = IM.horizontal * doblarMax;
+        }
     }
 
      void AnimacionRuedas()
@@ -58,5 +81,10 @@ public class ControlPosta : MonoBehaviour
             wheelMesh[i].transform.rotation = RotacionRueda;
 
         }
+    }
+
+    private void getObjects()
+    {
+        IM = GetComponent<inputManager>();
     }
 }
