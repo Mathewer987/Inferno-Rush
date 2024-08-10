@@ -242,6 +242,36 @@ WheelCollider:
     type: 3}
   m_PrefabInstance: {fileID: 8102433002027635623}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &409221670
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 409221671}
+  m_Layer: 0
+  m_Name: Masa
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &409221671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409221670}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.731, z: -0.07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1541109075}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &463639966
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,7 +536,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 890492376}
   m_LocalRotation: {x: -0.11115404, y: 0.75075924, z: -0.13084626, w: -0.63787514}
-  m_LocalPosition: {x: 305.97656, y: 23.176937, z: 341.51813}
+  m_LocalPosition: {x: 304.51, y: 22.57, z: 341.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -758,7 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1859d7745f93442a33e26ef8ef4bff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drive: 1
+  drive: 2
   Ruedas:
   - {fileID: 635525452}
   - {fileID: 325730730}
@@ -769,10 +799,12 @@ MonoBehaviour:
   - {fileID: 711806095}
   - {fileID: 1976708332}
   - {fileID: 832865684}
-  motorTorque: -500
+  motorTorque: -1000
   doblarMax: 25
   radius: 6
   KPH: 0
+  FuerzaAbajo: 50
+  fuerzaDeFreno: 90000
 --- !u!54 &1541109070
 Rigidbody:
   m_ObjectHideFlags: 0

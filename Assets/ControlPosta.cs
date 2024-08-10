@@ -13,6 +13,7 @@ public class ControlPosta : MonoBehaviour
     [SerializeField] private driveType drive;
 
     private inputManager IM;
+    private GameObject CentroDeMasa;
     public WheelCollider[] Ruedas = new WheelCollider[4];
     public GameObject[] wheelMesh = new GameObject[4];
     public float motorTorque = -200;
@@ -20,17 +21,19 @@ public class ControlPosta : MonoBehaviour
     public float radius = 6;
     private Rigidbody rigidbody;
     public float KPH;
+    public float FuerzaAbajo = 50;
+    public float fuerzaDeFreno;
 
     void Start()
     {
         getObjects();
     }
 
-    
+
 
     private void FixedUpdate()
     {
-
+        AgregarFuerzaAbajo();
         AnimacionRuedas();
         Movela();
         Rotala();
@@ -66,9 +69,19 @@ public class ControlPosta : MonoBehaviour
         }
 
         KPH = rigidbody.velocity.magnitude * 3.6f;
-    } 
 
-    
+        if (IM.FrenoDeMano)
+        {
+            Ruedas[3].brakeTorque = Ruedas[2].brakeTorque = fuerzaDeFreno;
+        }
+        else
+        {
+            Ruedas[3].brakeTorque = Ruedas[2].brakeTorque = 0;
+
+        }
+    }
+
+
 
     private void Rotala()
     {
@@ -80,12 +93,12 @@ public class ControlPosta : MonoBehaviour
             Ruedas[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * IM.horizontal;
         }
 
-        else if (IM.horizontal < 0) 
+        else if (IM.horizontal < 0)
         {
             Ruedas[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * IM.horizontal;
             Ruedas[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * IM.horizontal;
             //transform.Rotate (Vector3.up steerHelping):
-        } 
+        }
 
         else
         {
@@ -93,7 +106,7 @@ public class ControlPosta : MonoBehaviour
             Ruedas[1].steerAngle = 0;
         }
 
-        
+
     }
 
 
@@ -110,13 +123,21 @@ public class ControlPosta : MonoBehaviour
 
         }
     }
-    
+
     private void getObjects()
     {
         IM = GetComponent<inputManager>();
         rigidbody = GetComponent<Rigidbody>();
-    
+        CentroDeMasa = GameObject.Find("Masa");
+        rigidbody.centerOfMass = CentroDeMasa.transform.localPosition;
     }
+
+    private void AgregarFuerzaAbajo()
+    {
+        rigidbody.AddForce(-transform.up * FuerzaAbajo * rigidbody.velocity.magnitude);
+   
+    }
+
 }
 
 
