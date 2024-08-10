@@ -4,24 +4,29 @@ using UnityEngine;
 
 public class ControlPosta : MonoBehaviour
 {
-    internal enum driveType{
+    internal enum driveType {
         frontWheelDrive,
         rearWheelDrive,
         allWheelDrive
-     }
+    }
 
-    [SerializeField]private driveType drive; 
+    [SerializeField] private driveType drive;
 
     private inputManager IM;
     public WheelCollider[] Ruedas = new WheelCollider[4];
     public GameObject[] wheelMesh = new GameObject[4];
     public float motorTorque = -200;
     public float doblarMax = 30;
-    // Start is called before the first frame update
+    public float radius = 6;
+    private Rigidbody rigidbody;
+    public float KPH;
+
     void Start()
     {
         getObjects();
     }
+
+    
 
     private void FixedUpdate()
     {
@@ -29,7 +34,7 @@ public class ControlPosta : MonoBehaviour
         AnimacionRuedas();
         Movela();
         Rotala();
-       
+
     }
 
     private void Movela()
@@ -37,11 +42,11 @@ public class ControlPosta : MonoBehaviour
 
         float PotenciaTotal;
 
-        if(drive == driveType.allWheelDrive)
+        if (drive == driveType.allWheelDrive)
         {
             for (int i = 0; i < Ruedas.Length; i++)
             {
-                Ruedas[i].motorTorque = IM.vertical * (motorTorque / 4) ;
+                Ruedas[i].motorTorque = IM.vertical * (motorTorque / 4);
             }
         }
         else if (drive == driveType.rearWheelDrive)
@@ -58,18 +63,41 @@ public class ControlPosta : MonoBehaviour
             {
                 Ruedas[i].motorTorque = IM.vertical * (motorTorque / 2);
             }
-        }      
-    }
+        }
+
+        KPH = rigidbody.velocity.magnitude * 3.6f;
+    } 
+
+    
 
     private void Rotala()
     {
-        for (int i = 0; i < Ruedas.Length - 2; i++)
+
+        if (IM.horizontal > 0)
         {
-            Ruedas[i].steerAngle = IM.horizontal * doblarMax;
+            //rear tracks size is set to 1.Sf wheel base has been set to 2.55F
+            Ruedas[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * IM.horizontal;
+            Ruedas[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * IM.horizontal;
         }
+
+        else if (IM.horizontal < 0) 
+        {
+            Ruedas[0].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius - (1.5f / 2))) * IM.horizontal;
+            Ruedas[1].steerAngle = Mathf.Rad2Deg * Mathf.Atan(2.55f / (radius + (1.5f / 2))) * IM.horizontal;
+            //transform.Rotate (Vector3.up steerHelping):
+        } 
+
+        else
+        {
+            Ruedas[0].steerAngle = 0;
+            Ruedas[1].steerAngle = 0;
+        }
+
+        
     }
 
-     void AnimacionRuedas()
+
+    void AnimacionRuedas()
     {
         Vector3 PosicionRueda = Vector3.zero;
         Quaternion RotacionRueda = Quaternion.identity;
@@ -82,9 +110,13 @@ public class ControlPosta : MonoBehaviour
 
         }
     }
-
+    
     private void getObjects()
     {
         IM = GetComponent<inputManager>();
+        rigidbody = GetComponent<Rigidbody>();
+    
     }
 }
+
+
