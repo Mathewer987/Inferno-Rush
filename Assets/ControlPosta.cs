@@ -17,12 +17,14 @@ public class ControlPosta : MonoBehaviour
     public WheelCollider[] Ruedas = new WheelCollider[4];
     public GameObject[] wheelMesh = new GameObject[4];
     public float motorTorque = -200;
-    public float doblarMax = 30;
+    public float doblarMax = 4;
     public float radius = 6;
     private Rigidbody rigidbody;
     public float KPH;
     public float FuerzaAbajo = 50;
     public float fuerzaDeFreno;
+
+    public float[] slip = new float[4];
 
     void Start()
     {
@@ -37,9 +39,8 @@ public class ControlPosta : MonoBehaviour
         AnimacionRuedas();
         Movela();
         Rotala();
-
+        DameFriccion();
     }
-
     private void Movela()
     {
 
@@ -80,9 +81,6 @@ public class ControlPosta : MonoBehaviour
 
         }
     }
-
-
-
     private void Rotala()
     {
 
@@ -108,8 +106,6 @@ public class ControlPosta : MonoBehaviour
 
 
     }
-
-
     void AnimacionRuedas()
     {
         Vector3 PosicionRueda = Vector3.zero;
@@ -123,7 +119,6 @@ public class ControlPosta : MonoBehaviour
 
         }
     }
-
     private void getObjects()
     {
         IM = GetComponent<inputManager>();
@@ -131,11 +126,20 @@ public class ControlPosta : MonoBehaviour
         CentroDeMasa = GameObject.Find("Masa");
         rigidbody.centerOfMass = CentroDeMasa.transform.localPosition;
     }
-
     private void AgregarFuerzaAbajo()
     {
         rigidbody.AddForce(-transform.up * FuerzaAbajo * rigidbody.velocity.magnitude);
    
+    }
+    private void DameFriccion()
+    {
+        for (int i = 0; i < Ruedas.Length; i++)
+        {
+            WheelHit wheelHit;
+            Ruedas[i].GetGroundHit(out wheelHit);
+
+            slip[i] = wheelHit.forwardSlip;
+        }
     }
 
 }

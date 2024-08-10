@@ -788,7 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1859d7745f93442a33e26ef8ef4bff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drive: 2
+  drive: 1
   Ruedas:
   - {fileID: 635525452}
   - {fileID: 325730730}
@@ -805,6 +805,11 @@ MonoBehaviour:
   KPH: 0
   FuerzaAbajo: 50
   fuerzaDeFreno: 90000
+  slip:
+  - 0
+  - 0
+  - 0
+  - 0
 --- !u!54 &1541109070
 Rigidbody:
   m_ObjectHideFlags: 0
