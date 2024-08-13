@@ -23,6 +23,7 @@ public class ControlPosta : MonoBehaviour
     public float KPH;
     public float FuerzaAbajo = 50;
     public float fuerzaDeFreno;
+    public float thrust = -1000f;
 
     public float[] slip = new float[4];
 
@@ -79,6 +80,11 @@ public class ControlPosta : MonoBehaviour
         {
             Ruedas[3].brakeTorque = Ruedas[2].brakeTorque = 0;
 
+        }
+
+        if (IM.boosting)
+        {
+            rigidbody.AddForce(Vector3.forward * thrust);
         }
     }
     private void Rotala()
