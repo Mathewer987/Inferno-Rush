@@ -12,6 +12,28 @@ public class ControlPosta : MonoBehaviour
 
     [SerializeField] private driveType drive;
 
+    internal enum gearBox
+    {
+        Automatico,
+        Manual
+    }
+    [SerializeField] private gearBox gearChange;
+
+
+
+    public GameManager manager;
+
+    public float TotalPower;
+    public float wheelsRPM;
+    public AnimationCurve enginePower;
+
+    public float engineRPM;
+    public float smoothTime = 0.01f;
+    public float[] gears;
+    public int gearNum = 0;
+
+    public float maxRPM, minRPM;
+
     private inputManager IM;
     private GameObject CentroDeMasa;
     public WheelCollider[] Ruedas = new WheelCollider[4];
@@ -23,7 +45,9 @@ public class ControlPosta : MonoBehaviour
     public float KPH;
     public float FuerzaAbajo = 50;
     public float fuerzaDeFreno;
-    public float thrust = -1000f;
+    public float thrust = -20000f;
+
+    
 
     public float[] slip = new float[4];
 
@@ -32,7 +56,10 @@ public class ControlPosta : MonoBehaviour
         getObjects();
     }
 
-
+    private void Update()
+    {
+        Shifter();
+    }
 
     private void FixedUpdate()
     {
@@ -41,24 +68,82 @@ public class ControlPosta : MonoBehaviour
         Movela();
         Rotala();
         DameFriccion();
+        CalcularPotencia();
+    }
+
+    private void CalcularPotencia()
+    {
+        RPMRuedas();
+        TotalPower = (enginePower.Evaluate(engineRPM) * (gears[gearNum]) * IM.vertical) * -1;
+        float velocity = 0.0f;
+        engineRPM = Mathf.SmoothDamp(engineRPM, 1000 + (Mathf.Abs(wheelsRPM) * 3.6f * (gears[gearNum])), ref velocity, smoothTime);
+    }
+
+    private void Shifter()
+    {
+
+
+        if(gearChange == gearBox.Automatico)
+        {
+            if (engineRPM > maxRPM && gearNum < gears.Length - 1)
+            {
+                gearNum++;
+                manager.changeGear();
+
+            }
+        }
+
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                gearNum++;
+                manager.changeGear();
+
+            }
+        }
+
+        if (engineRPM < minRPM & gearNum > 0)
+        {
+            gearNum--;
+            manager.changeGear();
+        } 
+
+
+
+
+    }
+
+    private void RPMRuedas()
+    {
+        float sum = 0;
+        int R = 0;
+
+        for (int i = 0; i < 4; i++)
+        {
+            sum += Ruedas[i].rpm;
+            R++;
+        }
+
+        wheelsRPM = (R != 0) ? sum / R : 0;
+
     }
     private void Movela()
     {
 
-        float PotenciaTotal;
 
         if (drive == driveType.allWheelDrive)
         {
             for (int i = 0; i < Ruedas.Length; i++)
             {
-                Ruedas[i].motorTorque = IM.vertical * (motorTorque / 4);
+                Ruedas[i].motorTorque = TotalPower / 4;
             }
         }
         else if (drive == driveType.rearWheelDrive)
         {
             for (int i = 2; i < Ruedas.Length; i++)
             {
-                Ruedas[i].motorTorque = IM.vertical * (motorTorque / 2);
+                Ruedas[i].motorTorque = TotalPower / 2;
             }
         }
 
@@ -66,7 +151,7 @@ public class ControlPosta : MonoBehaviour
         {
             for (int i = 0; i < Ruedas.Length - 2; i++)
             {
-                Ruedas[i].motorTorque = IM.vertical * (motorTorque / 2);
+                Ruedas[i].motorTorque = TotalPower / 2;
             }
         }
 

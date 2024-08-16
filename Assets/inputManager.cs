@@ -9,7 +9,7 @@ public class inputManager : MonoBehaviour
     public float horizontal;
     public bool FrenoDeMano;
     public bool boosting;
-
+    
     private void FixedUpdate()
     {
 
