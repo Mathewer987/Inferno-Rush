@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Girador.unity.meta
 guid: 5ce00c9d59cf8ef4189cecaa80b7df48
 DefaultImporter:
+========
+guid: a6507c97e5295524cb5d5eeef177a512
+PrefabImporter:
+>>>>>>>> 23dd35b74c894fe3bbb830342f572b8511760e71:Assets/Scenes/Car_1.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
