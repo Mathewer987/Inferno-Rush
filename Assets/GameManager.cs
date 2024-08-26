@@ -46,9 +46,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+   
+
     public void changeGear()
     {
-        Marcha.text = RR.gearNum.ToString();
+        Marcha.text = (!RR.reverse)? (RR.gearNum + 1).ToString() : "R";
+
+       
     }
 
 }

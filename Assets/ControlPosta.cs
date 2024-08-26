@@ -22,6 +22,7 @@ public class ControlPosta : MonoBehaviour
 
 
     public GameManager manager;
+    public bool reverse;
 
     public float TotalPower;
     public float wheelsRPM;
@@ -77,15 +78,20 @@ public class ControlPosta : MonoBehaviour
         TotalPower = (enginePower.Evaluate(engineRPM) * (gears[gearNum]) * IM.vertical) * -1;
         float velocity = 0.0f;
         engineRPM = Mathf.SmoothDamp(engineRPM, 1000 + (Mathf.Abs(wheelsRPM) * 3.6f * (gears[gearNum])), ref velocity, smoothTime);
+
+
+
+        Movela();
     }
 
     private void Shifter()
     {
 
+        if (IsGrounded())return;
 
         if(gearChange == gearBox.Automatico)
         {
-            if (engineRPM > maxRPM && gearNum < gears.Length - 1)
+            if (engineRPM > maxRPM && gearNum < gears.Length - 1 && !reverse)
             {
                 gearNum++;
                 manager.changeGear();
@@ -114,6 +120,18 @@ public class ControlPosta : MonoBehaviour
 
     }
 
+    private bool IsGrounded()
+    {
+        if (Ruedas[0].isGrounded && Ruedas[1].isGrounded && Ruedas[2].isGrounded && Ruedas[3].isGrounded)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     private void RPMRuedas()
     {
         float sum = 0;
@@ -126,6 +144,18 @@ public class ControlPosta : MonoBehaviour
         }
 
         wheelsRPM = (R != 0) ? sum / R : 0;
+
+        if (wheelsRPM > 0 && !reverse)
+        {
+            reverse = true;
+            manager.changeGear();
+        }
+
+        if (wheelsRPM < 0 && reverse)
+        {
+            reverse = false;
+            manager.changeGear();
+        }
 
     }
     private void Movela()
