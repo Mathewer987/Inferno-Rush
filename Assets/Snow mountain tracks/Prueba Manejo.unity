@@ -836,9 +836,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1859d7745f93442a33e26ef8ef4bff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drive: 2
+  drive: 1
   gearChange: 0
   manager: {fileID: 2061569280}
+  reverse: 0
+  handBrakeFrictionMultiplier: 3.65
   TotalPower: 0
   wheelsRPM: 0
   enginePower:
@@ -900,13 +902,14 @@ MonoBehaviour:
   radius: 6
   KPH: 0
   FuerzaAbajo: 50
-  fuerzaDeFreno: 90000
+  fuerzaDeFreno: 900
   thrust: -1000
   slip:
   - 0
   - 0
   - 0
   - 0
+  handBrakeFriction: 0
 --- !u!54 &1541109070
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1769,6 +1772,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8106409243275755946, guid: cee9f3fbeef5db64ba42bf4afd27bd9d,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8106409243275755946, guid: cee9f3fbeef5db64ba42bf4afd27bd9d,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8106409243275755946, guid: cee9f3fbeef5db64ba42bf4afd27bd9d,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1459286500, guid: cee9f3fbeef5db64ba42bf4afd27bd9d, type: 3}

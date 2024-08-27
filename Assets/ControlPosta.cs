@@ -20,11 +20,11 @@ public class ControlPosta : MonoBehaviour
     }
     [SerializeField] private gearBox gearChange;
 
-
+    private WheelFrictionCurve fowardFriction, sidewaysFriction;
 
     public GameManager manager;
     public bool reverse;
-
+    public float handBrakeFrictionMultiplier = 2f;
     public float TotalPower;
     public float wheelsRPM;
     public AnimationCurve enginePower;
@@ -71,6 +71,8 @@ public class ControlPosta : MonoBehaviour
         Rotala();
         DameFriccion();
         CalcularPotencia();
+        ajustarTraccion();
+        ChequeaGiroRueda();
     }
 
     private void CalcularPotencia()
@@ -192,6 +194,7 @@ public class ControlPosta : MonoBehaviour
         {
             Ruedas[3].brakeTorque = Ruedas[2].brakeTorque = fuerzaDeFreno;
         }
+
         else
         {
             Ruedas[3].brakeTorque = Ruedas[2].brakeTorque = 0;
@@ -264,5 +267,127 @@ public class ControlPosta : MonoBehaviour
         }
     }
 
+    public float handBrakeFriction = 0;
+    private float driftFactor;
+
+       void ajustarTraccion()
+       {
+
+        float driftSmothFactor =.7f * Time.deltaTime;
+
+
+        if (IM.FrenoDeMano) {
+
+            sidewaysFriction = Ruedas[0].sidewaysFriction;
+            fowardFriction = Ruedas[0].forwardFriction;
+
+            float velocity = 0;
+            sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue = fowardFriction.extremumValue = fowardFriction.asymptoteValue =
+                Mathf.SmoothDamp(fowardFriction.asymptoteValue, driftFactor + handBrakeFrictionMultiplier, ref velocity, driftSmothFactor);
+
+            for (int i = 0; i < 4; i++)
+            {
+                Ruedas[i].sidewaysFriction = sidewaysFriction;
+                Ruedas[i].forwardFriction = fowardFriction;
+            }
+
+            sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue = fowardFriction.extremumValue = fowardFriction.asymptoteValue = 1.1f;
+
+
+            for (int i = 0; i < 2; i++)
+            {
+                Ruedas[i].sidewaysFriction = sidewaysFriction;
+                Ruedas[i].forwardFriction = fowardFriction;
+            }
+
+            rigidbody.AddForce(transform.forward * (KPH / 400) * 10000);
+
+            }
+       
+            else
+            {
+            fowardFriction = Ruedas[0].forwardFriction;
+            sidewaysFriction = Ruedas[0].sidewaysFriction;
+
+            fowardFriction.extremumValue = fowardFriction.asymptoteValue = sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue = 
+                ((KPH * handBrakeFrictionMultiplier) / 300) + 1;
+
+            for (int i = 0; i<4; i++)
+            {
+                Ruedas[i].forwardFriction = fowardFriction;
+                Ruedas[i].sidewaysFriction = sidewaysFriction;
+
+            }
+        }
+
+            for (int i = 2; i < 4; i++)
+        {
+            WheelHit wheelHit;
+
+            Ruedas[i].GetGroundHit(out wheelHit);
+
+            if (wheelHit.sidewaysSlip < 0) driftFactor = (1 + -IM.horizontal) * Mathf.Abs(wheelHit.sidewaysSlip);
+            
+            if(wheelHit.sidewaysSlip < 0) driftFactor = (1 + IM.horizontal) * Mathf.Abs(wheelHit.sidewaysSlip);
+        }
+    }
+
+    private float tempo;
+
+    void ChequeaGiroRueda()
+    {
+        float blind = 0.28f;
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            rigidbody.AddForce(transform.forward * -1500);
+
+            if (IM.FrenoDeMano)
+            {
+                for (int i = 0; i<4; i++)
+                {
+                    WheelHit wheelHit;
+                    Ruedas[i].GetGroundHit(out wheelHit);
+                    if (wheelHit.sidewaysSlip > blind || wheelHit.sidewaysSlip < -blind)
+                    {
+                        //applyBooster(wheelHit.sidewaysSlip);
+                    }
+                }
+            }
+        }
+
+        for (int i = 2; i < 4; i++){
+            WheelHit wheelHit;
+            Ruedas[i].GetGroundHit(out wheelHit);
+
+            if (wheelHit.sidewaysSlip < 0)
+                tempo = (1 + -IM.horizontal) * Mathf.Abs(wheelHit.sidewaysSlip * handBrakeFrictionMultiplier);
+                if (tempo < 0.5) tempo = 0.5f;
+            if (wheelHit.sidewaysSlip > 0)
+                tempo = (1 + IM.horizontal) * Mathf.Abs(wheelHit.sidewaysSlip * handBrakeFrictionMultiplier);
+                if (tempo < 0.5) tempo = 0.5f;
+            if (wheelHit.sidewaysSlip > .99f || wheelHit.sidewaysSlip < -.99f)
+            {
+                float velocity = 0;
+                handBrakeFriction = Mathf.SmoothDamp(handBrakeFriction, tempo * 3, ref velocity, 0, 1f * Time.deltaTime);
+            }
+
+            else
+
+                handBrakeFriction = tempo;
+
+
+        }
+
+    }
+
+    private IEnumerator timedLoop()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(.7f);
+            radius = 6 + KPH / 20;
+        }
+    }
 }
 
