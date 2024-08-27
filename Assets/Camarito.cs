@@ -11,7 +11,7 @@ public class Camarito : MonoBehaviour
     private GameObject cameraConstarint;
     private float Velocidad;
     public float defaltFOV = 0, desiredFOV = 0;
-    [Range (0,5)]public float tiempoFluido = 0;  
+    [Range(0, 5)] public float tiempoFluido = 0;
 
     private void Awake()
     {
@@ -37,7 +37,7 @@ public class Camarito : MonoBehaviour
 
     private void BoosteaFOV()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && !RR.reverse)
         {
             Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, desiredFOV, Time.deltaTime * tiempoFluido);
         }
