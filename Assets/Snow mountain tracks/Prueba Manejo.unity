@@ -836,7 +836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec1859d7745f93442a33e26ef8ef4bff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drive: 1
+  drive: 2
   gearChange: 0
   manager: {fileID: 2061569280}
   reverse: 0
@@ -856,8 +856,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 4505
-      value: 850
+      time: 4500
+      value: 800
       inSlope: -0.011744163
       outSlope: -0.011744163
       tangentMode: 0
@@ -876,6 +876,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  test: 0
   engineRPM: 0
   smoothTime: 0.01
   gears:
@@ -885,8 +886,10 @@ MonoBehaviour:
   - 0.9
   - 0.4
   gearNum: 0
-  maxRPM: 4600
-  minRPM: 2000
+  maxRPM: 999999
+  minRPM: 1000
+  playPauseSmoke: 0
+  hasFinished: 0
   Ruedas:
   - {fileID: 635525452}
   - {fileID: 325730730}
@@ -909,6 +912,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  maxWheelRPM: 800
   handBrakeFriction: 0
 --- !u!54 &1541109070
 Rigidbody:

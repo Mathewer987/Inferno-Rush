@@ -28,6 +28,8 @@ public class ControlPosta : MonoBehaviour
     public float TotalPower;
     public float wheelsRPM;
     public AnimationCurve enginePower;
+    [HideInInspector] public bool test; //engine sound boolean
+
 
     public float engineRPM;
     public float smoothTime = 0.01f;
@@ -35,6 +37,7 @@ public class ControlPosta : MonoBehaviour
     public int gearNum = 0;
 
     public float maxRPM, minRPM;
+    [HideInInspector] public bool playPauseSmoke = false, hasFinished;
 
     private inputManager IM;
     private GameObject CentroDeMasa;
@@ -48,6 +51,8 @@ public class ControlPosta : MonoBehaviour
     public float FuerzaAbajo = 50;
     public float fuerzaDeFreno;
     public float thrust = -20000f;
+    private bool flag = false;
+    private float lastValue;
 
 
 
@@ -72,20 +77,26 @@ public class ControlPosta : MonoBehaviour
         DameFriccion();
         CalcularPotencia();
         ajustarTraccion();
-        ChequeaGiroRueda();
     }
 
     private void CalcularPotencia()
     {
+        // Calculate wheel RPM
         RPMRuedas();
-        TotalPower = (enginePower.Evaluate(engineRPM) * (gears[gearNum]) * IM.vertical) * -1;
+
+        engineRPM = Mathf.Clamp(wheelsRPM * 3.6f * gears[gearNum], minRPM, maxRPM);
+
+        TotalPower = enginePower.Evaluate(engineRPM) * gears[gearNum] * IM.vertical * -1;
+
+        // Optionally use SmoothDamp to gradually adjust the engine RPM, if needed
         float velocity = 0.0f;
-        engineRPM = Mathf.SmoothDamp(engineRPM, 1000 + (Mathf.Abs(wheelsRPM) * 3.6f * (gears[gearNum])), ref velocity, smoothTime);
+        engineRPM = Mathf.SmoothDamp(engineRPM, Mathf.Clamp(1000 + (Mathf.Abs(wheelsRPM) * 3.6f * gears[gearNum]), minRPM, maxRPM), ref velocity, smoothTime);
 
-
-
-        Movela();
+        // Debug output to monitor values
+        Debug.Log($"Engine RPM: {engineRPM}, Wheel RPM: {wheelsRPM}, Total Power: {TotalPower}");
     }
+
+
 
     private void Shifter()
     {
@@ -135,6 +146,8 @@ public class ControlPosta : MonoBehaviour
         }
     }
 
+    public float maxWheelRPM = 600; // Define el límite máximo de RPM para las ruedas
+
     private void RPMRuedas()
     {
         float sum = 0;
@@ -146,8 +159,13 @@ public class ControlPosta : MonoBehaviour
             R++;
         }
 
+        // Calcula el promedio de las RPM de las ruedas
         wheelsRPM = (R != 0) ? sum / R : 0;
 
+        // Limita las RPM de las ruedas al máximo definido
+        wheelsRPM = Mathf.Clamp(wheelsRPM, -maxWheelRPM, maxWheelRPM);
+
+        // Gestiona el cambio de sentido (reversa)
         if (wheelsRPM > 0 && !reverse)
         {
             reverse = true;
@@ -159,7 +177,6 @@ public class ControlPosta : MonoBehaviour
             reverse = false;
             manager.changeGear();
         }
-
     }
     private void Movela()
     {
@@ -270,20 +287,19 @@ public class ControlPosta : MonoBehaviour
     public float handBrakeFriction = 0;
     private float driftFactor;
 
-       void ajustarTraccion()
-       {
+    private void ajustarTraccion()
+    {
+        //tine it takes to go from normal drive to drift 
+        float driftSmothFactor = .7f * Time.deltaTime;
 
-        float driftSmothFactor =.7f * Time.deltaTime;
-
-
-        if (IM.FrenoDeMano) {
-
+        if (IM.FrenoDeMano)
+        {
             sidewaysFriction = Ruedas[0].sidewaysFriction;
             fowardFriction = Ruedas[0].forwardFriction;
 
             float velocity = 0;
             sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue = fowardFriction.extremumValue = fowardFriction.asymptoteValue =
-                Mathf.SmoothDamp(fowardFriction.asymptoteValue, driftFactor + handBrakeFrictionMultiplier, ref velocity, driftSmothFactor);
+                Mathf.SmoothDamp(fowardFriction.asymptoteValue, driftFactor * handBrakeFrictionMultiplier, ref velocity, driftSmothFactor);
 
             for (int i = 0; i < 4; i++)
             {
@@ -292,27 +308,25 @@ public class ControlPosta : MonoBehaviour
             }
 
             sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue = fowardFriction.extremumValue = fowardFriction.asymptoteValue = 1.1f;
-
-
+            //extra grip for the front wheels
             for (int i = 0; i < 2; i++)
             {
                 Ruedas[i].sidewaysFriction = sidewaysFriction;
                 Ruedas[i].forwardFriction = fowardFriction;
             }
-
             rigidbody.AddForce(transform.forward * (KPH / 400) * 10000);
+        }
+        //executed when FrenoDeMano is being held
+        else
+        {
 
-            }
-       
-            else
-            {
             fowardFriction = Ruedas[0].forwardFriction;
             sidewaysFriction = Ruedas[0].sidewaysFriction;
 
-            fowardFriction.extremumValue = fowardFriction.asymptoteValue = sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue = 
+            fowardFriction.extremumValue = fowardFriction.asymptoteValue = sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue =
                 ((KPH * handBrakeFrictionMultiplier) / 300) + 1;
 
-            for (int i = 0; i<4; i++)
+            for (int i = 0; i < 4; i++)
             {
                 Ruedas[i].forwardFriction = fowardFriction;
                 Ruedas[i].sidewaysFriction = sidewaysFriction;
@@ -320,63 +334,23 @@ public class ControlPosta : MonoBehaviour
             }
         }
 
-            for (int i = 2; i < 4; i++)
+        //checks the amount of slip to control the drift
+        for (int i = 2; i < 4; i++)
         {
+
             WheelHit wheelHit;
 
             Ruedas[i].GetGroundHit(out wheelHit);
+            //smoke
+            if (wheelHit.sidewaysSlip >= 0.3f || wheelHit.sidewaysSlip <= -0.3f || wheelHit.forwardSlip >= .3f || wheelHit.forwardSlip <= -0.3f)
+                playPauseSmoke = true;
+            else
+                playPauseSmoke = false;
+
 
             if (wheelHit.sidewaysSlip < 0) driftFactor = (1 + -IM.horizontal) * Mathf.Abs(wheelHit.sidewaysSlip);
-            
-            if(wheelHit.sidewaysSlip < 0) driftFactor = (1 + IM.horizontal) * Mathf.Abs(wheelHit.sidewaysSlip);
-        }
-    }
 
-    private float tempo;
-
-    void ChequeaGiroRueda()
-    {
-        float blind = 0.28f;
-
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            rigidbody.AddForce(transform.forward * -1500);
-
-            if (IM.FrenoDeMano)
-            {
-                for (int i = 0; i<4; i++)
-                {
-                    WheelHit wheelHit;
-                    Ruedas[i].GetGroundHit(out wheelHit);
-                    if (wheelHit.sidewaysSlip > blind || wheelHit.sidewaysSlip < -blind)
-                    {
-                        //applyBooster(wheelHit.sidewaysSlip);
-                    }
-                }
-            }
-        }
-
-        for (int i = 2; i < 4; i++){
-            WheelHit wheelHit;
-            Ruedas[i].GetGroundHit(out wheelHit);
-
-            if (wheelHit.sidewaysSlip < 0)
-                tempo = (1 + -IM.horizontal) * Mathf.Abs(wheelHit.sidewaysSlip * handBrakeFrictionMultiplier);
-                if (tempo < 0.5) tempo = 0.5f;
-            if (wheelHit.sidewaysSlip > 0)
-                tempo = (1 + IM.horizontal) * Mathf.Abs(wheelHit.sidewaysSlip * handBrakeFrictionMultiplier);
-                if (tempo < 0.5) tempo = 0.5f;
-            if (wheelHit.sidewaysSlip > .99f || wheelHit.sidewaysSlip < -.99f)
-            {
-                float velocity = 0;
-                handBrakeFriction = Mathf.SmoothDamp(handBrakeFriction, tempo * 3, ref velocity, 0, 1f * Time.deltaTime);
-            }
-
-            else
-
-                handBrakeFriction = tempo;
-
-
+            if (wheelHit.sidewaysSlip > 0) driftFactor = (1 + IM.horizontal) * Mathf.Abs(wheelHit.sidewaysSlip);
         }
 
     }
@@ -387,6 +361,7 @@ public class ControlPosta : MonoBehaviour
         {
             yield return new WaitForSeconds(.7f);
             radius = 6 + KPH / 20;
+
         }
     }
 }
