@@ -895,7 +895,7 @@ MonoBehaviour:
   - 0.9
   - 0.4
   gearNum: 0
-  maxRPM: 999999
+  maxRPM: 6000
   minRPM: 1000
   playPauseSmoke: 0
   hasFinished: 0
@@ -921,7 +921,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  maxWheelRPM: 400
+  maxWheelRPM: 999
   handBrakeFriction: 0
 --- !u!54 &1541109070
 Rigidbody:

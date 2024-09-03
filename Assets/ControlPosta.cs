@@ -88,9 +88,11 @@ public class ControlPosta : MonoBehaviour
         // Calculate wheel RPM
         RPMRuedas();
 
-        engineRPM = Mathf.Clamp(wheelsRPM * 3.6f * gears[gearNum], minRPM, maxRPM);
+        engineRPM = Mathf.Clamp(wheelsRPM * gears[gearNum], minRPM, maxRPM);
 
-        TotalPower = enginePower.Evaluate(engineRPM) * gears[gearNum] * IM.vertical * -1;
+        float motorPower = enginePower.Evaluate(engineRPM);
+
+        TotalPower = motorPower * gears[gearNum] * IM.vertical * -1;
 
         // Optionally use SmoothDamp to gradually adjust the engine RPM, if needed
         float velocity = 0.0f;
@@ -184,9 +186,6 @@ public class ControlPosta : MonoBehaviour
 
     private void Movela()
     {
-
-
-
         if (drive == driveType.allWheelDrive)
         {
             for (int i = 0; i < Ruedas.Length; i++)
@@ -211,6 +210,11 @@ public class ControlPosta : MonoBehaviour
         }
 
         KPH = rigidbody.velocity.magnitude * 3.6f;
+        float maxSpeed = 57f; // Set a maximum speed to prevent excessive acceleration
+        if (KPH > maxSpeed)
+        {
+            rigidbody.velocity = rigidbody.velocity.normalized * (maxSpeed / 3.6f);
+        }
 
         if (IM.FrenoDeMano)
         {
@@ -228,7 +232,10 @@ public class ControlPosta : MonoBehaviour
             rigidbody.AddForce(Vector3.forward * thrust);
         }
 
-
+        if (KPH == -maxSpeed)
+        {
+            Debug.Log("Velocidad: " + KPH + "RPMRuedas: " + wheelsRPM);
+        }
     }
 
     private void Rotala()
