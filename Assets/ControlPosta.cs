@@ -61,11 +61,13 @@ public class ControlPosta : MonoBehaviour
     void Start()
     {
         getObjects();
+
     }
 
     private void Update()
     {
         Shifter();
+
     }
 
     private void FixedUpdate()
@@ -77,6 +79,8 @@ public class ControlPosta : MonoBehaviour
         DameFriccion();
         CalcularPotencia();
         ajustarTraccion();
+        enanoBariloche();
+
     }
 
     private void CalcularPotencia()
@@ -92,11 +96,10 @@ public class ControlPosta : MonoBehaviour
         float velocity = 0.0f;
         engineRPM = Mathf.SmoothDamp(engineRPM, Mathf.Clamp(1000 + (Mathf.Abs(wheelsRPM) * 3.6f * gears[gearNum]), minRPM, maxRPM), ref velocity, smoothTime);
 
+
+
         // Debug output to monitor values
-        Debug.Log($"Engine RPM: {engineRPM}, Wheel RPM: {wheelsRPM}, Total Power: {TotalPower}");
     }
-
-
 
     private void Shifter()
     {
@@ -178,8 +181,10 @@ public class ControlPosta : MonoBehaviour
             manager.changeGear();
         }
     }
+
     private void Movela()
     {
+
 
 
         if (drive == driveType.allWheelDrive)
@@ -222,7 +227,10 @@ public class ControlPosta : MonoBehaviour
         {
             rigidbody.AddForce(Vector3.forward * thrust);
         }
+
+
     }
+
     private void Rotala()
     {
 
@@ -248,6 +256,7 @@ public class ControlPosta : MonoBehaviour
 
 
     }
+
     void AnimacionRuedas()
     {
         Vector3 PosicionRueda = Vector3.zero;
@@ -261,6 +270,7 @@ public class ControlPosta : MonoBehaviour
 
         }
     }
+
     private void getObjects()
     {
         IM = GetComponent<inputManager>();
@@ -268,11 +278,13 @@ public class ControlPosta : MonoBehaviour
         CentroDeMasa = GameObject.Find("Masa");
         rigidbody.centerOfMass = CentroDeMasa.transform.localPosition;
     }
+
     private void AgregarFuerzaAbajo()
     {
         rigidbody.AddForce(-transform.up * FuerzaAbajo * rigidbody.velocity.magnitude);
 
     }
+
     private void DameFriccion()
     {
         for (int i = 0; i < Ruedas.Length; i++)
@@ -285,6 +297,7 @@ public class ControlPosta : MonoBehaviour
     }
 
     public float handBrakeFriction = 0;
+
     private float driftFactor;
 
     private void ajustarTraccion()
@@ -363,6 +376,22 @@ public class ControlPosta : MonoBehaviour
             radius = 6 + KPH / 20;
 
         }
+    } 
+
+    private void enanoBariloche()
+    {
+        if (TotalPower == 0)
+        {
+            Ruedas[3].brakeTorque = Ruedas[2].brakeTorque = fuerzaDeFreno / 2;
+        }
+
+        else
+        {
+            Ruedas[3].brakeTorque = Ruedas[2].brakeTorque = 0;
+        }
     }
+
+   
+
 }
 
