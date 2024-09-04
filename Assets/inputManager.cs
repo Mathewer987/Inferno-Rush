@@ -17,6 +17,8 @@ public class inputManager : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         FrenoDeMano = (Input.GetAxis("Jump") != 0) ? true : false;
         if (Input.GetKey(KeyCode.LeftShift)) boosting = true; else boosting = false;
+
+        
     }
 }
 

@@ -22,6 +22,8 @@ public class ControlPosta : MonoBehaviour
 
     private WheelFrictionCurve fowardFriction, sidewaysFriction;
 
+
+    public float maxSpeed = 40f;
     public GameManager manager;
     public bool reverse;
     public float handBrakeFrictionMultiplier = 2f;
@@ -30,11 +32,13 @@ public class ControlPosta : MonoBehaviour
     public AnimationCurve enginePower;
     [HideInInspector] public bool test; //engine sound boolean
 
-
+    public float HD = 40f;
     public float engineRPM;
     public float smoothTime = 0.01f;
     public float[] gears;
     public int gearNum = 0;
+    public float[] VCambios;
+
 
     public float maxRPM, minRPM;
     [HideInInspector] public bool playPauseSmoke = false, hasFinished;
@@ -53,6 +57,7 @@ public class ControlPosta : MonoBehaviour
     public float thrust = -20000f;
     private bool flag = false;
     private float lastValue;
+    public int Loca = 0;
 
 
 
@@ -67,7 +72,6 @@ public class ControlPosta : MonoBehaviour
     private void Update()
     {
         Shifter();
-
     }
 
     private void FixedUpdate()
@@ -80,6 +84,11 @@ public class ControlPosta : MonoBehaviour
         CalcularPotencia();
         ajustarTraccion();
         enanoBariloche();
+
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //  Debug.Log("gearChange: " + gearChange);
+        //}
 
     }
 
@@ -94,19 +103,22 @@ public class ControlPosta : MonoBehaviour
 
         TotalPower = motorPower * gears[gearNum] * IM.vertical * -1;
 
-        // Optionally use SmoothDamp to gradually adjust the engine RPM, if needed
         float velocity = 0.0f;
         engineRPM = Mathf.SmoothDamp(engineRPM, Mathf.Clamp(1000 + (Mathf.Abs(wheelsRPM) * 3.6f * gears[gearNum]), minRPM, maxRPM), ref velocity, smoothTime);
 
 
 
-        // Debug output to monitor values
     }
 
     private void Shifter()
     {
 
-        if (IsGrounded()) return;
+
+
+        if (!IsGrounded())
+        {
+            return;
+        }
 
         if (gearChange == gearBox.Automatico)
         {
@@ -118,22 +130,29 @@ public class ControlPosta : MonoBehaviour
             }
         }
 
-        else
+        if (gearChange == gearBox.Manual)
         {
             if (Input.GetKeyDown(KeyCode.E))
+                    
             {
-                gearNum++;
-                manager.changeGear();
+                Debug.Log("NT");
+
+                if ((KPH > HD - 1f && KPH < HD + 1f) && gearNum < gears.Length - 1)
+                {
+                    gearNum++;
+                    manager.changeGear();
+                    Cambialo();
+                    
+                }    
+            }
+
+            else if (Input.GetKeyDown(KeyCode.Q))
+            {
 
             }
         }
 
-        if (engineRPM < minRPM & gearNum > 0)
-        {
-            gearNum--;
-            manager.changeGear();
-        }
-
+    
 
 
 
@@ -210,7 +229,7 @@ public class ControlPosta : MonoBehaviour
         }
 
         KPH = rigidbody.velocity.magnitude * 3.6f;
-        float maxSpeed = 57f; // Set a maximum speed to prevent excessive acceleration
+
         if (KPH > maxSpeed)
         {
             rigidbody.velocity = rigidbody.velocity.normalized * (maxSpeed / 3.6f);
@@ -398,7 +417,18 @@ public class ControlPosta : MonoBehaviour
         }
     }
 
-   
+   private void Cambialo()
+    {
+        Debug.Log("1");
+        if (Loca < VCambios.Length) 
+        {
+            Debug.Log("2");
+            maxSpeed = VCambios[Loca];
+            Loca = Loca + 1;
+            HD = maxSpeed;
+            
+        }
+    }
 
 }
 
