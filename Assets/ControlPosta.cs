@@ -31,13 +31,14 @@ public class ControlPosta : MonoBehaviour
     public float wheelsRPM;
     public AnimationCurve enginePower;
     [HideInInspector] public bool test; //engine sound boolean
-
+    public bool primera;
     public float HD = 40f;
     public float engineRPM;
     public float smoothTime = 0.01f;
     public float[] gears;
     public int gearNum = 0;
     public float[] VCambios;
+    public float Record;
 
 
     public float maxRPM, minRPM;
@@ -66,6 +67,7 @@ public class ControlPosta : MonoBehaviour
     void Start()
     {
         getObjects();
+        maxSpeed = VCambios[Loca];
 
     }
 
@@ -84,11 +86,9 @@ public class ControlPosta : MonoBehaviour
         CalcularPotencia();
         ajustarTraccion();
         enanoBariloche();
+        
 
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //  Debug.Log("gearChange: " + gearChange);
-        //}
+        
 
     }
 
@@ -135,8 +135,7 @@ public class ControlPosta : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
                     
             {
-                Debug.Log("NT");
-
+                
                 if ((KPH > HD - 1f && KPH < HD + 1f) && gearNum < gears.Length - 1)
                 {
                     gearNum++;
@@ -148,8 +147,16 @@ public class ControlPosta : MonoBehaviour
 
             else if (Input.GetKeyDown(KeyCode.Q))
             {
+                if (gearNum > 0)
+                {
+                    gearNum--;
+                    manager.changeGear();
+                    CambialoMenos();
 
+                }
             }
+
+
         }
 
     
@@ -157,6 +164,7 @@ public class ControlPosta : MonoBehaviour
 
 
     }
+
 
     private bool IsGrounded()
     {
@@ -419,16 +427,31 @@ public class ControlPosta : MonoBehaviour
 
    private void Cambialo()
     {
-        Debug.Log("1");
         if (Loca < VCambios.Length) 
         {
-            Debug.Log("2");
-            maxSpeed = VCambios[Loca];
             Loca = Loca + 1;
+            maxSpeed = VCambios[Loca];
             HD = maxSpeed;
             
         }
     }
 
+
+  
+
+    private void CambialoMenos()
+    {
+        if (Loca > 0)
+        {
+            float smoothTime = 0.0f;
+            float velocity = 0.0f;
+            Loca = Loca - 1;
+            maxSpeed = Mathf.SmoothDamp(maxSpeed, VCambios[Loca], ref velocity, smoothTime);
+            //maxSpeed = VCambios[Loca];
+            HD = maxSpeed;
+        }
+    }
+
+    
 }
 

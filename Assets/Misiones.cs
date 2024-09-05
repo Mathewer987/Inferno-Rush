@@ -1,0 +1,110 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+
+public class Misiones : MonoBehaviour
+{
+
+    public float time;
+    public float startTime;
+    public Text txtTiempo;
+    public GameObject resultados;
+    bool termino = false;
+    public Text txtTempo;
+    public Text txtMejorTiempo;
+    public Text txtEstado;
+    public float Mejor = 2f;
+    public bool Ganaste;
+    public Collision Colu;
+    public bool nein;
+    public ControlPosta RR;
+    [SerializeField] private Mision misionsita;
+    public GameObject Meta;
+
+
+    internal enum Mision
+    {
+        ContraTiempo,
+        RecogerCosas
+    }
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        if (misionsita == Mision.ContraTiempo)
+        {
+            time = startTime;
+            resultados.SetActive(false);
+            Meta.SetActive(true);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (misionsita == Mision.ContraTiempo)
+        {
+            if (Colu.ColuTermi == true && nein == false)
+            {
+                Ganaste = true;
+            }
+
+            if (termino == false)
+            {
+                time -= Time.deltaTime;
+
+            }
+            //cambia de color cuando llega a cero
+            if (time < 4)
+            {
+                txtTiempo.color = Color.red;
+            }
+
+            else
+            {
+                txtTiempo.color = Color.white;
+
+            }
+            txtTiempo.text = time.ToString();
+
+            if (time <= 0 || Colu.ColuTermi == true)
+            {
+                termino = true;
+                resultados.SetActive(true);
+
+                if (Ganaste == false)
+                {
+                    time = 0;
+                    txtEstado.text = "Perdiste";
+                    txtEstado.color = Color.red;
+                    nein = true;
+                }
+
+                else if (Ganaste == true && nein == false)
+                {
+                    txtEstado.text = "Ganaste";
+                    txtEstado.color = Color.green;
+
+                    if (Mathf.Abs(time) > Mejor)
+                    {
+                        Mejor = time;
+                        RR.Record = Mejor;
+                    }
+                }
+
+                txtTempo.text = time.ToString();
+                txtMejorTiempo.text = Mejor.ToString();
+            }
+        }
+
+        else if (misionsita != Mision.ContraTiempo)
+        {
+            resultados.SetActive(false);
+            txtTiempo.gameObject.SetActive(false);
+            Meta.SetActive(false);
+        }
+    }
+}
