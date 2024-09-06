@@ -10,6 +10,9 @@ public class Collision : MonoBehaviour
     public Misiones RR;
     private void OnTriggerEnter(Collider other)
     {
+       
+
+        
         if (other.CompareTag("Hitbox"))
         {
                 ColuTermi = true;
