@@ -22,6 +22,14 @@ public class Misiones : MonoBehaviour
     public ControlPosta RR;
     [SerializeField] private Mision misionsita;
     public GameObject Meta;
+    public GameObject Spawner;
+    public ObjectSpawner NT;
+    public GameObject resulatadosSpawneo;
+    public Text cantidadObjeto;
+    public ObjectSpawner LA;
+    public CollisionObjeto GH;
+
+
 
 
     internal enum Mision
@@ -32,13 +40,32 @@ public class Misiones : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (misionsita == Mision.ContraTiempo)
         {
             time = startTime;
             resultados.SetActive(false);
             Meta.SetActive(true);
+            txtTiempo.gameObject.SetActive(true);
+            
+        }
+
+        if (misionsita == Mision.RecogerCosas)
+        {
+            LA.enabled = true;
+            GH.enabled = true;
+
+            resulatadosSpawneo.SetActive(false);
+            Spawner.SetActive(true);
+            cantidadObjeto.gameObject.SetActive(true);
+
+        }
+
+        else if (misionsita != Mision.RecogerCosas)
+        {
+            LA.enabled = false;
+            GH.enabled = false;
         }
     }
 
@@ -105,6 +132,22 @@ public class Misiones : MonoBehaviour
             resultados.SetActive(false);
             txtTiempo.gameObject.SetActive(false);
             Meta.SetActive(false);
+        }
+
+        if (misionsita == Mision.RecogerCosas)
+        {
+            if (NT.VoyPaLla == NT.cantidadDeMonedas - 3)
+            {
+                resulatadosSpawneo.SetActive(true);
+                cantidadObjeto.color = Color.green;
+            }
+        }
+
+        else if (misionsita != Mision.RecogerCosas)
+        {
+            resulatadosSpawneo.SetActive(false);
+            cantidadObjeto.gameObject.SetActive(false);
+
         }
     }
 }

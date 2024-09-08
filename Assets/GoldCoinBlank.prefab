@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6992109431816447838}
   - component: {fileID: 6992109431815316894}
   - component: {fileID: 6992109431826761886}
+  - component: {fileID: 114188229299982174}
+  - component: {fileID: 690369244611567833}
   m_Layer: 0
   m_Name: GoldCoinBlank
   m_TagString: Untagged
@@ -26,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6992109431817255774}
-  m_LocalRotation: {x: 0, y: 0.37635002, z: 0, w: -0.92647755}
+  m_LocalRotation: {x: 0, y: 0.95289963, z: 0, w: -0.303286}
   m_LocalPosition: {x: 273.60364, y: 19.63, z: 338.64914}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -97,3 +99,29 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114188229299982174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6992109431817255774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7a651e712aed87438169bffef6a14e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!64 &690369244611567833
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6992109431817255774}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 4300000, guid: 17fa8966684c1ad45af8f1113590a309, type: 3}

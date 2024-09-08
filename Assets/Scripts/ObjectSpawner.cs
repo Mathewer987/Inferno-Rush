@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ObjectSpawner : MonoBehaviour
 {
@@ -10,31 +11,49 @@ public class ObjectSpawner : MonoBehaviour
     public MeshCollider meshCollider; // MeshCollider de la calle
     public float alturaInicial = 10f; // Altura desde la cual se lanzará el rayo
     public int maxIntentos = 10; // Número máximo de intentos para encontrar una posición válida
-    public float HIV = 5f;
-    public float velocidadRotacion = 100f;
-    public GameObject[] monedasInstanciadas;
-    private int HZ = 0;
+    public float HIV = 5f; // Altura adicional sobre la carretera
+    public float velocidadRotacion = 100f; // Velocidad de rotación de las monedas
+    public GameObject[] monedasInstanciadas; // Array para almacenar las monedas instanciadas
+    private int HZ = 0; // Contador para llevar la cuenta de las monedas instanciadas
+    public Text puntaje;
+    public CollisionObjeto NT;
+    public int VoyPaLla;
+    private Misiones MT;
 
 
-    void Awake()
+
+    void Start()
     {
+        maxIntentos = cantidadDeMonedas;
         monedasInstanciadas = new GameObject[cantidadDeMonedas];
+        puntaje.text = "0/" + (cantidadDeMonedas - 3);
         InstanciarMonedas();
+        
     }
 
     void Update()
     {
+        
+
+        
         for (int i = 0; i < monedasInstanciadas.Length; i++)
         {
             if (monedasInstanciadas[i] != null)
             {
+                // Rotar las monedas alrededor del eje Y
                 monedasInstanciadas[i].transform.Rotate(Vector3.up * velocidadRotacion * Time.deltaTime);
             }
         }
+        
+        puntaje.text = VoyPaLla.ToString() + "/" + (cantidadDeMonedas - 3);
+        
     }
 
     void InstanciarMonedas()
     {
+        
+
+        
         for (int i = 0; i < cantidadDeMonedas; i++)
         {
             Vector3 puntoAleatorioEnCarretera = GenerarPuntoAleatorioEnCarretera();
@@ -42,10 +61,11 @@ public class ObjectSpawner : MonoBehaviour
             if (puntoAleatorioEnCarretera != Vector3.zero)
             {
                 // Instanciar la moneda en la posición encontrada
-                Instantiate(monedaPrefab, puntoAleatorioEnCarretera, Quaternion.identity);
-                monedasInstanciadas[HZ] = monedaPrefab;
-                HZ = HZ + 1;
+                GameObject monedaInstanciada = Instantiate(monedaPrefab, puntoAleatorioEnCarretera, Quaternion.identity);
 
+                // Almacenar la referencia de la moneda instanciada en el array
+                monedasInstanciadas[HZ] = monedaInstanciada;
+                HZ++;
             }
             else
             {
@@ -85,4 +105,5 @@ public class ObjectSpawner : MonoBehaviour
 
         return Vector3.zero; // No se encontró un punto válido después de varios intentos
     }
+    
 }
