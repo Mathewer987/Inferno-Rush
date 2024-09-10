@@ -6,7 +6,7 @@ public class RPMDovich : MonoBehaviour
 {
     public ControlPosta RR; // Asegúrate de que este script actualice la velocidad
     public GameObject AgujaSinTacc;
-    private float posicionInicial = 215f, posicionFinal = -46.6f;
+    private float posicionInicial = 185.4f, posicionFinal = -46.6f;
     private float posicionDeseada;
     public float velocidadVehiculo; 
 
