@@ -31,12 +31,17 @@ public class GameManager : MonoBehaviour
 
     public void updateAguja()
     {
+
         float rangoMovimiento = posicionInicial - posicionFinal;
         float temp = velocidadVehiculo / 179;
         float nuevaPosicion = posicionInicial - temp * rangoMovimiento;
+
         Aguja.transform.eulerAngles = new Vector3(0, 0, nuevaPosicion);
 
         float valorZ = Aguja.transform.eulerAngles.z;
+
+        
+
         float objetivo = 71.86f;
         float umbral = 0.5f;
 
@@ -44,6 +49,10 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log(velocidadVehiculo);
         }
+        
+       
+        
+
 
     }
 
