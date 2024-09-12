@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RPMDovich : MonoBehaviour
 {
@@ -8,22 +9,56 @@ public class RPMDovich : MonoBehaviour
     public GameObject AgujaSinTacc;
     private float posicionInicial = 185.4f, posicionFinal = -46.6f;
     private float posicionDeseada;
-    public float velocidadVehiculo; 
+    public float velocidadVehiculo;
+    public Sprite BotonOn;
+    public Sprite BotonOff;
+    public Image botonImage;
+    public GameObject autinho;
+    float rangoMovimiento;
+    float temp;
+    float nuevaPosicion;
 
-    // Update is called once per frame
+    void Awake()
+    {
+        RR = autinho.GetComponent<ControlPosta>();
+        botonImage.sprite = BotonOff;
+
+    }
+    void start()
+    {
+
+
+
+    }
     private void Update() // Cambia FixedUpdate por Update
     {
         velocidadVehiculo = RR.KPH;
         updateETA();
+
+        if (velocidadVehiculo >= RR.maxSpeed - 1)
+        {
+            botonImage.sprite = BotonOn;
+        }
+        else
+        {
+            botonImage.sprite = BotonOff;
+        }
+
+        if (RR.cambiopolis == true)
+        {
+            AgujaSinTacc.transform.eulerAngles = new Vector3(0, 0, nuevaPosicion);
+            RR.cambiopolis = false;
+
+        }
     }
 
     public void updateETA()
     {
    
 
-        float rangoMovimiento = posicionInicial - posicionFinal;
-        float temp = velocidadVehiculo / 40;
-        float nuevaPosicion = posicionInicial - temp * rangoMovimiento;
+         rangoMovimiento = posicionInicial - posicionFinal;
+         temp = velocidadVehiculo / 40;
+         nuevaPosicion = posicionInicial - temp * rangoMovimiento;
 
         AgujaSinTacc.transform.eulerAngles = new Vector3(0, 0, nuevaPosicion);
     }

@@ -13,7 +13,12 @@ public class GameManager : MonoBehaviour
     private float posicionInicial = 223f, posicionFinal = -46f;
     private float posicionDeseada;
     public float velocidadVehiculo;
+    public GameObject autinho;
 
+    void Awake()
+    {
+        RR = autinho.GetComponent<ControlPosta>();
+    }
     void Start()
     {
 

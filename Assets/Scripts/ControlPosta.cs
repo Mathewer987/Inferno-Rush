@@ -40,6 +40,7 @@ public class ControlPosta : MonoBehaviour
     public float[] VCambios;
     public float Record;
     public bool YU = false;
+    public bool cambiopolis;
 
 
     public float maxRPM, minRPM;
@@ -142,8 +143,9 @@ public class ControlPosta : MonoBehaviour
                     gearNum++;
                     manager.changeGear();
                     YU = true;
+                    cambiopolis = true;
                     Cambialo();
-                    
+
                 }    
             }
 
@@ -153,7 +155,9 @@ public class ControlPosta : MonoBehaviour
                 {
                     gearNum--;
                     manager.changeGear();
+                    cambiopolis = true;
                     CambialoMenos();
+
 
                 }
             }
