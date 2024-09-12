@@ -17,6 +17,7 @@ public class RPMDovich : MonoBehaviour
     float rangoMovimiento;
     float temp;
     float nuevaPosicion;
+    public bool IOP;
 
     void Awake()
     {
@@ -33,7 +34,16 @@ public class RPMDovich : MonoBehaviour
     private void Update() // Cambia FixedUpdate por Update
     {
         velocidadVehiculo = RR.KPH;
+
+
+        if (RR.cambiopolis == true)
+        {
+            nuevaPosicion = AgujaSinTacc.transform.eulerAngles.z;
+            IOP = true;
+        }
+
         updateETA();
+
 
         if (velocidadVehiculo >= RR.maxSpeed - 1)
         {
@@ -46,9 +56,12 @@ public class RPMDovich : MonoBehaviour
 
         if (RR.cambiopolis == true)
         {
-            AgujaSinTacc.transform.eulerAngles = new Vector3(0, 0, nuevaPosicion);
             RR.cambiopolis = false;
+        }
 
+        if (RR.Loca == 0) { }
+        {
+            IOP = false;
         }
     }
 
@@ -56,9 +69,22 @@ public class RPMDovich : MonoBehaviour
     {
    
 
-         rangoMovimiento = posicionInicial - posicionFinal;
-         temp = velocidadVehiculo / 40;
-         nuevaPosicion = posicionInicial - temp * rangoMovimiento;
+        rangoMovimiento = posicionInicial - posicionFinal;
+
+        if (IOP == false)
+        {
+            temp = velocidadVehiculo / 40;
+        }
+
+        else if (IOP == true)
+        {
+            
+        }
+
+        if (RR.cambiopolis == false)
+        {
+            nuevaPosicion = posicionInicial - temp * rangoMovimiento;
+        }
 
         AgujaSinTacc.transform.eulerAngles = new Vector3(0, 0, nuevaPosicion);
     }

@@ -47,6 +47,8 @@ public class ControlPosta : MonoBehaviour
     [HideInInspector] public bool playPauseSmoke = false, hasFinished;
 
     private inputManager IM;
+    public Autinhos A;
+
     private GameObject CentroDeMasa;
     public WheelCollider[] Ruedas = new WheelCollider[4];
     public GameObject[] wheelMesh = new GameObject[4];
@@ -58,9 +60,9 @@ public class ControlPosta : MonoBehaviour
     public float FuerzaAbajo = 50;
     public float fuerzaDeFreno;
     public float thrust = -20000f;
-    private bool flag = false;
     private float lastValue;
     public int Loca = 0;
+    bool ñ;
 
 
 
@@ -71,11 +73,19 @@ public class ControlPosta : MonoBehaviour
         getObjects();
         maxSpeed = VCambios[Loca];
 
+        for (int i = 0; i < 4; i++)
+        {
+            wheelMesh[i].transform.Rotate(0, 0, 90); // Ajuste inicial de la rotación
+        }
+
+
+
     }
 
     private void Update()
     {
         Shifter();
+        
     }
 
     private void FixedUpdate()
@@ -103,7 +113,7 @@ public class ControlPosta : MonoBehaviour
 
         float motorPower = enginePower.Evaluate(engineRPM);
 
-        TotalPower = motorPower * gears[gearNum] * IM.vertical * -1;
+        TotalPower = motorPower * gears[gearNum] * IM.vertical ;
 
         float velocity = 0.0f;
         engineRPM = Mathf.SmoothDamp(engineRPM, Mathf.Clamp(1000 + (Mathf.Abs(wheelsRPM) * 3.6f * gears[gearNum]), minRPM, maxRPM), ref velocity, smoothTime);
@@ -251,7 +261,7 @@ public class ControlPosta : MonoBehaviour
 
         if (IM.FrenoDeMano)
         {
-            Ruedas[3].brakeTorque = Ruedas[2].brakeTorque = fuerzaDeFreno;
+            Ruedas[3].brakeTorque = Ruedas[2].brakeTorque = 1000000;
         }
 
         else
@@ -305,9 +315,12 @@ public class ControlPosta : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             Ruedas[i].GetWorldPose(out PosicionRueda, out RotacionRueda);
-            wheelMesh[i].transform.position = PosicionRueda;
-            wheelMesh[i].transform.rotation = RotacionRueda;
 
+            // Si quieres que la rotación Z inicial sea 90 grados
+            Quaternion rotacionAdicional = Quaternion.Euler(0, 0, 90);
+
+            wheelMesh[i].transform.position = PosicionRueda;
+            wheelMesh[i].transform.rotation = RotacionRueda * rotacionAdicional; // Aplicar la rotación adicional
         }
     }
 
@@ -322,6 +335,11 @@ public class ControlPosta : MonoBehaviour
     private void AgregarFuerzaAbajo()
     {
         rigidbody.AddForce(-transform.up * FuerzaAbajo * rigidbody.velocity.magnitude);
+
+
+ 
+            
+        
 
     }
 
