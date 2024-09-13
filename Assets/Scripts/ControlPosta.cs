@@ -63,6 +63,7 @@ public class ControlPosta : MonoBehaviour
     private float lastValue;
     public int Loca = 0;
     bool ñ;
+    float motorPower;
 
 
 
@@ -111,7 +112,7 @@ public class ControlPosta : MonoBehaviour
 
         engineRPM = Mathf.Clamp(wheelsRPM * gears[gearNum], minRPM, maxRPM);
 
-        float motorPower = enginePower.Evaluate(engineRPM);
+         motorPower = enginePower.Evaluate(engineRPM);
 
         TotalPower = motorPower * gears[gearNum] * IM.vertical ;
 
@@ -229,6 +230,7 @@ public class ControlPosta : MonoBehaviour
 
     private void Movela()
     {
+
         if (drive == driveType.allWheelDrive)
         {
             for (int i = 0; i < Ruedas.Length; i++)
@@ -322,6 +324,7 @@ public class ControlPosta : MonoBehaviour
             wheelMesh[i].transform.position = PosicionRueda;
             wheelMesh[i].transform.rotation = RotacionRueda * rotacionAdicional; // Aplicar la rotación adicional
         }
+
     }
 
     private void getObjects()
