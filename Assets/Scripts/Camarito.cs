@@ -37,7 +37,7 @@ public class Camarito : MonoBehaviour
 
     private void BoosteaFOV()
     {
-        if (Input.GetKey(KeyCode.LeftShift) && !RR.reverse)
+        if (Input.GetKey(KeyCode.LeftShift) && RR.reverse)
         {
             Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, desiredFOV, Time.deltaTime * tiempoFluido);
         }

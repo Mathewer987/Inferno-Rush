@@ -263,7 +263,7 @@ public class ControlPosta : MonoBehaviour
 
         if (IM.FrenoDeMano)
         {
-            Ruedas[3].brakeTorque = Ruedas[2].brakeTorque = 1000000;
+            enanoBariloche();
         }
 
         else
@@ -274,7 +274,7 @@ public class ControlPosta : MonoBehaviour
 
         if (IM.boosting)
         {
-            rigidbody.AddForce(Vector3.forward * thrust);
+            rigidbody.AddForce(Vector3.left * thrust);
         }
 
         if (KPH == -maxSpeed)
@@ -388,7 +388,11 @@ public class ControlPosta : MonoBehaviour
                 Ruedas[i].sidewaysFriction = sidewaysFriction;
                 Ruedas[i].forwardFriction = fowardFriction;
             }
-            rigidbody.AddForce(transform.forward * (KPH / 400) * 10000);
+            if (reverse == true)
+            {
+                rigidbody.AddForce(transform.forward * (KPH / 400) * -100000);
+
+            }
         }
         //executed when FrenoDeMano is being held
         else
@@ -441,6 +445,7 @@ public class ControlPosta : MonoBehaviour
 
     private void enanoBariloche()
     {
+
         if (TotalPower == 0)
         {
             Ruedas[3].brakeTorque = Ruedas[2].brakeTorque = fuerzaDeFreno / 2;
@@ -477,6 +482,11 @@ public class ControlPosta : MonoBehaviour
             //maxSpeed = VCambios[Loca];
             HD = maxSpeed;
         }
+    }
+
+    private void Yayo()
+    {
+
     }
 
     
