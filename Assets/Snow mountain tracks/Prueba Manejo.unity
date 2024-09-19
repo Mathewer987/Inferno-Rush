@@ -1147,6 +1147,7 @@ MonoBehaviour:
   botonImage: {fileID: 2041413819}
   autinho: {fileID: 0}
   IOP: 0
+  smoothSpeed: 2
 --- !u!4 &852443272
 Transform:
   m_ObjectHideFlags: 0
@@ -2607,13 +2608,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1650695234}
-  m_LocalRotation: {x: 0, y: -0, z: 0.9988899, w: -0.047106404}
+  m_LocalRotation: {x: 0, y: -0, z: 0.9993349, w: -0.03646908}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 584983649}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 185.4}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 184.18}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -420, y: -235.99998}

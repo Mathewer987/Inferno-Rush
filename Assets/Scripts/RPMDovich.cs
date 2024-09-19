@@ -18,6 +18,9 @@ public class RPMDovich : MonoBehaviour
     float temp;
     float nuevaPosicion;
     public bool IOP;
+    int SXO = 1;
+    public float smoothSpeed = 2.0f; // Velocidad de la interpolación suave
+
 
     void Awake()
     {
@@ -34,7 +37,6 @@ public class RPMDovich : MonoBehaviour
     private void Update() // Cambia FixedUpdate por Update
     {
         velocidadVehiculo = RR.KPH;
-
 
         if (RR.cambiopolis == true)
         {
@@ -67,25 +69,43 @@ public class RPMDovich : MonoBehaviour
 
     public void updateETA()
     {
-   
-
         rangoMovimiento = posicionInicial - posicionFinal;
+        temp = velocidadVehiculo / 40;
 
-        if (IOP == false)
+        // Si IOP es false, queremos mover la aguja de manera suave y dejarla en la posición correcta
+        if (IOP == false && SXO == 1)
         {
-            temp = velocidadVehiculo / 40;
-        }
+            // Calcula el ángulo objetivo en función de la velocidad actual
+            float targetAngle = posicionInicial - temp * rangoMovimiento;
 
+            // Mueve suavemente la aguja hacia esa posición
+            nuevaPosicion = Mathf.Lerp(nuevaPosicion, targetAngle, Time.deltaTime * smoothSpeed);
+
+            // Actualiza la rotación de la aguja
+            AgujaSinTacc.transform.eulerAngles = new Vector3(0, 0, nuevaPosicion);
+
+            // Al finalizar, la aguja se quedará en su nueva posición
+        }
+        // Si IOP es true, también queremos mover la aguja suavemente a la posición deseada
         else if (IOP == true)
         {
-            
-        }
+            SXO = 0;
 
-        if (RR.cambiopolis == false)
-        {
-            nuevaPosicion = posicionInicial - temp * rangoMovimiento;
-        }
+            rangoMovimiento = rangoMovimiento * -1;
+            // Calcula el ángulo objetivo para el cambio de marcha o transición especial
+            float targetAngle = posicionInicial - temp * rangoMovimiento;
 
-        AgujaSinTacc.transform.eulerAngles = new Vector3(0, 0, nuevaPosicion);
+            // Suaviza la transición de la aguja hacia el nuevo ángulo objetivo
+            nuevaPosicion = Mathf.Lerp(nuevaPosicion, targetAngle, Time.deltaTime * smoothSpeed);
+
+            // Actualiza la rotación de la aguja
+            AgujaSinTacc.transform.eulerAngles = new Vector3(0, 0, nuevaPosicion);
+
+            // Cambia el estado de SXO para controlar el cambio
+            SXO = 1;
+            rangoMovimiento = rangoMovimiento * -1;
+
+
+        }
     }
 }
