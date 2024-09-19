@@ -41,6 +41,7 @@ public class ControlPosta : MonoBehaviour
     public float Record;
     public bool YU = false;
     public bool cambiopolis;
+    float pendiente;
 
 
     public float maxRPM, minRPM;
@@ -99,8 +100,7 @@ public class ControlPosta : MonoBehaviour
         CalcularPotencia();
         ajustarTraccion();
         enanoBariloche();
-        
-
+        Yayo();
         
 
     }
@@ -486,9 +486,20 @@ public class ControlPosta : MonoBehaviour
 
     private void Yayo()
     {
+        float Debora = KPH; // Almacena la velocidad actual
+        Vector3 currentVelocity = rigidbody.velocity;
 
+        float rotacionX = transform.eulerAngles.x;
+
+
+
+        if (rotacionX < 0)
+        {
+            rigidbody.AddForce(Vector3.left * 1000f);
+        }
     }
 
-    
+
+
 }
 
