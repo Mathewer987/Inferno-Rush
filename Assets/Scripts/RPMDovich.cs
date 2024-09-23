@@ -20,6 +20,7 @@ public class RPMDovich : MonoBehaviour
     public bool IOP;
     int SXO = 1;
     public float smoothSpeed = 2.0f; // Velocidad de la interpolación suave
+    public float targetAngle;
 
 
     void Awake()
@@ -91,9 +92,8 @@ public class RPMDovich : MonoBehaviour
         {
             SXO = 0;
 
-            rangoMovimiento = rangoMovimiento * -1;
-            // Calcula el ángulo objetivo para el cambio de marcha o transición especial
-            float targetAngle = posicionInicial - temp * rangoMovimiento;
+                    // Calcula el ángulo objetivo para el cambio de marcha o transición especial
+            targetAngle = (posicionInicial + temp * rangoMovimiento) ;
 
             // Suaviza la transición de la aguja hacia el nuevo ángulo objetivo
             nuevaPosicion = Mathf.Lerp(nuevaPosicion, targetAngle, Time.deltaTime * smoothSpeed);
@@ -103,7 +103,8 @@ public class RPMDovich : MonoBehaviour
 
             // Cambia el estado de SXO para controlar el cambio
             SXO = 1;
-            rangoMovimiento = rangoMovimiento * -1;
+            
+            
 
 
         }
