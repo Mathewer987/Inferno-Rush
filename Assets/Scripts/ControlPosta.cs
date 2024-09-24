@@ -274,7 +274,7 @@ public class ControlPosta : MonoBehaviour
 
         if (IM.boosting)
         {
-            rigidbody.AddForce(Vector3.left * thrust);
+            rigidbody.AddForce(Vector3.forward * thrust);
         }
 
         if (KPH == -maxSpeed)
@@ -495,7 +495,7 @@ public class ControlPosta : MonoBehaviour
 
         if (rotacionX < 0)
         {
-            rigidbody.AddForce(Vector3.left * 1000f);
+            rigidbody.AddForce(Vector3.forward * 1000f);
         }
     }
 
