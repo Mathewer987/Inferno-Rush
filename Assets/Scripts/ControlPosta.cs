@@ -124,17 +124,16 @@ public class ControlPosta : MonoBehaviour
 
         if (gearChange == gearBox.Automatico)
         {
-            if (engineRPM > maxRPM && gearNum < gears.Length - 1 && !reverse)
+            if ((KPH < VCambios[gearNum] + 0.5f || KPH > VCambios[gearNum] - 0.5f) && !reverse)
             {
                 gearNum++;
                 manager.changeGear();
-
             }
         }
 
         if (gearChange == gearBox.Manual)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && !reverse)
                     
             {
                 
@@ -149,7 +148,7 @@ public class ControlPosta : MonoBehaviour
                 }    
             }
 
-            else if (Input.GetKeyDown(KeyCode.Q))
+            else if (Input.GetKeyDown(KeyCode.Q) && !reverse)
             {
                 if (gearNum > 0)
                 {
@@ -305,11 +304,16 @@ public class ControlPosta : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             Ruedas[i].GetWorldPose(out PosicionRueda, out RotacionRueda);
-            wheelMesh[i].transform.position = PosicionRueda;
-            wheelMesh[i].transform.rotation = RotacionRueda;
 
+            // Si quieres que la rotación Z inicial sea 90 grados
+            Quaternion rotacionAdicional = Quaternion.Euler(0, 0, 90);
+
+            wheelMesh[i].transform.position = PosicionRueda;
+            wheelMesh[i].transform.rotation = RotacionRueda * rotacionAdicional; // Aplicar la rotación adicional
         }
+
     }
+
 
     private void getObjects()
     {

@@ -54,12 +54,20 @@ public class RPMDovich : MonoBehaviour
 
     public void updateETA()
     {
-   
+        // Calcular el rango de movimiento de la aguja
+        rangoMovimiento = posicionInicial - posicionFinal;
 
-         rangoMovimiento = posicionInicial - posicionFinal;
-         temp = velocidadVehiculo / 40;
-         nuevaPosicion = posicionInicial - temp * rangoMovimiento;
+        float lpm = RR.VCambios[RR.gearNum];
 
+        // Calcular la posición objetivo de la aguja para la velocidad actual
+        float temp = velocidadVehiculo / lpm;
+        float posicionObjetivo = posicionInicial - temp * rangoMovimiento;
+
+        // Interpolar suavemente entre la posición actual y la posición objetivo
+        nuevaPosicion = Mathf.Lerp(nuevaPosicion, posicionObjetivo, Time.deltaTime * 5f);
+
+        // Actualizar la rotación de la aguja
         AgujaSinTacc.transform.eulerAngles = new Vector3(0, 0, nuevaPosicion);
     }
+
 }
