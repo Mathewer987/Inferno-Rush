@@ -41,6 +41,10 @@ public class ControlPosta : MonoBehaviour
     public float Record;
     public bool YU = false;
     public bool cambiopolis;
+    public float previa;
+    public bool acelerando;
+    public bool desacelera2;
+
 
 
     public float maxRPM, minRPM;
@@ -88,7 +92,8 @@ public class ControlPosta : MonoBehaviour
         CalcularPotencia();
         ajustarTraccion();
         enanoBariloche();
-        
+        Desacelera2();
+
 
         
 
@@ -124,11 +129,24 @@ public class ControlPosta : MonoBehaviour
 
         if (gearChange == gearBox.Automatico)
         {
-            if ((KPH < VCambios[gearNum] + 0.5f || KPH > VCambios[gearNum] - 0.5f) && !reverse)
+            if ((KPH < HD + 0.5f && KPH > HD - 0.5f) && !reverse && gearNum < gears.Length - 1 && acelerando == true)
             {
                 gearNum++;
                 manager.changeGear();
+                YU = true;
+                cambiopolis = true;
+                Cambialo();
             }
+
+            else if ((KPH < HD + 0.5f && KPH > HD - 0.5f) && !reverse && desacelera2 == true)
+            {
+                gearNum--;
+                manager.changeGear();
+                cambiopolis = true;
+                CambialoMenos();
+            }
+
+
         }
 
         if (gearChange == gearBox.Manual)
@@ -420,7 +438,17 @@ public class ControlPosta : MonoBehaviour
             radius = 6 + KPH / 20;
 
         }
-    } 
+    }
+
+    private IEnumerator tiempoDesacelera2()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            previa = KPH;
+
+        }
+    }
 
     private void enanoBariloche()
     {
@@ -445,10 +473,6 @@ public class ControlPosta : MonoBehaviour
             
         }
     }
-
-
-  
-
     private void CambialoMenos()
     {
         if (Loca > 0)
@@ -462,6 +486,23 @@ public class ControlPosta : MonoBehaviour
         }
     }
 
-    
+    private void Desacelera2()
+    {
+        float previousSpeed = rigidbody.velocity.magnitude;
+        float nueva = KPH;
+
+        StartCoroutine(tiempoDesacelera2());
+
+        if (KPH < previa)
+        {
+            desacelera2 = true;
+            acelerando = false;
+        }
+        else if (KPH > previa)
+        {
+            desacelera2 = false;
+            acelerando = true;
+        }
+    }
 }
 
