@@ -1248,6 +1248,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d8c7663a99ef44d968533d84730b15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  engineSoundStyle: 1
+  lowAccelClip: {fileID: 8300000, guid: eca54ec811623e44b99ae6639a17c8a1, type: 3}
+  lowDecelClip: {fileID: 8300000, guid: 0d8c8dd7c2fc61d4c9e34d71ba1d4b78, type: 3}
+  highAccelClip: {fileID: 8300000, guid: e198f7ed8c950914ba94e7630caac7bf, type: 3}
+  highDecelClip: {fileID: 8300000, guid: e875fce9653c5b448a6819ec54cf3987, type: 3}
+  pitchMultiplier: 1
+  lowPitchMin: 1
+  lowPitchMax: 6
+  highPitchMultiplier: 0.25
+  maxRolloffDistance: 500
+  dopplerLevel: 1
+  useDoppler: 1
+  m_CarController: {fileID: 1541109069}
 --- !u!4 &751839496
 Transform:
   m_ObjectHideFlags: 0
@@ -1255,12 +1268,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751839494}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 299.9908, y: 20.88509, z: 340.5384}
+  m_LocalRotation: {x: -0, y: 0.6427878, z: -0, w: -0.76604426}
+  m_LocalPosition: {x: 0, y: -0.114910126, z: -0.009327102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_Father: {fileID: 1541109075}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &775590706
 GameObject:
@@ -2302,6 +2315,7 @@ MonoBehaviour:
   previa: 0
   acelerando: 0
   desacelera2: 0
+  MV: 0
   maxRPM: 6000
   minRPM: 1000
   playPauseSmoke: 0
@@ -2450,6 +2464,7 @@ MonoBehaviour:
   previa: 0
   acelerando: 0
   desacelera2: 0
+  MV: 0
   maxRPM: 6000
   minRPM: 1000
   playPauseSmoke: 0

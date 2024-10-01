@@ -28,14 +28,30 @@ public class Audiovich : MonoBehaviour
     private AudioSource m_HighAccel; // Source for the high acceleration sounds
     private AudioSource m_HighDecel; // Source for the high deceleration sounds
     private bool m_StartedSound; // flag for knowing if we have started sounds
-    private ControlPosta m_CarController; // Reference to car we are controlling
+    public ControlPosta RR; // Reference to car we are controlling
+    public float NT;
+    public float LA;
 
 
+    private void Start()
+    {
+        StartCoroutine(Esrtableci2());
+
+    }
+
+    private IEnumerator Esrtableci2()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            NT = RR.engineRPM;
+            LA = RR.MV;
+
+        }
+    }
     private void StartSound()
     {
         // get the carcontroller ( this will not be null as we have require component)
-        m_CarController = GetComponent<ControlPosta>();
-
         // setup the simple audio source
         m_HighAccel = SetUpEngineAudioSource(highAccelClip);
 
@@ -85,7 +101,7 @@ public class Audiovich : MonoBehaviour
         if (m_StartedSound)
         {
             // The pitch is interpolated between the min and max values, according to the car's revs.
-            float pitch = ULerp(lowPitchMin, lowPitchMax, m_CarController.engineRPM);
+            float pitch = ULerp(lowPitchMin, lowPitchMax, NT);
 
             // clamp to minimum pitch (note, not clamped to max for high revs while burning out)
             pitch = Mathf.Min(lowPitchMax, pitch);
@@ -108,11 +124,11 @@ public class Audiovich : MonoBehaviour
                 m_HighDecel.pitch = pitch * highPitchMultiplier * pitchMultiplier;
 
                 // get values for fading the sounds based on the acceleration
-                float accFade = Mathf.Abs(m_CarController.MV);
+                float accFade = Mathf.Abs(LA);
                 float decFade = 1 - accFade;
 
                 // get the high fade value based on the cars revs
-                float highFade = Mathf.InverseLerp(0.2f, 0.8f, m_CarController.engineRPM);
+                float highFade = Mathf.InverseLerp(0.2f, 0.8f, NT);
                 float lowFade = 1 - highFade;
 
                 // adjust the values to be more realistic
