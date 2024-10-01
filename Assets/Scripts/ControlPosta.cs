@@ -45,6 +45,7 @@ public class ControlPosta : MonoBehaviour
     public bool acelerando;
     public bool desacelera2;
     bool pini;
+    public float MV;
 
 
     public float maxRPM, minRPM;
@@ -93,6 +94,7 @@ public class ControlPosta : MonoBehaviour
         ajustarTraccion();
         enanoBariloche();
         Desacelera2();
+        MV = IM.vertical;
        }
 
     private void CalcularPotencia()
@@ -278,14 +280,17 @@ public class ControlPosta : MonoBehaviour
 
         if (IM.FrenoDeMano)
         {
-            Ruedas[3].brakeTorque = Ruedas[2].brakeTorque = fuerzaDeFreno;
+            // Aplicar fuerza de freno en las ruedas traseras
+            Ruedas[2].brakeTorque = fuerzaDeFreno;
+            Ruedas[3].brakeTorque = fuerzaDeFreno;
         }
-
         else
         {
-            Ruedas[3].brakeTorque = Ruedas[2].brakeTorque = 0;
-
+            // Quitar la fuerza de freno
+            Ruedas[2].brakeTorque = 0;
+            Ruedas[3].brakeTorque = 0;
         }
+
 
         if (IM.boosting)
         {
