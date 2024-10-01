@@ -44,7 +44,7 @@ public class ControlPosta : MonoBehaviour
     public float previa;
     public bool acelerando;
     public bool desacelera2;
-
+    bool pini;
 
 
     public float maxRPM, minRPM;
@@ -93,11 +93,7 @@ public class ControlPosta : MonoBehaviour
         ajustarTraccion();
         enanoBariloche();
         Desacelera2();
-
-
-        
-
-    }
+       }
 
     private void CalcularPotencia()
     {
@@ -138,12 +134,25 @@ public class ControlPosta : MonoBehaviour
                 Cambialo();
             }
 
-            else if ((KPH < HD + 0.5f && KPH > HD - 0.5f) && !reverse && desacelera2 == true)
+            else if (!reverse && desacelera2 == true)
             {
-                gearNum--;
-                manager.changeGear();
-                cambiopolis = true;
-                CambialoMenos();
+
+            foreach (float velocidad in VCambios){
+              
+                    if ((KPH < velocidad + 0.4f && KPH > velocidad - 0.4f) && pini == false && gearNum > 0)
+                    {
+                        gearNum--;
+                        manager.changeGear();
+                        cambiopolis = true;
+                        CambialoMenos();
+                        Debug.Log("sad");
+                        pini = true;
+                        StartCoroutine(PONO());
+
+                    }
+
+                }
+                
             }
 
 
@@ -162,7 +171,7 @@ public class ControlPosta : MonoBehaviour
                     YU = true;
                     cambiopolis = true;
                     Cambialo();
-
+                    
                 }    
             }
 
@@ -174,6 +183,7 @@ public class ControlPosta : MonoBehaviour
                     manager.changeGear();
                     cambiopolis = true;
                     CambialoMenos();
+
 
 
                 }
@@ -449,6 +459,16 @@ public class ControlPosta : MonoBehaviour
 
         }
     }
+    private IEnumerator PONO()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.1f);
+            pini = false;
+
+        }
+    }
+
 
     private void enanoBariloche()
     {

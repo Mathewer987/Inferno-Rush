@@ -2256,6 +2256,9 @@ MonoBehaviour:
   Record: 0
   YU: 0
   cambiopolis: 0
+  previa: 0
+  acelerando: 0
+  desacelera2: 0
   maxRPM: 6000
   minRPM: 1000
   playPauseSmoke: 0
@@ -2401,6 +2404,9 @@ MonoBehaviour:
   Record: 0
   YU: 0
   cambiopolis: 0
+  previa: 0
+  acelerando: 0
+  desacelera2: 0
   maxRPM: 6000
   minRPM: 1000
   playPauseSmoke: 0
@@ -2420,7 +2426,7 @@ MonoBehaviour:
   radius: 6
   KPH: 0
   FuerzaAbajo: 50
-  fuerzaDeFreno: 900
+  fuerzaDeFreno: 9000000
   thrust: -1000
   Loca: 0
   slip:
