@@ -1245,14 +1245,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 751839494}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77d8c7663a99ef44d968533d84730b15, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b0b1cf11602e5e4a93e02c6f50e44e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   engineSoundStyle: 1
-  lowAccelClip: {fileID: 8300000, guid: eca54ec811623e44b99ae6639a17c8a1, type: 3}
-  lowDecelClip: {fileID: 8300000, guid: 0d8c8dd7c2fc61d4c9e34d71ba1d4b78, type: 3}
-  highAccelClip: {fileID: 8300000, guid: e198f7ed8c950914ba94e7630caac7bf, type: 3}
-  highDecelClip: {fileID: 8300000, guid: e875fce9653c5b448a6819ec54cf3987, type: 3}
+  lowAccelClip: {fileID: 8300000, guid: 27da69da8ac04374c958ccc8153c035d, type: 3}
+  lowDecelClip: {fileID: 8300000, guid: 27da69da8ac04374c958ccc8153c035d, type: 3}
+  highAccelClip: {fileID: 8300000, guid: 299ea33c9f84c1b43aa945c2d6272869, type: 3}
+  highDecelClip: {fileID: 8300000, guid: ffa6afa96ff3a4045b198b29acebdedd, type: 3}
   pitchMultiplier: 1
   lowPitchMin: 1
   lowPitchMax: 6
@@ -1260,7 +1260,8 @@ MonoBehaviour:
   maxRolloffDistance: 500
   dopplerLevel: 1
   useDoppler: 1
-  m_CarController: {fileID: 1541109069}
+  RR: {fileID: 1541109069}
+  IM: {fileID: 1541109071}
 --- !u!4 &751839496
 Transform:
   m_ObjectHideFlags: 0
@@ -2457,7 +2458,7 @@ MonoBehaviour:
   - 40
   - 75
   - 100
-  - 120
+  - 150
   Record: 0
   YU: 0
   cambiopolis: 0
@@ -2479,7 +2480,7 @@ MonoBehaviour:
   - {fileID: 2009646551}
   - {fileID: 535834142}
   - {fileID: 867522812}
-  motorTorque: -1000
+  motorTorque: 1
   doblarMax: 30
   radius: 6
   KPH: 0

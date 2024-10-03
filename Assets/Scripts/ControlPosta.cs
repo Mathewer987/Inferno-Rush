@@ -95,6 +95,7 @@ public class ControlPosta : MonoBehaviour
         enanoBariloche();
         Desacelera2();
         MV = IM.vertical;
+       
        }
 
     private void CalcularPotencia()
@@ -106,7 +107,7 @@ public class ControlPosta : MonoBehaviour
 
         float motorPower = enginePower.Evaluate(engineRPM);
 
-        TotalPower = motorPower * gears[gearNum] * IM.vertical * -1;
+        TotalPower = motorPower * gears[gearNum] * IM.vertical * -1 * motorTorque;
 
         float velocity = 0.0f;
         engineRPM = Mathf.SmoothDamp(engineRPM, Mathf.Clamp(1000 + (Mathf.Abs(wheelsRPM) * 3.6f * gears[gearNum]), minRPM, maxRPM), ref velocity, smoothTime);
@@ -118,7 +119,10 @@ public class ControlPosta : MonoBehaviour
     private void Shifter()
     {
 
-
+        if (reverse == true)
+        {
+            gearNum = 0;
+        }
 
         if (!IsGrounded())
         {
@@ -294,7 +298,7 @@ public class ControlPosta : MonoBehaviour
 
         if (IM.boosting)
         {
-            rigidbody.AddForce(Vector3.forward * thrust);
+            rigidbody.AddForce(Vector3.right * thrust);
         }
 
         if (KPH == -maxSpeed)
