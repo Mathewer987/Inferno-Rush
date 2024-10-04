@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class ControlPosta : MonoBehaviour
 {
@@ -85,6 +87,7 @@ public class ControlPosta : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (SceneManager.GetActiveScene().name == "PlataformaSelectiva") return;
         AgregarFuerzaAbajo();
         AnimacionRuedas();
         Movela();
