@@ -1,56 +1,74 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class AwakeManager : MonoBehaviour
 {
     public GameObject toRotate;
     public float rotacionVelo;
     public GameObject[] VehiCULOS;
+    public GameObject player;
     public int vehiclePointer = 0;
 
     private void Awake()
     {
-        vehiclePointer = PlayerPrefs.GetInt("pointer");
+        foreach (GameObject vehiculo in VehiCULOS)
+        {
+            if (vehiculo.tag == "Player")
+            {
+                vehiculo.SetActive(false);
+            }
+        }
 
-        GameObject childObject = Instantiate(VehiCULOS.vehiculos[vehiclePointer], Vector3.zero, Quaternion.identity) as GameObject;
-        childObject.transform.parent = toRotate.transform;
+        player = VehiCULOS[vehiclePointer];
+        player.SetActive(true);
     }
 
     private void FixedUpdate()
     {
         toRotate.transform.Rotate(Vector3.up * rotacionVelo * Time.deltaTime);
-    }
 
-    public void BTNDerecho()
-    {
-        if(vehiclePointer < VehiCULOS.vehicles.Length-1)
+        foreach(GameObject gh in VehiCULOS)
         {
-            Destroy(GameObject.FindGameObjectWithTag("Player"));
-            vehiclePointer++;
-            PlayerPrefs.SetInt("pointer", vehiclePointer);
-            GameObject childObject = Instantiate(VehiCULOS.vehiculos[vehiclePointer], Vector3.zero, Quaternion.identity) as GameObject;
-            childObject.transform.parent = toRotate.transform;
-
+          gh.transform.Rotate(Vector3.up * rotacionVelo * Time.deltaTime);
 
         }
 
 
+    }
+
+    public void BTNDerecho()
+    {
+        if (vehiclePointer < VehiCULOS.Length - 1)
+        {
+            player.SetActive(false);
+            player = null;
+            vehiclePointer++;
+            player = VehiCULOS[vehiclePointer];
+            player.SetActive(true);
+        }
+
+       
     }
 
     public void BTNIzquierdo()
     {
         if (vehiclePointer > 0)
         {
-            Destroy(GameObject.FindGameObjectWithTag("Player"));
+            player.SetActive(false);
+            player = null;
             vehiclePointer--;
-            PlayerPrefs.SetInt("pointer", vehiclePointer);
-            GameObject childObject = Instantiate(VehiCULOS.vehiculos[vehiclePointer], Vector3.zero, Quaternion.identity) as GameObject;
-            childObject.transform.parent = toRotate.transform;
-
-
+            player = VehiCULOS[vehiclePointer];
+            player.SetActive(true);
         }
 
 
+    }
+
+    public void buenovich()
+    {
+        SceneManager.LoadScene("Prueba Manejo");
     }
 }

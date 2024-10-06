@@ -15,6 +15,8 @@ public class Audiovich : MonoBehaviour
     public AudioClip lowDecelClip;                                              // Audio clip for low deceleration
     public AudioClip highAccelClip;                                             // Audio clip for high acceleration
     public AudioClip highDecelClip;                                             // Audio clip for high deceleration
+    public AudioClip turboMas;
+
     public float pitchMultiplier = 1f;                                          // Used for altering the pitch of audio clips
     public float lowPitchMin = 1f;                                              // The lowest possible pitch for the low sounds
     public float lowPitchMax = 6f;                                              // The highest possible pitch for the low sounds
@@ -27,8 +29,11 @@ public class Audiovich : MonoBehaviour
     private AudioSource m_LowDecel; // Source for the low deceleration sounds
     private AudioSource m_HighAccel; // Source for the high acceleration sounds
     private AudioSource m_HighDecel; // Source for the high deceleration sounds
+    private AudioSource m_turbo;
+
     private bool m_StartedSound; // flag for knowing if we have started sounds
     public ControlPosta RR; // Reference to car we are controlling
+    public inputManager IM; // Reference to car we are controlling
     public float NT;
     public float LA;
 
@@ -61,6 +66,11 @@ public class Audiovich : MonoBehaviour
             m_LowAccel = SetUpEngineAudioSource(lowAccelClip);
             m_LowDecel = SetUpEngineAudioSource(lowDecelClip);
             m_HighDecel = SetUpEngineAudioSource(highDecelClip);
+
+            if (IM.boosting == true)
+            {
+                m_turbo = SetUpEngineAudioSource(turboMas);
+            }
         }
 
         // flag that we have started the sounds playing
@@ -106,6 +116,8 @@ public class Audiovich : MonoBehaviour
             // clamp to minimum pitch (note, not clamped to max for high revs while burning out)
             pitch = Mathf.Min(lowPitchMax, pitch);
 
+            m_turbo.pitch = 0.5f + (RR.engineRPM / RR.maxRPM) / 2;
+
             if (engineSoundStyle == EngineAudioOptions.Simple)
             {
                 // for 1 channel engine sound, it's oh so simple:
@@ -142,12 +154,14 @@ public class Audiovich : MonoBehaviour
                 m_LowDecel.volume = lowFade * decFade;
                 m_HighAccel.volume = highFade * accFade;
                 m_HighDecel.volume = highFade * decFade;
+                m_turbo.volume = highFade * decFade;
 
                 // adjust the doppler levels
                 m_HighAccel.dopplerLevel = useDoppler ? dopplerLevel : 0;
                 m_LowAccel.dopplerLevel = useDoppler ? dopplerLevel : 0;
                 m_HighDecel.dopplerLevel = useDoppler ? dopplerLevel : 0;
                 m_LowDecel.dopplerLevel = useDoppler ? dopplerLevel : 0;
+
             }
         }
     }
