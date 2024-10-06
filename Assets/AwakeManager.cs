@@ -69,6 +69,20 @@ public class AwakeManager : MonoBehaviour
 
     public void buenovich()
     {
+        foreach(GameObject auto in VehiCULOS)
+        {
+            if (auto.activeSelf)
+            {
+                DontDestroyOnLoad(auto);
+
+            }
+
+            else
+            {
+                Destroy(auto);
+
+            }
+        }
         SceneManager.LoadScene("Prueba Manejo");
     }
 }

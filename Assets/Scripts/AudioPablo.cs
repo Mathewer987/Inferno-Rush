@@ -28,9 +28,11 @@ public class AudioPablo : MonoBehaviour
     private AudioSource m_HighAccel; // Source for the high acceleration sounds
     private AudioSource m_HighDecel; // Source for the high deceleration sounds
     private bool m_StartedSound; // flag for knowing if we have started sounds
+    private bool dasds; // flag for knowing if we have started sounds
 
     public ControlPosta RR; // Reference to car we are controlling
     public inputManager IM;
+
 
     //NT = RR.engineRPM;
     //LA = RR.MV;
@@ -85,6 +87,9 @@ public class AudioPablo : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        
+
+        
         // get the distance to main camera
         float camDist = (Camera.main.transform.position - transform.position).sqrMagnitude;
 
@@ -125,6 +130,8 @@ public class AudioPablo : MonoBehaviour
                 m_HighAccel.pitch = pitch * highPitchMultiplier * pitchMultiplier;
                 m_HighDecel.pitch = pitch * highPitchMultiplier * pitchMultiplier;
 
+             
+
                 // get values for fading the sounds based on the acceleration
                 float accFade = Mathf.Abs((IM.vertical > 0) ? IM.vertical : 0);
                 float decFade = 1 - accFade;
@@ -152,9 +159,16 @@ public class AudioPablo : MonoBehaviour
                 m_LowDecel.dopplerLevel = useDoppler ? dopplerLevel : 0;
             }
         }
+    
+        
+
     }
 
 
+    private IEnumerator da()
+    {
+        yield return new WaitForSeconds(2f);
+    }
     // sets up and adds new audio source to the gane object
     private AudioSource SetUpEngineAudioSource(AudioClip clip)
     {
