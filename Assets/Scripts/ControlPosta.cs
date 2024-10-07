@@ -96,8 +96,8 @@ public class ControlPosta : MonoBehaviour
         // Verificar si la escena cargada es la que deseamos
         if (scene.name == nombreEscenaObjetivo)
         {
-            objetoPadre = IM.LA;
-            gameObject.transform.SetParent(objetoPadre);
+            //objetoPadre = IM.LA;
+            //gameObject.transform.SetParent(objetoPadre);
             transform.position = nuevaPosicion;
             transform.rotation = nuevaRotacion;
             
