@@ -718,6 +718,7 @@ MonoBehaviour:
   - {fileID: 1709132607}
   RD: {fileID: 852443271}
   GM: {fileID: 2061569280}
+  GG: {fileID: 0}
 --- !u!4 &576373909
 Transform:
   m_ObjectHideFlags: 0
@@ -1529,6 +1530,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5317094160680163797, guid: d3ae234b959c3094485670d0c61b9551,
+        type: 3}
+      propertyPath: FuerzaAbajo
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317094160680163797, guid: d3ae234b959c3094485670d0c61b9551,
+        type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 2061569280}
     - target: {fileID: 7920020806997754726, guid: d3ae234b959c3094485670d0c61b9551,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2085,7 +2096,6 @@ MonoBehaviour:
   fuerzaDeFreno: 900
   thrust: -1000
   Loca: 0
-  objetoPadre: {fileID: 0}
   slip:
   - 0
   - 0
@@ -2402,6 +2412,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8615071649583683425, guid: 717573342c393f64eb7ed1dc2b39cb7f,
+        type: 3}
+      propertyPath: FuerzaAbajo
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8615071649583683425, guid: 717573342c393f64eb7ed1dc2b39cb7f,
+        type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 2061569280}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 717573342c393f64eb7ed1dc2b39cb7f, type: 3}
 --- !u!1 &1709132607 stripped

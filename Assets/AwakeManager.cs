@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class AwakeManager : MonoBehaviour
 {
     public GameObject toRotate;
@@ -11,6 +10,10 @@ public class AwakeManager : MonoBehaviour
     public GameObject[] VehiCULOS;
     public GameObject player;
     public int vehiclePointer = 0;
+    public int dillom = -1;
+
+
+
 
     private void Awake()
     {
@@ -28,13 +31,17 @@ public class AwakeManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        toRotate.transform.Rotate(Vector3.up * rotacionVelo * Time.deltaTime);
-
-        foreach(GameObject gh in VehiCULOS)
+        if (SceneManager.GetActiveScene().name != "Prueba Manejo")
         {
-          gh.transform.Rotate(Vector3.up * rotacionVelo * Time.deltaTime);
+            toRotate.transform.Rotate(Vector3.up * rotacionVelo * Time.deltaTime);
 
+            foreach (GameObject gh in VehiCULOS)
+            {
+                gh.transform.Rotate(Vector3.up * rotacionVelo * Time.deltaTime);
+
+            }
         }
+        
 
 
     }
@@ -69,20 +76,15 @@ public class AwakeManager : MonoBehaviour
 
     public void buenovich()
     {
-        foreach(GameObject auto in VehiCULOS)
+        for (int i = 0; i < VehiCULOS.Length; i++)
         {
-            if (auto.activeSelf)
+            // Si el GameObject está activado
+            if (VehiCULOS[i].activeSelf)
             {
-                DontDestroyOnLoad(auto);
-
-            }
-
-            else
-            {
-                Destroy(auto);
-
+                dillom = i;  // Guardamos el índice
             }
         }
+        GeneralManager.Instance.carIndex = vehiclePointer;
         SceneManager.LoadScene("Prueba Manejo");
     }
 }

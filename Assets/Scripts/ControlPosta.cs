@@ -68,7 +68,6 @@ public class ControlPosta : MonoBehaviour
     private bool flag = false;
     private float lastValue;
     public int Loca = 0;
-    public Transform objetoPadre;
      
 
 
@@ -79,36 +78,16 @@ public class ControlPosta : MonoBehaviour
     public Quaternion nuevaRotacion = Quaternion.Euler(0f, -280f, 0f);
     public string nombreEscenaObjetivo = "Prueba Manejo"; // Nombre de la escena objetivo
 
-    void OnEnable()
+    private void Awake()
     {
-        // Suscribirse al evento de carga de escena
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnDisable()
-    {
-        // Asegurarse de desuscribirse del evento
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // Verificar si la escena cargada es la que deseamos
-        if (scene.name == nombreEscenaObjetivo)
-        {
-            //objetoPadre = IM.LA;
-            //gameObject.transform.SetParent(objetoPadre);
-            transform.position = nuevaPosicion;
-            transform.rotation = nuevaRotacion;
-            
-            Debug.Log("asd");
-        }
     }
 
     void Start()
     {
         getObjects();
         maxSpeed = VCambios[Loca];
+
+
 
     }
 
