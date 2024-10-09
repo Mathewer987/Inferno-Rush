@@ -286,6 +286,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1541109069, guid: 110f561184787bf42bdc3a0a4cba3887, type: 3}
+      propertyPath: motorTorque
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1541109070, guid: 110f561184787bf42bdc3a0a4cba3887, type: 3}
       propertyPath: m_Mass
       value: 500
@@ -520,6 +524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97641247c4a11b2458f5f3f2812ba434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  carIndex: 0
 --- !u!4 &385804306
 Transform:
   m_ObjectHideFlags: 0
@@ -541,6 +546,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5317094160680163797, guid: d3ae234b959c3094485670d0c61b9551,
+        type: 3}
+      propertyPath: motorTorque
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7920020806997754726, guid: d3ae234b959c3094485670d0c61b9551,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1407,6 +1417,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8615071649583683425, guid: 717573342c393f64eb7ed1dc2b39cb7f,
+        type: 3}
+      propertyPath: motorTorque
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 717573342c393f64eb7ed1dc2b39cb7f, type: 3}

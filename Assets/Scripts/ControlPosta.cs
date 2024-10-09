@@ -22,7 +22,7 @@ public class ControlPosta : MonoBehaviour
     }
     [SerializeField] private gearBox gearChange;
 
-    private WheelFrictionCurve fowardFriction, sidewaysFriction;
+    private WheelFrictionCurve forwardFriction, sidewaysFriction;
 
 
     public float maxSpeed = 40f;
@@ -151,11 +151,14 @@ public class ControlPosta : MonoBehaviour
         {
             if ((KPH < HD + 0.5f && KPH > HD - 0.5f) && !reverse && gearNum < gears.Length - 1 && acelerando == true)
             {
-                gearNum++;
-                manager.changeGear();
-                YU = true;
-                cambiopolis = true;
-                Cambialo();
+                if(gearNum < 4){
+                    gearNum++;
+                    manager.changeGear();
+                    YU = true;
+                    cambiopolis = true;
+                    Cambialo();
+                }
+                
             }
 
             else if (!reverse && desacelera2 == true)
@@ -165,6 +168,7 @@ public class ControlPosta : MonoBehaviour
               
                     if ((KPH < velocidad + 0.4f && KPH > velocidad - 0.4f) && pini == false && gearNum > 0)
                     {
+                        if(gearNum > 0)
                         gearNum--;
                         manager.changeGear();
                         cambiopolis = true;
@@ -395,77 +399,79 @@ public class ControlPosta : MonoBehaviour
         }
     }
 
-    public float handBrakeFriction = 0;
 
     private float driftFactor;
 
     private void ajustarTraccion()
     {
-        //tine it takes to go from normal drive to drift 
         float driftSmothFactor = .7f * Time.deltaTime;
 
         if (IM.FrenoDeMano)
         {
+            // Ajustar la fricción lateral (sideways) solo para las ruedas traseras
+            for (int i = 2; i < 4; i++) // Solo ruedas traseras
+            {
+                sidewaysFriction = Ruedas[i].sidewaysFriction;
+                forwardFriction = Ruedas[i].forwardFriction;
+
+                // Reducir la fricción lateral para permitir el drift
+                float velocity = 0;
+                sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue =
+                    Mathf.SmoothDamp(sidewaysFriction.extremumValue, driftFactor * handBrakeFrictionMultiplier, ref velocity, driftSmothFactor);
+
+                // No tocar la fricción longitudinal (forwardFriction) o mantenerla baja para evitar que se frene
+                forwardFriction.extremumValue = forwardFriction.asymptoteValue = 1.2f; // No poner esto en valores muy bajos
+
+                Ruedas[i].sidewaysFriction = sidewaysFriction;
+                Ruedas[i].forwardFriction = forwardFriction;
+            }
+
+            // Dar más agarre a las ruedas delanteras para mantener el control
             sidewaysFriction = Ruedas[0].sidewaysFriction;
-            fowardFriction = Ruedas[0].forwardFriction;
+            forwardFriction = Ruedas[0].forwardFriction;
 
-            float velocity = 0;
-            sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue = fowardFriction.extremumValue = fowardFriction.asymptoteValue =
-                Mathf.SmoothDamp(fowardFriction.asymptoteValue, driftFactor * handBrakeFrictionMultiplier, ref velocity, driftSmothFactor);
+            sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue = 1.5f;
+            forwardFriction.extremumValue = forwardFriction.asymptoteValue = 1.5f;
 
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 2; i++) // Solo ruedas delanteras
             {
                 Ruedas[i].sidewaysFriction = sidewaysFriction;
-                Ruedas[i].forwardFriction = fowardFriction;
+                Ruedas[i].forwardFriction = forwardFriction;
             }
 
-            sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue = fowardFriction.extremumValue = fowardFriction.asymptoteValue = 1.1f;
-            //extra grip for the front wheels
-            for (int i = 0; i < 2; i++)
-            {
-                Ruedas[i].sidewaysFriction = sidewaysFriction;
-                Ruedas[i].forwardFriction = fowardFriction;
-            }
-            rigidbody.AddForce(transform.forward * (KPH / 400) * 10000);
+            // Añadir fuerza para mantener el deslizamiento en lugar de frenar
+            rigidbody.AddForce(transform.forward * (KPH / 400) * 40000);
         }
-        //executed when FrenoDeMano is being held
         else
         {
-
-            fowardFriction = Ruedas[0].forwardFriction;
+            // Si no se está derrapando, ajustar la fricción para conducción normal
+            forwardFriction = Ruedas[0].forwardFriction;
             sidewaysFriction = Ruedas[0].sidewaysFriction;
 
-            fowardFriction.extremumValue = fowardFriction.asymptoteValue = sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue =
-                ((KPH * handBrakeFrictionMultiplier) / 300) + 1;
+            forwardFriction.extremumValue = forwardFriction.asymptoteValue =
+            sidewaysFriction.extremumValue = sidewaysFriction.asymptoteValue = ((KPH * handBrakeFrictionMultiplier) / 300) + 1;
 
             for (int i = 0; i < 4; i++)
             {
-                Ruedas[i].forwardFriction = fowardFriction;
+                Ruedas[i].forwardFriction = forwardFriction;
                 Ruedas[i].sidewaysFriction = sidewaysFriction;
-
             }
         }
 
-        //checks the amount of slip to control the drift
-        for (int i = 2; i < 4; i++)
+        // Calcular el drift factor basado en el deslizamiento lateral (sidewaysSlip)
+        for (int i = 2; i < 4; i++) // Sólo ruedas traseras
         {
-
             WheelHit wheelHit;
-
             Ruedas[i].GetGroundHit(out wheelHit);
-            //smoke
-            if (wheelHit.sidewaysSlip >= 0.3f || wheelHit.sidewaysSlip <= -0.3f || wheelHit.forwardSlip >= .3f || wheelHit.forwardSlip <= -0.3f)
-                playPauseSmoke = true;
-            else
-                playPauseSmoke = false;
 
-
-            if (wheelHit.sidewaysSlip < 0) driftFactor = (1 + -IM.horizontal) * Mathf.Abs(wheelHit.sidewaysSlip);
-
-            if (wheelHit.sidewaysSlip > 0) driftFactor = (1 + IM.horizontal) * Mathf.Abs(wheelHit.sidewaysSlip);
+            if (wheelHit.sidewaysSlip < 0)
+                driftFactor = Mathf.Abs(wheelHit.sidewaysSlip); // Invertir para corregir signo
+            else if (wheelHit.sidewaysSlip > 0)
+                driftFactor = Mathf.Abs(wheelHit.sidewaysSlip);
         }
-
     }
+
+
 
     private IEnumerator timedLoop()
     {
