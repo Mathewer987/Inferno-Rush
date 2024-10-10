@@ -19,6 +19,7 @@ public class ObjectSpawner : MonoBehaviour
     public CollisionObjeto NT;
     public int VoyPaLla;
     private Misiones MT;
+    public int lala;
 
 
 
@@ -26,7 +27,7 @@ public class ObjectSpawner : MonoBehaviour
     {
         maxIntentos = cantidadDeMonedas;
         monedasInstanciadas = new GameObject[cantidadDeMonedas];
-        puntaje.text = "0/" + (cantidadDeMonedas - 3);
+        puntaje.text = "0/" + (cantidadDeMonedas - lala);
         InstanciarMonedas();
         
     }
@@ -45,7 +46,7 @@ public class ObjectSpawner : MonoBehaviour
             }
         }
         
-        puntaje.text = VoyPaLla.ToString() + "/" + (cantidadDeMonedas - 3);
+        puntaje.text = VoyPaLla.ToString() + "/" + (cantidadDeMonedas - lala);
         
     }
 
