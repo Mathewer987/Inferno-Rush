@@ -24,7 +24,7 @@ public class ControlPosta : MonoBehaviour
 
     private WheelFrictionCurve forwardFriction, sidewaysFriction;
 
-
+    public ParticleSystem[] nitrusSmoke;
     public float maxSpeed = 40f;
     public GameManager manager;
     public bool reverse;
@@ -112,6 +112,7 @@ public class ControlPosta : MonoBehaviour
         ajustarTraccion();
         enanoBariloche();
         Desacelera2();
+        ActivaNitruvish();
         MV = IM.vertical;
        
        }
@@ -557,5 +558,55 @@ public class ControlPosta : MonoBehaviour
             acelerando = true;
         }
     }
+
+    public void ActivaNitruvish()
+    {
+        if (!IM.boosting && nitrusValue <= 10)
+        {
+            nitrusValue += Time.deltaTime / 1.5f;
+        }
+        else
+        {
+            nitrusValue -= (nitrusValue <= 0) ? 0 : Time.deltaTime / 0.5f;
+
+        }
+
+        if (IM.boosting) {
+            if (nitrusValue > 0) ArrancaNitroEmisor();
+            else paraNitroEmisor();
+            
+        }
+
+        else paraNitroEmisor();
+
+    }
+
+    public void ArrancaNitroEmisor()
+    {
+        if (nitrusFlag) return;
+
+        for(int i = 0; i< nitrusSmoke.Length; i++)
+        {
+            nitrusSmoke[i].Play();
+        }
+        rigidbody.AddForce(transform.forward * 10000);
+        nitrusFlag = true;
+    }
+
+    public float nitrusValue;
+    public bool nitrusFlag;
+
+    public void paraNitroEmisor()
+    {
+        if (!nitrusFlag) return;
+
+        for (int i = 0; i < nitrusSmoke.Length; i++)
+        {
+            nitrusSmoke[i].Stop();
+        }
+        rigidbody.AddForce(transform.forward * 10000);
+        nitrusFlag = false;
+    }
+
 }
 

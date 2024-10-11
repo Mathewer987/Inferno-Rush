@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private float posicionDeseada;
     public float velocidadVehiculo;
     public GameObject autinho;
+    public Slider nitrusSlider;
 
     void Awake()
     {
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
         velocidadVehiculo = RR.KPH;
         kph.text = RR.KPH.ToString("0");
         updateAguja();
+        nitrusUI();
     }
 
     public void updateAguja()
@@ -68,6 +70,11 @@ public class GameManager : MonoBehaviour
         Marcha.text = (!RR.reverse) ? (RR.gearNum + 1).ToString() : "R";
 
 
+    }
+
+    public void nitrusUI()
+    {
+        nitrusSlider.value = RR.nitrusValue / 35;
     }
 
 }

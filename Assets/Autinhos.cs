@@ -11,9 +11,10 @@ public class Autinhos : MonoBehaviour
     public GameManager GM;
     public AwakeManager GG;
     string nombreEscenaObjetivo = "Prueba Manejo";
+    public GameObject objectToMakeChild; // El objeto que quieres hacer hijo del auto activo
 
 
-    
+
     void Awake()
     {
         
@@ -28,6 +29,9 @@ public class Autinhos : MonoBehaviour
             {
                 RD.autinho = autinho;
                 GM.autinho = autinho;
+
+                objectToMakeChild.transform.SetParent(autinho.transform);
+
 
             }
             else
