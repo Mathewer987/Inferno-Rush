@@ -51,7 +51,6 @@ public class ControlPosta : MonoBehaviour
 
 
     public float maxRPM, minRPM;
-    [HideInInspector] public bool playPauseSmoke = false, hasFinished;
 
     private inputManager IM;
     private GameObject CentroDeMasa;
@@ -98,10 +97,6 @@ public class ControlPosta : MonoBehaviour
 
     private void FixedUpdate()
     {
-
-        
-
-
         if (SceneManager.GetActiveScene().name == "PlataformaSelectiva") return;
         AgregarFuerzaAbajo();
         AnimacionRuedas();
@@ -465,6 +460,12 @@ public class ControlPosta : MonoBehaviour
             WheelHit wheelHit;
             Ruedas[i].GetGroundHit(out wheelHit);
 
+            if (wheelHit.sidewaysSlip >= 0.3f || wheelHit.sidewaysSlip <= -0.3f || wheelHit.forwardSlip >= 0.3f || wheelHit.forwardSlip <= -0.3f)
+
+                playPauseSmoke = true;
+            else
+                playPauseSmoke = false;
+
             if (wheelHit.sidewaysSlip < 0)
                 driftFactor = Mathf.Abs(wheelHit.sidewaysSlip); // Invertir para corregir signo
             else if (wheelHit.sidewaysSlip > 0)
@@ -472,7 +473,7 @@ public class ControlPosta : MonoBehaviour
         }
     }
 
-
+    [HideInInspector] public bool playPauseSmoke = false;
 
     private IEnumerator timedLoop()
     {

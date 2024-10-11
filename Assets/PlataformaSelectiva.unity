@@ -294,6 +294,21 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 2114991244906987598, guid: 110f561184787bf42bdc3a0a4cba3887,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2306975215207556782, guid: 110f561184787bf42bdc3a0a4cba3887,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3437457625186927389, guid: 110f561184787bf42bdc3a0a4cba3887,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3798853156124873956, guid: 110f561184787bf42bdc3a0a4cba3887,
         type: 3}
       propertyPath: m_Enabled
@@ -368,6 +383,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_DynamicOccludee
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7622020198877007863, guid: 110f561184787bf42bdc3a0a4cba3887,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 110f561184787bf42bdc3a0a4cba3887, type: 3}

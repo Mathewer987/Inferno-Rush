@@ -1751,6 +1751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   drive: 2
   gearChange: 0
+  nitrusSmoke: []
   maxSpeed: 40
   manager: {fileID: 0}
   reverse: 0
@@ -1825,8 +1826,6 @@ MonoBehaviour:
   MV: 0
   maxRPM: 6000
   minRPM: 1000
-  playPauseSmoke: 0
-  hasFinished: 0
   Ruedas:
   - {fileID: 2023015395632375749}
   - {fileID: 1846551294176989761}
@@ -1850,8 +1849,13 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  nuevaPosicion: {x: 300, y: 21, z: 340.54}
+  nuevaRotacion: {x: 0, y: -0.64278764, z: 0, w: -0.76604444}
+  nombreEscenaObjetivo: Prueba Manejo
   maxWheelRPM: 999
-  handBrakeFriction: 0
+  playPauseSmoke: 0
+  nitrusValue: 0
+  nitrusFlag: 0
 --- !u!114 &9204650621487612761
 MonoBehaviour:
   m_ObjectHideFlags: 0
