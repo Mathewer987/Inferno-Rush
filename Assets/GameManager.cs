@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public float velocidadVehiculo;
     public GameObject autinho;
     public Slider nitrusSlider;
+    public Slider RC;
+
 
     void Awake()
     {
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
         kph.text = RR.KPH.ToString("0");
         updateAguja();
         nitrusUI();
+        RCA();
     }
 
     public void updateAguja()
@@ -75,6 +78,11 @@ public class GameManager : MonoBehaviour
     public void nitrusUI()
     {
         nitrusSlider.value = RR.nitrusValue / 35;
+    }
+
+    public void RCA()
+    {
+        RC.value = RR.valorRC / 35;
     }
 
 }

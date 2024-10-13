@@ -35,6 +35,8 @@ public class ControlPosta : MonoBehaviour
     [HideInInspector] public bool test; //engine sound boolean
     public bool primera;
     public float HD = 40f;
+    float variableAcumulativa = 0f; // Inicialízala
+
     public float engineRPM;
     public float smoothTime = 0.01f;
     public float[] gears;
@@ -48,6 +50,12 @@ public class ControlPosta : MonoBehaviour
     public bool desacelera2;
     bool pini;
     public float MV;
+    public bool CalentonJ;
+    public ParticleSystem[] smoke;
+    public bool gtr;
+    private bool paloma;
+    public float valorRC;
+
 
 
     public float maxRPM, minRPM;
@@ -79,6 +87,9 @@ public class ControlPosta : MonoBehaviour
 
     private void Awake()
     {
+       
+        
+
     }
 
     void Start()
@@ -100,7 +111,10 @@ public class ControlPosta : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "PlataformaSelectiva") return;
         AgregarFuerzaAbajo();
         AnimacionRuedas();
-        Movela();
+      
+            Movela();
+
+        
         Rotala();
         DameFriccion();
         CalcularPotencia();
@@ -109,8 +123,34 @@ public class ControlPosta : MonoBehaviour
         Desacelera2();
         ActivaNitruvish();
         MV = IM.vertical;
-       
-       }
+
+
+        if (CalentonJ == false && IsGrounded())
+        {
+            rigidbody.constraints = RigidbodyConstraints.FreezePosition;
+
+            // Congela la rotación en los tres ejes
+            rigidbody.constraints |= RigidbodyConstraints.FreezeRotation;
+        }
+
+        else
+        {
+            rigidbody.constraints = RigidbodyConstraints.None;
+
+        }
+
+    }
+
+    private IEnumerator FAFA()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+
+
+        }
+    }
+
 
     private void CalcularPotencia()
     {
@@ -323,10 +363,74 @@ public class ControlPosta : MonoBehaviour
         {
             Debug.Log("Velocidad: " + KPH + "RPMRuedas: " + wheelsRPM);
         }
+
+        if (CalentonJ == false && TotalPower * -1 > 0 )
+        {
+            for (int i = 0; i < smoke.Length; i++)
+            {
+                var emission = smoke[i].emission;
+                var emmision = smoke[i].emission;
+                emmision.rateOverTime = ((int)wheelsRPM * -1 <= 2000) ? Mathf.Clamp((int)wheelsRPM * -1 / 16.8f, 0, 2000) : 2000;
+                Debug.Log("a");
+                smoke[i].Play();
+
+                if (valorRC <= 35)
+                {
+                    valorRC += Time.deltaTime * 2.5f;
+                }
+                valorRC = Mathf.Clamp(valorRC, 0, 100);
+                
+                StartCoroutine(LOL());
+
+                if (valorRC == 35 && TotalPower != 0)
+                {
+                    if (paloma == true)
+                    {
+
+                    }
+                }
+
+            }
+
+        }
+
+
+
+
+       
+
+
+
+
     }
 
-    private void Rotala()
+    private IEnumerator LOL()
     {
+        while (true)
+        {
+            yield return new WaitForSeconds(6f);
+
+            if (TotalPower != 0)
+            {
+                paloma = true;
+
+            }
+        }
+    }
+
+
+    private IEnumerator UNseg()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(1f);
+
+                
+            }
+        }
+
+        private void Rotala()
+        {
 
         if (IM.horizontal > 0)
         {
