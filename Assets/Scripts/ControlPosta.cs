@@ -53,7 +53,7 @@ public class ControlPosta : MonoBehaviour
     public bool CalentonJ;
     public ParticleSystem[] smoke;
     public bool gtr;
-    private bool paloma;
+    private bool paloma = false;
     public float valorRC;
 
 
@@ -75,7 +75,8 @@ public class ControlPosta : MonoBehaviour
     private bool flag = false;
     private float lastValue;
     public int Loca = 0;
-     
+    public bool yupi;
+
 
 
 
@@ -371,7 +372,7 @@ public class ControlPosta : MonoBehaviour
                 var emission = smoke[i].emission;
                 var emmision = smoke[i].emission;
                 emmision.rateOverTime = ((int)wheelsRPM * -1 <= 2000) ? Mathf.Clamp((int)wheelsRPM * -1 / 16.8f, 0, 2000) : 2000;
-                Debug.Log("a");
+  
                 smoke[i].Play();
 
                 if (valorRC <= 35)
@@ -380,24 +381,30 @@ public class ControlPosta : MonoBehaviour
                 }
                 valorRC = Mathf.Clamp(valorRC, 0, 100);
                 
-                StartCoroutine(LOL());
 
-                if (valorRC == 35 && TotalPower != 0)
+                if (valorRC >= 35 && TotalPower != 0 && paloma == false)
                 {
-                    if (paloma == true)
-                    {
-
-                    }
+                    StartCoroutine(LOL());
                 }
+
+
+
 
             }
 
+            
+
+        }
+
+        if (valorRC >= 35 && TotalPower == 0 && CalentonJ == false)
+        {
+            CalentonJ = true;
         }
 
 
 
 
-       
+
 
 
 
@@ -412,7 +419,9 @@ public class ControlPosta : MonoBehaviour
 
             if (TotalPower != 0)
             {
+                Debug.Log("1.5");
                 paloma = true;
+                yupi = true;
 
             }
         }

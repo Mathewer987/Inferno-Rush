@@ -12,6 +12,8 @@ public class RPMDovich : MonoBehaviour
     public float velocidadVehiculo;
     public Sprite BotonOn;
     public Sprite BotonOff;
+    public GameObject PRI;
+
     public Image botonImage;
     public GameObject autinho;
     float rangoMovimiento;
@@ -32,6 +34,8 @@ public class RPMDovich : MonoBehaviour
     }
     private void Update() // Cambia FixedUpdate por Update
     {
+        PRI.SetActive(RR.yupi);
+
         velocidadVehiculo = RR.KPH;
         updateETA();
 
@@ -50,6 +54,8 @@ public class RPMDovich : MonoBehaviour
             RR.cambiopolis = false;
 
         }
+
+        
     }
 
     public void updateETA()
