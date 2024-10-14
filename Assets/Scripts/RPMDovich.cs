@@ -13,6 +13,7 @@ public class RPMDovich : MonoBehaviour
     public Sprite BotonOn;
     public Sprite BotonOff;
     public GameObject PRI;
+    public GameObject PRL;
 
     public Image botonImage;
     public GameObject autinho;
@@ -55,7 +56,14 @@ public class RPMDovich : MonoBehaviour
 
         }
 
-        
+        if (RR.CalentonJ == true)
+        {
+            PRI.SetActive(false);
+            PRL.SetActive(false);
+
+
+        }
+
     }
 
     public void updateETA()

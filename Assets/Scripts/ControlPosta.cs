@@ -344,8 +344,8 @@ public class ControlPosta : MonoBehaviour
         if (IM.FrenoDeMano)
         {
             // Aplicar fuerza de freno en las ruedas traseras
-            Ruedas[2].brakeTorque = fuerzaDeFreno;
-            Ruedas[3].brakeTorque = fuerzaDeFreno;
+            Ruedas[2].brakeTorque = 0;
+            Ruedas[3].brakeTorque = 0;
         }
         else
         {
@@ -379,6 +379,12 @@ public class ControlPosta : MonoBehaviour
                 {
                     valorRC += Time.deltaTime * 2.5f;
                 }
+
+                else if (valorRC > 0 && valorRC < 35)
+                {
+                    valorRC -= Time.deltaTime / 0.2f;
+                }
+
                 valorRC = Mathf.Clamp(valorRC, 0, 100);
                 
 
@@ -387,7 +393,7 @@ public class ControlPosta : MonoBehaviour
                     StartCoroutine(LOL());
                 }
 
-
+                
 
 
             }
@@ -400,6 +406,8 @@ public class ControlPosta : MonoBehaviour
         {
             CalentonJ = true;
         }
+
+        
 
 
 
@@ -417,7 +425,7 @@ public class ControlPosta : MonoBehaviour
         {
             yield return new WaitForSeconds(6f);
 
-            if (TotalPower != 0)
+            if (TotalPower != 0 && CalentonJ == false)
             {
                 Debug.Log("1.5");
                 paloma = true;

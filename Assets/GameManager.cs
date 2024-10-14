@@ -83,6 +83,8 @@ public class GameManager : MonoBehaviour
     public void RCA()
     {
         RC.value = RR.valorRC / 35;
+
+        
     }
 
 }
