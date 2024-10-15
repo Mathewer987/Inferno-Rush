@@ -36,7 +36,7 @@ public class ControlPosta : MonoBehaviour
     public bool primera;
     public float HD = 40f;
     float variableAcumulativa = 0f; // Inicialízala
-
+    float tiempoEspera;
     public float engineRPM;
     public float smoothTime = 0.01f;
     public float[] gears;
@@ -176,7 +176,7 @@ public class ControlPosta : MonoBehaviour
 
         if (reverse == true)
         {
-            gearNum = 0;
+            //gearNum = 0;
         }
 
         if (!IsGrounded())
@@ -201,23 +201,21 @@ public class ControlPosta : MonoBehaviour
             else if (!reverse && desacelera2 == true)
             {
 
-            foreach (float velocidad in VCambios){
-              
-                    if ((KPH < velocidad + 0.4f && KPH > velocidad - 0.4f) && pini == false && gearNum > 0)
+                foreach (float velocidad in VCambios)
+                {
+                    if ((KPH < velocidad + 1f && KPH > velocidad - 1f) && pini == false && gearNum > 0)
                     {
-                        if(gearNum > 0)
                         gearNum--;
                         manager.changeGear();
                         cambiopolis = true;
                         CambialoMenos();
-                        Debug.Log("sad");
+                        Debug.Log("Reduciendo marcha automáticamente");
+
                         pini = true;
-                        StartCoroutine(PONO());
-
+                        StartCoroutine(PONO()); // Ajustar tiempo de espera según la velocidad
                     }
-
                 }
-                
+
             }
 
 
@@ -619,7 +617,7 @@ public class ControlPosta : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.01f);
             pini = false;
 
         }
