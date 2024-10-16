@@ -140,6 +140,11 @@ public class ControlPosta : MonoBehaviour
 
         }
 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            CalentonJ = !CalentonJ;
+        }
+
     }
 
     private IEnumerator FAFA()
@@ -198,12 +203,12 @@ public class ControlPosta : MonoBehaviour
                 
             }
 
-            else if (!reverse && desacelera2 == true)
+            else if (!reverse && (desacelera2 == true || IM.FrenoDeMano == true))
             {
 
                 foreach (float velocidad in VCambios)
                 {
-                    if ((KPH < velocidad + 1f && KPH > velocidad - 1f) && pini == false && gearNum > 0)
+                    if ((KPH < velocidad + 0.4f && KPH > velocidad - 0.7f) && pini == false && gearNum > 0)
                     {
                         gearNum--;
                         manager.changeGear();
@@ -617,7 +622,7 @@ public class ControlPosta : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.1f);
             pini = false;
 
         }
@@ -639,7 +644,7 @@ public class ControlPosta : MonoBehaviour
 
    private void Cambialo()
     {
-        if (Loca < VCambios.Length) 
+        if (Loca < VCambios.Length - 1) 
         {
             Loca = Loca + 1;
             maxSpeed = VCambios[Loca];
