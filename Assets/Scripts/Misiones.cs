@@ -136,7 +136,7 @@ public class Misiones : MonoBehaviour
 
         if (misionsita == Mision.RecogerCosas)
         {
-            if (NT.VoyPaLla == NT.cantidadDeMonedas - 3)
+            if (NT.VoyPaLla == NT.cantidadDeMonedas - 4)
             {
                 resulatadosSpawneo.SetActive(true);
                 cantidadObjeto.color = Color.green;

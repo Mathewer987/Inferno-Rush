@@ -1,90 +1,116 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class AwakeManager : MonoBehaviour
 {
     public GameObject toRotate;
-    public float rotacionVelo;
-    public GameObject[] VehiCULOS;
-    public GameObject player;
+    public GameObject buyButton;
+    public GameObject startButton;
+    public float rotateSpeed;
+    public vehicleList4 listOfVehicles;
     public int vehiclePointer = 0;
-    public int dillom = -1;
-
+    public Text currency;
+    public Text carInfo;
+    public GeneralManager GM;
+    public GameObject newParent;
 
 
 
     private void Awake()
     {
-        foreach (GameObject vehiculo in VehiCULOS)
-        {
-            if (vehiculo.tag == "Player")
-            {
-                vehiculo.SetActive(false);
-            }
-        }
+        vehiclePointer = PlayerPrefs.GetInt("pointer");
+        PlayerPrefs.SetInt("currency", 150000);
 
-        player = VehiCULOS[vehiclePointer];
-        player.SetActive(true);
+        // Aquí instancias el vehículo
+        GameObject childObject = Instantiate(listOfVehicles.vehicles[vehiclePointer], Vector3.zero, Quaternion.identity) as GameObject;
+
+        // Cambiar el padre a 'newParent' en lugar de 'toRotate'
+        childObject.transform.SetParent(newParent.transform);
+
+        getCarInfo();
+        GM.carIndex = listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carName;
     }
 
     private void FixedUpdate()
     {
-        if (SceneManager.GetActiveScene().name != "Prueba Manejo")
-        {
-            toRotate.transform.Rotate(Vector3.up * rotacionVelo * Time.deltaTime);
-
-            foreach (GameObject gh in VehiCULOS)
-            {
-                gh.transform.Rotate(Vector3.up * rotacionVelo * Time.deltaTime);
-
-            }
-        }
-        
-
+        toRotate.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
 
     }
 
-    public void BTNDerecho()
+    public void rightButton()
     {
-        if (vehiclePointer < VehiCULOS.Length - 1)
+        if (vehiclePointer < listOfVehicles.vehicles.Length - 1)
         {
-            player.SetActive(false);
-            player = null;
+            Destroy(GameObject.FindGameObjectWithTag("Player"));
             vehiclePointer++;
-            player = VehiCULOS[vehiclePointer];
-            player.SetActive(true);
-        }
+            PlayerPrefs.SetInt("pointer", vehiclePointer);
+            GameObject childObject = Instantiate(listOfVehicles.vehicles[vehiclePointer], Vector3.zero, Quaternion.identity) as GameObject;
+            childObject.transform.parent = toRotate.transform;
+            getCarInfo();
+            GM.carIndex = listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carName;
 
-       
+        }
     }
 
-    public void BTNIzquierdo()
+    public void leftButton()
     {
         if (vehiclePointer > 0)
         {
-            player.SetActive(false);
-            player = null;
+            Destroy(GameObject.FindGameObjectWithTag("Player"));
             vehiclePointer--;
-            player = VehiCULOS[vehiclePointer];
-            player.SetActive(true);
+            PlayerPrefs.SetInt("pointer", vehiclePointer);
+            GameObject childObject = Instantiate(listOfVehicles.vehicles[vehiclePointer], Vector3.zero, Quaternion.identity) as GameObject;
+            childObject.transform.parent = toRotate.transform;
+            getCarInfo();
+            GM.carIndex = listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carName;
+
         }
-
-
     }
 
-    public void buenovich()
+    public void startGameButton()
     {
-        for (int i = 0; i < VehiCULOS.Length; i++)
-        {
-            // Si el GameObject está activado
-            if (VehiCULOS[i].activeSelf)
-            {
-                dillom = i;  // Guardamos el índice
-            }
-        }
-        GeneralManager.Instance.carIndex = vehiclePointer;
         SceneManager.LoadScene("Prueba Manejo");
     }
+
+    public void BuyButton()
+    {
+
+
+        if (PlayerPrefs.GetInt("currency") >= listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carPrice)
+        {
+            PlayerPrefs.SetInt("currency", PlayerPrefs.GetInt("currency") - listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carPrice);
+
+            PlayerPrefs.SetString(listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carName.ToString(),
+                                    listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carName.ToString());
+            getCarInfo();
+        }
+
+    }
+
+    public void getCarInfo()
+    {
+        if (listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carName.ToString() ==
+            PlayerPrefs.GetString(listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carName.ToString()))
+        {
+            carInfo.text = "Owned";
+            startButton.SetActive(true);
+            buyButton.SetActive(false);
+            currency.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
+
+            return;
+
+        }
+        currency.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
+
+        carInfo.text = listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carName.ToString() + " $ " +
+                        listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carPrice.ToString();
+
+        startButton.SetActive(false);
+        buyButton.SetActive(buyButton);
+
+    }
+
 }

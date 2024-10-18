@@ -220,10 +220,12 @@ MonoBehaviour:
   acelerando: 0
   desacelera2: 0
   MV: 0
+  CalentonJ: 0
+  smoke: []
+  gtr: 0
+  valorRC: 0
   maxRPM: 6000
   minRPM: 1000
-  playPauseSmoke: 0
-  hasFinished: 0
   Ruedas:
   - {fileID: 4942779718398921634}
   - {fileID: 4942779718395281878}
@@ -242,6 +244,7 @@ MonoBehaviour:
   fuerzaDeFreno: 900000
   thrust: -1000
   Loca: 0
+  yupi: 0
   slip:
   - 0
   - 0
@@ -250,7 +253,10 @@ MonoBehaviour:
   nuevaPosicion: {x: 300, y: 21, z: 340.54}
   nuevaRotacion: {x: 0, y: -0.64278764, z: 0, w: -0.76604444}
   nombreEscenaObjetivo: Prueba Manejo
+  carPrice: 63000
+  carName: CamNorm
   maxWheelRPM: 999
+  playPauseSmoke: 0
   nitrusValue: 0
   nitrusFlag: 0
 --- !u!114 &1541109071

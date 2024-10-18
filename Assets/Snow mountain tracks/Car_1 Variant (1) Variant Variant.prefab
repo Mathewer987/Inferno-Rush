@@ -150,6 +150,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6042eaad9823b6f488f160b2bce47ac7, type: 2}
+    - target: {fileID: 5317094160680163797, guid: d3ae234b959c3094485670d0c61b9551,
+        type: 3}
+      propertyPath: carName
+      value: CamLava
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317094160680163797, guid: d3ae234b959c3094485670d0c61b9551,
+        type: 3}
+      propertyPath: carPrice
+      value: 10000
+      objectReference: {fileID: 0}
     - target: {fileID: 7920020806997754726, guid: d3ae234b959c3094485670d0c61b9551,
         type: 3}
       propertyPath: m_LocalPosition.x

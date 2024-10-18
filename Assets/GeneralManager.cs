@@ -5,12 +5,13 @@ using UnityEngine;
 public class GeneralManager : MonoBehaviour
 {
     public static GeneralManager Instance;
-    public int carIndex;
+    public string carIndex;
 
 
     // Start is called before the first frame update
     void Awake()
     {
+
         if (Instance != null && Instance != this)
         {
             Destroy(this.gameObject);

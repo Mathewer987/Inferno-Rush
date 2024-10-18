@@ -5562,6 +5562,7 @@ MonoBehaviour:
   GM: {fileID: 2061569280}
   GG: {fileID: 0}
   objectToMakeChild: {fileID: 1807901851}
+  GH: {fileID: 0}
 --- !u!4 &576373909
 Transform:
   m_ObjectHideFlags: 0
@@ -6871,7 +6872,7 @@ PrefabInstance:
     - target: {fileID: 8649102698306618385, guid: d3ae234b959c3094485670d0c61b9551,
         type: 3}
       propertyPath: m_Name
-      value: Car_1 Variant (1) Variant
+      value: CamVelto
       objectReference: {fileID: 0}
     - target: {fileID: 8649102698306618385, guid: d3ae234b959c3094485670d0c61b9551,
         type: 3}
@@ -12169,6 +12170,8 @@ MonoBehaviour:
   nuevaPosicion: {x: 0, y: 0, z: 0}
   nuevaRotacion: {x: 0, y: 0, z: 0, w: 0}
   nombreEscenaObjetivo: Prueba Manejo
+  carPrice: 0
+  carName: 
   maxWheelRPM: 999
   playPauseSmoke: 0
   nitrusValue: 0
@@ -12544,7 +12547,7 @@ PrefabInstance:
     - target: {fileID: 5062951870317464229, guid: 717573342c393f64eb7ed1dc2b39cb7f,
         type: 3}
       propertyPath: m_Name
-      value: Car_1 Variant (1) Variant Variant
+      value: CamLava
       objectReference: {fileID: 0}
     - target: {fileID: 5062951870317464229, guid: 717573342c393f64eb7ed1dc2b39cb7f,
         type: 3}
@@ -14043,7 +14046,7 @@ PrefabInstance:
     - target: {fileID: 3813964040552711044, guid: 110f561184787bf42bdc3a0a4cba3887,
         type: 3}
       propertyPath: m_Name
-      value: Car_1
+      value: CamNorm
       objectReference: {fileID: 0}
     - target: {fileID: 3813964040552711044, guid: 110f561184787bf42bdc3a0a4cba3887,
         type: 3}

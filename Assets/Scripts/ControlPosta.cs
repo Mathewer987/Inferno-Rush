@@ -86,6 +86,9 @@ public class ControlPosta : MonoBehaviour
     public Quaternion nuevaRotacion = Quaternion.Euler(0f, -280f, 0f);
     public string nombreEscenaObjetivo = "Prueba Manejo"; // Nombre de la escena objetivo
 
+    //Car Shop Values
+    public int carPrice;
+    public string carName;
     private void Awake()
     {
        

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class vehicleList : MonoBehaviour
+public class vehicleList4 : MonoBehaviour
 {
-    
+    public GameObject[] vehicles;    
 }

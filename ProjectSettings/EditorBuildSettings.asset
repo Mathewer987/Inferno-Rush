@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Prueba Manejo.unity
     guid: 55357f48a3e2b4643b0983826b854f64
+  - enabled: 1
+    path: Assets/PlataformaSelectiva.unity
+    guid: 545c3b9e6040622499b47ce3776cd4ab
   m_configObjects: {}
