@@ -16,6 +16,7 @@ public class AwakeManager : MonoBehaviour
     public Text carInfo;
     public GeneralManager GM;
     public GameObject newParent;
+    public GameObject childObject;
 
 
 
@@ -25,11 +26,8 @@ public class AwakeManager : MonoBehaviour
         PlayerPrefs.SetInt("currency", 150000);
 
         // Aquí instancias el vehículo
-        GameObject childObject = Instantiate(listOfVehicles.vehicles[vehiclePointer], Vector3.zero, Quaternion.identity) as GameObject;
-
-        // Cambiar el padre a 'newParent' en lugar de 'toRotate'
-        childObject.transform.SetParent(newParent.transform);
-
+        childObject = Instantiate(listOfVehicles.vehicles[vehiclePointer], Vector3.zero, Quaternion.identity) as GameObject;
+        childObject.transform.parent = newParent.transform;
         getCarInfo();
         GM.carIndex = listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carName;
     }
@@ -37,8 +35,11 @@ public class AwakeManager : MonoBehaviour
     private void FixedUpdate()
     {
         toRotate.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+        childObject.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
 
     }
+
+
 
     public void rightButton()
     {
@@ -47,8 +48,8 @@ public class AwakeManager : MonoBehaviour
             Destroy(GameObject.FindGameObjectWithTag("Player"));
             vehiclePointer++;
             PlayerPrefs.SetInt("pointer", vehiclePointer);
-            GameObject childObject = Instantiate(listOfVehicles.vehicles[vehiclePointer], Vector3.zero, Quaternion.identity) as GameObject;
-            childObject.transform.parent = toRotate.transform;
+            childObject = Instantiate(listOfVehicles.vehicles[vehiclePointer], Vector3.zero, Quaternion.identity) as GameObject;
+            childObject.transform.parent = newParent.transform;
             getCarInfo();
             GM.carIndex = listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carName;
 
@@ -62,8 +63,8 @@ public class AwakeManager : MonoBehaviour
             Destroy(GameObject.FindGameObjectWithTag("Player"));
             vehiclePointer--;
             PlayerPrefs.SetInt("pointer", vehiclePointer);
-            GameObject childObject = Instantiate(listOfVehicles.vehicles[vehiclePointer], Vector3.zero, Quaternion.identity) as GameObject;
-            childObject.transform.parent = toRotate.transform;
+            childObject = Instantiate(listOfVehicles.vehicles[vehiclePointer], Vector3.zero, Quaternion.identity) as GameObject;
+            childObject.transform.parent = newParent.transform;
             getCarInfo();
             GM.carIndex = listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carName;
 
