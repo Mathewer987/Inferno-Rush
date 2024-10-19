@@ -275,6 +275,41 @@ MonoBehaviour:
   horizontal: 0
   FrenoDeMano: 0
   boosting: 0
+--- !u!114 &114440159710824182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3813964040552711044}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e386e85c212744f8665b899c3cb9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerRef: {fileID: 1541109069}
+  engineUpgrade: 1
+  I_engineUpgrade: 0
+  P_engineUpgrade: 
+  spoilerUpgrade: 0
+  I_spoilerUpgrade: 0
+  L_spoilerUpgrade: []
+  P_spoilerUpgrade: 
+  nitrusUpgrade: 0
+  I_nitrusUpgrade: 0
+  P_nitrusUpgrade: 
+  car: {fileID: 0}
+  colorUpgrade: 0
+  I_colorUpgrade: 0
+  L_colorUpgrade: []
+  P_colorUpgrade: 
+  wheelUpgrade: 0
+  I_wheelUpgrade: 0
+  L_wheelUpgrade: []
+  P_wheelUpgrade: 
+  handlingUpgrade: 0
+  I_handlingUpgrade: 0
+  P_handlingUpgrade: 
 --- !u!1001 &1261741586303074638
 PrefabInstance:
   m_ObjectHideFlags: 0

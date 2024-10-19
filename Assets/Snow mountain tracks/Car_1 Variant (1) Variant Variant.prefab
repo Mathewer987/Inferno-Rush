@@ -1,5 +1,40 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &114778634394373372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5062951870317464229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8e386e85c212744f8665b899c3cb9ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerRef: {fileID: 0}
+  engineUpgrade: 0
+  I_engineUpgrade: 0
+  P_engineUpgrade: 
+  spoilerUpgrade: 0
+  I_spoilerUpgrade: 0
+  L_spoilerUpgrade: []
+  P_spoilerUpgrade: 
+  nitrusUpgrade: 0
+  I_nitrusUpgrade: 0
+  P_nitrusUpgrade: 
+  car: {fileID: 0}
+  colorUpgrade: 0
+  I_colorUpgrade: 0
+  L_colorUpgrade: []
+  P_colorUpgrade: 
+  wheelUpgrade: 0
+  I_wheelUpgrade: 0
+  L_wheelUpgrade: []
+  P_wheelUpgrade: 
+  handlingUpgrade: 0
+  I_handlingUpgrade: 0
+  P_handlingUpgrade: 
 --- !u!1001 &1041082370935098735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -145,6 +180,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114639953025219266, guid: d3ae234b959c3094485670d0c61b9551,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1624225055802468626, guid: d3ae234b959c3094485670d0c61b9551,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -222,6 +262,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3ae234b959c3094485670d0c61b9551, type: 3}
+--- !u!1 &5062951870317464229 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8649102698306618385, guid: d3ae234b959c3094485670d0c61b9551,
+    type: 3}
+  m_PrefabInstance: {fileID: 4486991446374370996}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6029596442691210706 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7920020806997754726, guid: d3ae234b959c3094485670d0c61b9551,
