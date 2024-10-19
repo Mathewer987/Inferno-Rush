@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/PlataformaSelectiva.unity
     guid: 545c3b9e6040622499b47ce3776cd4ab
+  - enabled: 1
+    path: Assets/DynoTime.unity
+    guid: 070229429e5002649b57396a29d8b6f2
   m_configObjects: {}
