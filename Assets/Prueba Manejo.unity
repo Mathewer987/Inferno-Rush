@@ -13939,7 +13939,7 @@ PrefabInstance:
       objectReference: {fileID: 1448640388}
     - target: {fileID: 1541109069, guid: 110f561184787bf42bdc3a0a4cba3887, type: 3}
       propertyPath: motorTorque
-      value: 1.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1541109069, guid: 110f561184787bf42bdc3a0a4cba3887, type: 3}
       propertyPath: handBrakeFrictionMultiplier
