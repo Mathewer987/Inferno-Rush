@@ -66,7 +66,33 @@ public class PanelDataEngine : MonoBehaviour
         }
     }
 
-   
+    public void SeleccionArgentina(Button clickedButton)
+    {
+        // Aquí puedes determinar qué botón fue presionado
+        int buttonIndex = miniDatas.IndexOf(clickedButton); // Obtiene el índice del botón presionado
+        Debug.Log("Botón presionado: " + buttonIndex + " - " + nom[buttonIndex]);
+        // Agrega aquí la lógica que quieras realizar cuando se selecciona el motor
+    }
+
+    public void BuyMotor(int motorIndex)
+    {
+        // Verificar si el motor no está ya "owned"
+        if (PlayerPrefs.GetString(motorKeys[motorIndex]) != "owned")
+        {
+            // Aquí podrías agregar la lógica para verificar monedas o recursos
+            // Por simplicidad, asumimos que siempre se puede comprar
+            PlayerPrefs.SetString(motorKeys[motorIndex], "owned");
+
+            Debug.Log("Motor " + motorKeys[motorIndex] + " ahora es tuyo!");
+
+            // Actualiza la información del motor o UI
+        }
+        else
+        {
+            Debug.Log("Ya posees este motor!");
+        }
+    }
+
     private bool IsPointerOverUIObject(GameObject target)
     {
         PointerEventData pointerEventData = new PointerEventData(EventSystem.current);

@@ -439,7 +439,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 104877377}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 882953488}
+        m_MethodName: SeleccionArgentina
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 104877376}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &104877377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -697,8 +708,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -275, y: -180}
-  m_SizeDelta: {x: 207.40381, y: 68.99998}
+  m_AnchoredPosition: {x: -265.1, y: -165}
+  m_SizeDelta: {x: 227.1386, y: 174.5406}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &172317685
 MonoBehaviour:
@@ -1720,7 +1731,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 578331458}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 882953488}
+        m_MethodName: SeleccionArgentina
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 578331457}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &578331458
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2300,7 +2322,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 878997448}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 882953488}
+        m_MethodName: SeleccionArgentina
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 878997447}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &878997448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3661,7 +3694,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1274473331}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 882953488}
+        m_MethodName: SeleccionArgentina
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1274473330}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1274473331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4260,7 +4304,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1598163089}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 882953488}
+        m_MethodName: SeleccionArgentina
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1598163088}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1598163089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4573,7 +4628,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1648465617}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 882953488}
+        m_MethodName: SeleccionArgentina
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1648465616}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1648465617
 MonoBehaviour:
   m_ObjectHideFlags: 0
