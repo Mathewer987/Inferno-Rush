@@ -32,6 +32,7 @@ public class PanelDataEngine : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         bool isHovering = false; // Bandera para verificar si estamos sobre algún botón
 
         foreach (Button infos in miniDatas)
@@ -66,13 +67,30 @@ public class PanelDataEngine : MonoBehaviour
         }
     }
 
+
     public void SeleccionArgentina(Button clickedButton)
     {
         // Aquí puedes determinar qué botón fue presionado
         int buttonIndex = miniDatas.IndexOf(clickedButton); // Obtiene el índice del botón presionado
-        Debug.Log("Botón presionado: " + buttonIndex + " - " + nom[buttonIndex]);
-        // Agrega aquí la lógica que quieras realizar cuando se selecciona el motor
+
+        if (buttonIndex != -1) // Verifica si el botón está en la lista
+        {
+            Debug.Log("Botón presionado: " + buttonIndex + " - " + nom[buttonIndex]);
+
+            ColorBlock colors = miniDatas[buttonIndex].colors;
+
+            // Cambia el color normal del botón
+            colors.normalColor = Color.green;
+
+            // Asigna el nuevo ColorBlock al botón
+            miniDatas[buttonIndex].colors = colors; // Asegúrate de asignar el ColorBlock modificado de nuevo
+        }
+        else
+        {
+            Debug.LogWarning("El botón presionado no se encontró en miniDatas.");
+        }
     }
+
 
     public void BuyMotor(int motorIndex)
     {
