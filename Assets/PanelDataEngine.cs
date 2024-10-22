@@ -18,6 +18,7 @@ public class PanelDataEngine : MonoBehaviour
     public Text Peso;
     public Text Estado;
     public string[] motorKeys;
+    public int seleccion;
 
     public int indexRevisar;
 
@@ -73,22 +74,24 @@ public class PanelDataEngine : MonoBehaviour
         // Aquí puedes determinar qué botón fue presionado
         int buttonIndex = miniDatas.IndexOf(clickedButton); // Obtiene el índice del botón presionado
 
-        if (buttonIndex != -1) // Verifica si el botón está en la lista
-        {
+       
             Debug.Log("Botón presionado: " + buttonIndex + " - " + nom[buttonIndex]);
 
-            ColorBlock colors = miniDatas[buttonIndex].colors;
+        seleccion = buttonIndex;
 
-            // Cambia el color normal del botón
-            colors.normalColor = Color.green;
+        Button selectedButton = miniDatas[buttonIndex]; // Obtén el botón seleccionado
+        ColorBlock colors = selectedButton.colors; // Obtén el ColorBlock actual del botón
 
-            // Asigna el nuevo ColorBlock al botón
-            miniDatas[buttonIndex].colors = colors; // Asegúrate de asignar el ColorBlock modificado de nuevo
-        }
-        else
-        {
-            Debug.LogWarning("El botón presionado no se encontró en miniDatas.");
-        }
+        // Cambia el color normal del botón
+        colors.normalColor = Color.green;
+
+        // Asigna el nuevo ColorBlock al botón
+        selectedButton.colors = colors;
+
+        // Forzar la selección del botón para actualizar visualmente
+        selectedButton.Select();
+
+
     }
 
 
