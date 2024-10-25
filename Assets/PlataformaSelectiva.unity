@@ -2430,6 +2430,7 @@ MonoBehaviour:
   - Motor4
   - Motor5
   - Motor6
+  seleccion: 0
   indexRevisar: 0
 --- !u!114 &882953489
 MonoBehaviour:
