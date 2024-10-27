@@ -20,6 +20,9 @@ public class PanelDataEngine : MonoBehaviour
     public string[] motorKeys;
     public int seleccion;
 
+    public int CDF;
+    public int PSO;
+
     public int indexRevisar;
 
     private void Awake()
@@ -35,7 +38,12 @@ public class PanelDataEngine : MonoBehaviour
             // Aplicar el color verde al botón guardado
             Button selectedButton = miniDatas[seleccion];
             ChangeButtonColor(selectedButton, Color.green);
+            CDF = PlayerPrefs.GetInt("CaballosDeFuerza"); 
         }
+
+
+
+
     }
 
 
@@ -82,27 +90,41 @@ public class PanelDataEngine : MonoBehaviour
 
     public void SeleccionArgentina(Button clickedButton)
     {
-        // Restablece el color de todos los botones antes de cambiar el color del botón presionado
-        foreach (Button btn in miniDatas)
-        {
-            ResetButtonColor(btn); // Restablece el color de los otros botones
-        }
-
         // Obtiene el índice del botón presionado
         int buttonIndex = miniDatas.IndexOf(clickedButton);
-        Debug.Log("Botón presionado: " + buttonIndex + " - " + nom[buttonIndex]);
 
-        seleccion = buttonIndex;
+        // Verifica si el motor está "owned"
+        if (PlayerPrefs.HasKey(motorKeys[buttonIndex]))
+        {
+            // Restablece el color de todos los botones antes de cambiar el color del botón presionado
+            foreach (Button btn in miniDatas)
+            {
+                ResetButtonColor(btn); // Restablece el color de los otros botones
+            }
 
-        // Guardar la selección en PlayerPrefs
-        PlayerPrefs.SetInt("SeleccionMotor", seleccion);
-        PlayerPrefs.Save(); // Asegura que los datos se guarden
+            Debug.Log("Botón presionado: " + buttonIndex + " - " + nom[buttonIndex]);
 
-        // Cambiar el color del botón presionado
-        ChangeButtonColor(clickedButton, Color.green);
+            seleccion = buttonIndex;
 
-        // Forzar la actualización visual del botón
-        ForceButtonUpdate(clickedButton);
+            // Guardar la selección en PlayerPrefs
+            PlayerPrefs.SetInt("SeleccionMotor", seleccion);
+            PlayerPrefs.SetInt("CaballosDeFuerza", HPs[buttonIndex]); // Guardar caballos de fuerza
+            PlayerPrefs.Save(); // Asegura que los datos se guarden
+
+           CDF = PlayerPrefs.GetInt("CaballosDeFuerza"); // Guardar caballos de fuerza
+
+
+            // Cambiar el color del botón presionado
+            ChangeButtonColor(clickedButton, Color.green);
+            // Forzar la actualización visual del botón
+            ForceButtonUpdate(clickedButton);
+        }
+        else
+        {
+            // Muestra un mensaje si el motor no es "owned"
+            Debug.Log("Este motor no está disponible para selección porque no lo posees.");
+            // Aquí puedes añadir un mensaje en la UI si lo deseas
+        }
     }
 
 

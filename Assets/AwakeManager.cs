@@ -31,8 +31,7 @@ public class AwakeManager : MonoBehaviour
 
 
     public MejorasManejador MM;
-
-
+    public int CDF1;
 
     private void Awake()
     {
@@ -53,6 +52,7 @@ public class AwakeManager : MonoBehaviour
         childObject.transform.parent = newParent.transform;
         getCarInfo();
         GM.carIndex = listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carName;
+        CDF1 = PlayerPrefs.GetInt("CaballosDeFuerza"); 
     }
 
     private void FixedUpdate()
