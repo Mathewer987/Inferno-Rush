@@ -11,6 +11,7 @@ public class PanelDataEngine : MonoBehaviour
     public string[] nom;
     public int[] HPs;
     public int[] Pesosim;
+    public List<Color> colors;
 
     public GameObject dataCenter;
     public Text title;
@@ -63,8 +64,7 @@ public class PanelDataEngine : MonoBehaviour
                 title.text = nom[indexRevisar];
                 HP.text = "Horse Power: " + HPs[indexRevisar].ToString();
                 Peso.text = "Peso: " + Pesosim[indexRevisar].ToString();
-
-                // Comprobar si el motor es "owned" y mostrar el estado
+                title.color = colors[indexRevisar];  // Cambia el color del texto (las letras del título)
                 if (PlayerPrefs.HasKey(motorKeys[indexRevisar]))
                 {
                     Estado.text = "Status: Owned"; // Mostrar que el motor es propiedad
@@ -76,6 +76,7 @@ public class PanelDataEngine : MonoBehaviour
 
                 dataCenter.SetActive(true);  
                 isHovering = true; 
+
                 break;
             }
         }
@@ -112,7 +113,6 @@ public class PanelDataEngine : MonoBehaviour
             PlayerPrefs.Save(); // Asegura que los datos se guarden
 
            CDF = PlayerPrefs.GetInt("CaballosDeFuerza"); // Guardar caballos de fuerza
-
 
             // Cambiar el color del botón presionado
             ChangeButtonColor(clickedButton, Color.green);
