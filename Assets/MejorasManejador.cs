@@ -31,7 +31,7 @@ public class MejorasManejador : MonoBehaviour
     void Update()
     {
         currencyE.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
-        //currencyP.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
+        currencyP.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
         //currencyN.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
         //currencyA.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
         //currencyTC.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
@@ -48,30 +48,71 @@ public class MejorasManejador : MonoBehaviour
         AM.aleron.SetActive(false);
         AM.turboCargador.SetActive(false);
         AM.pintura.SetActive(false);
+        engine = true;
     }
 
     public void botonPiston()
     {
+        AM.Modificaciones.SetActive(false);
+        AM.engine.SetActive(false);
+        AM.piston.SetActive(true);
+        AM.nitro.SetActive(false);
+        AM.aleron.SetActive(false);
+        AM.turboCargador.SetActive(false);
+        AM.pintura.SetActive(false);
+        piston = true;
 
     }
 
     public void botonNitro()
     {
+        AM.Modificaciones.SetActive(false);
+        AM.engine.SetActive(false);
+        AM.piston.SetActive(false);
+        AM.nitro.SetActive(true);
+        AM.aleron.SetActive(false);
+        AM.turboCargador.SetActive(false);
+        AM.pintura.SetActive(false);
+        nitro = true;
 
     }
 
     public void botonAleron()
     {
+        AM.Modificaciones.SetActive(false);
+        AM.engine.SetActive(false);
+        AM.piston.SetActive(false);
+        AM.nitro.SetActive(false);
+        AM.aleron.SetActive(true);
+        AM.turboCargador.SetActive(false);
+        AM.pintura.SetActive(false);
+        aleron = true;
 
     }
 
     public void botonTurbo()
     {
+        AM.Modificaciones.SetActive(false);
+        AM.engine.SetActive(false);
+        AM.piston.SetActive(false);
+        AM.nitro.SetActive(false);
+        AM.aleron.SetActive(false);
+        AM.turboCargador.SetActive(true);
+        AM.pintura.SetActive(false);
+        turbo = true;
 
     }
 
     public void botonPintura()
     {
+        AM.Modificaciones.SetActive(false);
+        AM.engine.SetActive(false);
+        AM.piston.SetActive(false);
+        AM.nitro.SetActive(false);
+        AM.aleron.SetActive(false);
+        AM.turboCargador.SetActive(false);
+        AM.pintura.SetActive(true);
+        pintura = true;
 
     }
 

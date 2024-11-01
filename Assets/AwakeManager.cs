@@ -32,13 +32,15 @@ public class AwakeManager : MonoBehaviour
 
     public MejorasManejador MM;
     public int CDF1;
+    public int CDF2;
+
 
     private void Awake()
     {
         Modificaciones.SetActive(false);
         Principal.SetActive(true);
         engine.SetActive(false);
-        //piston.SetActive(false);
+        piston.SetActive(false);
         //nitro.SetActive(false);
         //aleron.SetActive(false);
         //turboCargador.SetActive(false);
@@ -52,7 +54,9 @@ public class AwakeManager : MonoBehaviour
         childObject.transform.parent = newParent.transform;
         getCarInfo();
         GM.carIndex = listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carName;
-        CDF1 = PlayerPrefs.GetInt("CaballosDeFuerza"); 
+        CDF1 = PlayerPrefs.GetInt("CaballosDeFuerza");
+        CDF2 = PlayerPrefs.GetInt("CaballosDeFuerzaP");
+
     }
 
     private void FixedUpdate()
@@ -86,30 +90,89 @@ public class AwakeManager : MonoBehaviour
 
     }
 
-    public void BotonVuelta()
+    public void BotonVueltaEngine()
     {
-        //if (MM.engine == false && MM.piston == false && MM.nitro == false && MM.aleron == false && MM.turbo == false && MM.pintura == false) { 
+        MM.engine = false;
+        Modificaciones.SetActive(true);
+        engine.SetActive(false);
+        piston.SetActive(false);
+        nitro.SetActive(false);
+        aleron.SetActive(false);
+        turboCargador.SetActive(false);
+        pintura.SetActive(false);
+
+    }
+
+    public void BotonVueltaPiston()
+    {
+        MM.piston = false;
+        Modificaciones.SetActive(true);
+        engine.SetActive(false);
+        piston.SetActive(false);
+        nitro.SetActive(false);
+        aleron.SetActive(false);
+        turboCargador.SetActive(false);
+        pintura.SetActive(false);
+
+    }
+
+    public void BotonVueltanitro()
+    {
+        MM.nitro = false;
+        Modificaciones.SetActive(true);
+        engine.SetActive(false);
+        piston.SetActive(false);
+        nitro.SetActive(true);
+        aleron.SetActive(false);
+        turboCargador.SetActive(false);
+        pintura.SetActive(false);
+
+    }
+
+    public void BotonVueltaaleron()
+    {
+        MM.aleron = false;
+        Modificaciones.SetActive(true);
+        engine.SetActive(false);
+        piston.SetActive(false);
+        nitro.SetActive(true);
+        aleron.SetActive(false);
+        turboCargador.SetActive(false);
+        pintura.SetActive(false);
+
+    }
+
+    public void BotonVueltaturbo()
+    {
+        MM.turbo= false;
+        Modificaciones.SetActive(true);
+        engine.SetActive(false);
+        piston.SetActive(false);
+        nitro.SetActive(true);
+        aleron.SetActive(false);
+        turboCargador.SetActive(false);
+        pintura.SetActive(false);
+
+    }
+
+    public void BotonVueltapintura()
+    {
+        MM.pintura = false;
+        Modificaciones.SetActive(true);
+        engine.SetActive(false);
+        piston.SetActive(false);
+        nitro.SetActive(true);
+        aleron.SetActive(false);
+        turboCargador.SetActive(false);
+        pintura.SetActive(false);
+
+    }
+    public void BotonVueltaPosta()
+    {
+        if (MM.engine == false && MM.piston == false && MM.nitro == false && MM.aleron == false && MM.turbo == false && MM.pintura == false) { 
         Modificaciones.SetActive(false);
         Principal.SetActive(true);
-        //}
-
-        //else if (MM.engine == true || MM.piston == true || MM.nitro == true || MM.aleron == true || MM.turbo == true || MM.pintura == true)
-        //{
-
-        if (MM.engine == true)
-        {
-            Modificaciones.SetActive(true);
-            engine.SetActive(false);
-            piston.SetActive(false);
-            nitro.SetActive(false);
-            aleron.SetActive(false);
-            turboCargador.SetActive(false);
-            pintura.SetActive(false);
         }
-        
-
-        //}
-
     }
 
     public void leftButton()
