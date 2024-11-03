@@ -95,8 +95,8 @@ public class MejorasManejador : MonoBehaviour
         AM.Modificaciones.SetActive(false);
         AM.engine.SetActive(false);
         AM.piston.SetActive(false);
-        AM.nitro.SetActive(false);
-        AM.aleron.SetActive(false);
+        //AM.nitro.SetActive(false);
+        //AM.aleron.SetActive(false);
         AM.turboCargador.SetActive(true);
         AM.pintura.SetActive(false);
         turbo = true;

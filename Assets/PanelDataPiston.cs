@@ -28,6 +28,9 @@ public class PanelDataPiston : MonoBehaviour
     {
         dataCenter.SetActive(false);
 
+        //DeleteTurboPreferences();
+
+
         // Cargar la selección guardada (si existe)
         if (PlayerPrefs.HasKey("SeleccionPiston"))
         {
@@ -108,9 +111,11 @@ public class PanelDataPiston : MonoBehaviour
             // Guardar la selección en PlayerPrefs
             PlayerPrefs.SetInt("SeleccionPiston", seleccion);
             PlayerPrefs.SetInt("CaballosDeFuerzaP", HPs[buttonIndex]); // Guardar caballos de fuerza
+            PlayerPrefs.SetInt("PesoPiston", Pesosim[buttonIndex]); // Guardar peso
             PlayerPrefs.Save(); // Asegura que los datos se guarden
 
             CDF = PlayerPrefs.GetInt("CaballosDeFuerzaP"); // Guardar caballos de fuerza
+            PSO = PlayerPrefs.GetInt("PesoPiston"); // Cargar peso
 
             // Cambiar el color del botón presionado
             ChangeButtonColor(clickedButton, Color.green);
@@ -153,6 +158,9 @@ public class PanelDataPiston : MonoBehaviour
 
     public void BuyPiston(int pistonIndex)
     {
+
+        pistonIndex = indexRevisar;
+
         // Verificar si el motor no está ya "owned"
         if (PlayerPrefs.GetString(pistonKeys[pistonIndex]) != "owned")
         {
@@ -187,5 +195,19 @@ public class PanelDataPiston : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void DeleteTurboPreferences()
+    {
+        foreach (string pistonKeys in pistonKeys)
+        {
+            if (PlayerPrefs.HasKey(pistonKeys))
+            {
+                PlayerPrefs.DeleteKey(pistonKeys);
+            }
+        }
+
+        PlayerPrefs.Save(); // Guarda los cambios
+        Debug.Log("Preferencias de turbos eliminadas!");
     }
 }

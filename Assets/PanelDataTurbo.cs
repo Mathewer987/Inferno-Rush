@@ -4,12 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-
-public class PanelDataEngine : MonoBehaviour
+public class PanelDataTurbo : MonoBehaviour
 {
     public List<Button> miniDatas;
     public string[] nom;
-    public int[] HPs;
+    public int[] PSIs;
     public int[] Pesosim;
     public List<Color> colors;
 
@@ -18,14 +17,13 @@ public class PanelDataEngine : MonoBehaviour
     public Text HP;
     public Text Peso;
     public Text Estado;
-    public string[] motorKeys;
+    public string[] turboKeys;
     public int seleccion;
 
-    public int CDF;
+    public int PSI;
     public int PSO;
 
     public int indexRevisar;
-
     private void Awake()
     {
         dataCenter.SetActive(false);
@@ -34,15 +32,15 @@ public class PanelDataEngine : MonoBehaviour
 
 
         // Cargar la selección guardada (si existe)
-        if (PlayerPrefs.HasKey("SeleccionMotor"))
+        if (PlayerPrefs.HasKey("SeleccionTurbo"))
         {
             // Obtener el índice del botón seleccionado guardado
-            seleccion = PlayerPrefs.GetInt("SeleccionMotor");
+            seleccion = PlayerPrefs.GetInt("SeleccionTurbo");
 
             // Aplicar el color verde al botón guardado
             Button selectedButton = miniDatas[seleccion];
             ChangeButtonColor(selectedButton, Color.green);
-            CDF = PlayerPrefs.GetInt("CaballosDeFuerza"); 
+            PSI = PlayerPrefs.GetInt("PSIss");
         }
 
 
@@ -65,10 +63,10 @@ public class PanelDataEngine : MonoBehaviour
             {
                 indexRevisar = miniDatas.IndexOf(infos);
                 title.text = nom[indexRevisar];
-                HP.text = "Horse Power: " + HPs[indexRevisar].ToString();
+                HP.text = "PSI: " + PSIs[indexRevisar].ToString();
                 Peso.text = "Peso: " + Pesosim[indexRevisar].ToString();
                 title.color = colors[indexRevisar];  // Cambia el color del texto (las letras del título)
-                if (PlayerPrefs.HasKey(motorKeys[indexRevisar]))
+                if (PlayerPrefs.HasKey(turboKeys[indexRevisar]))
                 {
                     Estado.text = "Status: Owned"; // Mostrar que el motor es propiedad
                 }
@@ -77,8 +75,8 @@ public class PanelDataEngine : MonoBehaviour
                     Estado.text = "Status: Not Owned"; // Mostrar que el motor no es propiedad
                 }
 
-                dataCenter.SetActive(true);  
-                isHovering = true; 
+                dataCenter.SetActive(true);
+                isHovering = true;
 
                 break;
             }
@@ -98,7 +96,7 @@ public class PanelDataEngine : MonoBehaviour
         int buttonIndex = miniDatas.IndexOf(clickedButton);
 
         // Verifica si el motor está "owned"
-        if (PlayerPrefs.HasKey(motorKeys[buttonIndex]))
+        if (PlayerPrefs.HasKey(turboKeys[buttonIndex]))
         {
             // Restablece el color de todos los botones antes de cambiar el color del botón presionado
             foreach (Button btn in miniDatas)
@@ -111,13 +109,13 @@ public class PanelDataEngine : MonoBehaviour
             seleccion = buttonIndex;
 
             // Guardar la selección en PlayerPrefs
-            PlayerPrefs.SetInt("SeleccionMotor", seleccion);
-            PlayerPrefs.SetInt("CaballosDeFuerza", HPs[buttonIndex]); // Guardar caballos de fuerza
-            PlayerPrefs.SetInt("PesoMotor", Pesosim[buttonIndex]); // Guardar peso
+            PlayerPrefs.SetInt("SeleccionTurbo", seleccion);
+            PlayerPrefs.SetInt("PSIss", PSIs[buttonIndex]); // Guardar caballos de fuerza
+            PlayerPrefs.SetInt("PesoTurbo", Pesosim[buttonIndex]); // Guardar peso
             PlayerPrefs.Save(); // Asegura que los datos se guarden
 
-           CDF = PlayerPrefs.GetInt("CaballosDeFuerza"); // Guardar caballos de fuerza
-           PSO = PlayerPrefs.GetInt("PesoMotor"); // Cargar peso
+            PSI = PlayerPrefs.GetInt("PSIss"); // Guardar caballos de fuerza
+            PSO = PlayerPrefs.GetInt("PesoTurbo"); // Cargar peso
 
             // Cambiar el color del botón presionado
             ChangeButtonColor(clickedButton, Color.green);
@@ -127,7 +125,7 @@ public class PanelDataEngine : MonoBehaviour
         else
         {
             // Muestra un mensaje si el motor no es "owned"
-            Debug.Log("Este motor no está disponible para selección porque no lo posees.");
+            Debug.Log("Este turbo no está disponible para selección porque no lo posees.");
             // Aquí puedes añadir un mensaje en la UI si lo deseas
         }
     }
@@ -158,25 +156,24 @@ public class PanelDataEngine : MonoBehaviour
     }
 
 
-    public void BuyMotor(int motorIndex)
+    public void BuyTurbo(int turboIndex)
     {
 
-        motorIndex = indexRevisar;
-
+        turboIndex = indexRevisar;
         // Verificar si el motor no está ya "owned"
-        if (PlayerPrefs.GetString(motorKeys[motorIndex]) != "owned")
+        if (PlayerPrefs.GetString(turboKeys[turboIndex]) != "owned")
         {
             // Aquí podrías agregar la lógica para verificar monedas o recursos
             // Por simplicidad, asumimos que siempre se puede comprar
-            PlayerPrefs.SetString(motorKeys[motorIndex], "owned");
+            PlayerPrefs.SetString(turboKeys[turboIndex], "owned");
 
-            Debug.Log("Motor " + motorKeys[motorIndex] + " ahora es tuyo!");
+            Debug.Log("Turbo " + turboKeys[turboIndex] + " ahora es tuyo!");
 
             // Actualiza la información del motor o UI
         }
         else
         {
-            Debug.Log("Ya posees este motor!");
+            Debug.Log("Ya posees este turbo!");
         }
     }
 
@@ -201,16 +198,15 @@ public class PanelDataEngine : MonoBehaviour
 
     public void DeleteTurboPreferences()
     {
-        foreach (string engineKeys in motorKeys)
+        foreach (string turboKey in turboKeys)
         {
-            if (PlayerPrefs.HasKey(engineKeys))
+            if (PlayerPrefs.HasKey(turboKey))
             {
-                PlayerPrefs.DeleteKey(engineKeys);
+                PlayerPrefs.DeleteKey(turboKey);
             }
         }
 
         PlayerPrefs.Save(); // Guarda los cambios
         Debug.Log("Preferencias de turbos eliminadas!");
     }
-
 }
