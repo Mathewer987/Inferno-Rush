@@ -14,6 +14,7 @@ public class AwakeManager : MonoBehaviour
     public int vehiclePointer = 0;
     public Text currency;
     public Text currency2;
+    public Text currency3;
     public Text currency5;
 
     public Text carInfo;
@@ -34,10 +35,12 @@ public class AwakeManager : MonoBehaviour
     public MejorasManejador MM;
     public int CDF1;
     public int CDF2;
+    public int CDF3;
     public int CDF5;
 
     public int P1;
     public int P2;
+    public int P3;
     public int P5;
 
     public int CFSinSuTurbo;
@@ -52,7 +55,7 @@ public class AwakeManager : MonoBehaviour
         Principal.SetActive(true);
         engine.SetActive(false);
         piston.SetActive(false);
-        //nitro.SetActive(false);
+        nitro.SetActive(false);
         //aleron.SetActive(false);
         turboCargador.SetActive(false);
         //pintura.SetActive(false);
@@ -70,15 +73,17 @@ public class AwakeManager : MonoBehaviour
         
         CDF1 = PlayerPrefs.GetInt("CaballosDeFuerza");
         CDF2 = PlayerPrefs.GetInt("CaballosDeFuerzaP");
+        CDF3 = PlayerPrefs.GetInt("CaballosDeFuerzaN");
         CDF5 = PlayerPrefs.GetInt("PSIss");
 
         //Parte pesos variables
 
         P1 = PlayerPrefs.GetInt("PesoMotor");
         P2 = PlayerPrefs.GetInt("PesoPiston");
+        P3 = PlayerPrefs.GetInt("PesoNitro");
         P5 = PlayerPrefs.GetInt("PesoTurbo");
 
-        CFSinSuTurbo = CDF1 + CDF2;
+        CFSinSuTurbo = CDF1 + CDF2 + CDF3;
     }
 
     
@@ -87,20 +92,22 @@ public class AwakeManager : MonoBehaviour
     {
         toRotate.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
         childObject.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
-        
+
         //Parte caballos de fuerza variables
 
         CDF1 = PlayerPrefs.GetInt("CaballosDeFuerza");
         CDF2 = PlayerPrefs.GetInt("CaballosDeFuerzaP");
+        CDF3 = PlayerPrefs.GetInt("CaballosDeFuerzaN");
         CDF5 = PlayerPrefs.GetInt("PSIss");
 
         //Parte pesos variables
 
         P1 = PlayerPrefs.GetInt("PesoMotor");
         P2 = PlayerPrefs.GetInt("PesoPiston");
+        P3 = PlayerPrefs.GetInt("PesoNitro");
         P5 = PlayerPrefs.GetInt("PesoTurbo");
 
-        CFSinSuTurbo = CDF1 + CDF2;
+        CFSinSuTurbo = CDF1 + CDF2 + CDF3;
 
         Peso = P1 + P2 + P5;
 
@@ -195,7 +202,7 @@ public class AwakeManager : MonoBehaviour
         Modificaciones.SetActive(true);
         engine.SetActive(false);
         piston.SetActive(false);
-        //nitro.SetActive(false);
+        nitro.SetActive(false);
         //aleron.SetActive(false);
         turboCargador.SetActive(false);
         pintura.SetActive(false);
@@ -267,6 +274,7 @@ public class AwakeManager : MonoBehaviour
             buyButton.SetActive(false);
             currency.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
             currency2.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
+            currency3.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
             currency5.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
 
             return;
@@ -274,6 +282,7 @@ public class AwakeManager : MonoBehaviour
         }
         currency.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
         currency2.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
+        currency3.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
         currency5.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
 
         carInfo.text = listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carName.ToString() + " $ " +
