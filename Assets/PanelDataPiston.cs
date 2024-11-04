@@ -41,6 +41,8 @@ public class PanelDataPiston : MonoBehaviour
             Button selectedButton = miniDatas[seleccion];
             ChangeButtonColor(selectedButton, Color.green);
             CDF = PlayerPrefs.GetInt("CaballosDeFuerzaP");
+            PSO = PlayerPrefs.GetInt("PesoPiston");
+
         }
 
 

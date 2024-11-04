@@ -42,7 +42,9 @@ public class PanelDataEngine : MonoBehaviour
             // Aplicar el color verde al botón guardado
             Button selectedButton = miniDatas[seleccion];
             ChangeButtonColor(selectedButton, Color.green);
-            CDF = PlayerPrefs.GetInt("CaballosDeFuerza"); 
+            CDF = PlayerPrefs.GetInt("CaballosDeFuerza");
+            PSO = PlayerPrefs.GetInt("PesoMotor");
+
         }
 
 

@@ -41,6 +41,8 @@ public class PanelDataTurbo : MonoBehaviour
             Button selectedButton = miniDatas[seleccion];
             ChangeButtonColor(selectedButton, Color.green);
             PSI = PlayerPrefs.GetInt("PSIss");
+            PSO = PlayerPrefs.GetInt("PesoTurbo");
+
         }
 
 

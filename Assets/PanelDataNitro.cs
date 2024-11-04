@@ -26,7 +26,6 @@ public class PanelDataNitro : MonoBehaviour
     public int indexRevisar;
     private void Awake()
     {
-        Debug.Log(CDF);
         dataCenter.SetActive(false);
 
         //DeleteTurboPreferences();
@@ -42,6 +41,7 @@ public class PanelDataNitro : MonoBehaviour
             Button selectedButton = miniDatas[seleccion];
             ChangeButtonColor(selectedButton, Color.green);
             CDF = PlayerPrefs.GetInt("CaballosDeFuerzaN");
+            PSO = PlayerPrefs.GetInt("PesoNitro");
         }
 
 
@@ -88,7 +88,6 @@ public class PanelDataNitro : MonoBehaviour
         {
             dataCenter.SetActive(false);
         }
-        Debug.Log(CDF);
 
     }
 
@@ -112,7 +111,7 @@ public class PanelDataNitro : MonoBehaviour
             seleccion = buttonIndex;
 
             // Guardar la selección en PlayerPrefs
-            PlayerPrefs.SetInt("SeleccioNitro", seleccion);
+            PlayerPrefs.SetInt("SeleccionNitro", seleccion);
             PlayerPrefs.SetInt("CaballosDeFuerzaN", HPs[buttonIndex]); // Guardar caballos de fuerza
             PlayerPrefs.SetInt("PesoNitro", Pesosim[buttonIndex]); // Guardar peso
             PlayerPrefs.Save(); // Asegura que los datos se guarden
