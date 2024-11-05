@@ -15,7 +15,10 @@ public class AwakeManager : MonoBehaviour
     public Text currency;
     public Text currency2;
     public Text currency3;
+    public Text currency4;
     public Text currency5;
+    public Text currency6;
+
 
     public Text carInfo;
     public GeneralManager GM;
@@ -58,7 +61,7 @@ public class AwakeManager : MonoBehaviour
         nitro.SetActive(false);
         //aleron.SetActive(false);
         turboCargador.SetActive(false);
-        //pintura.SetActive(false);
+        pintura.SetActive(false);
 
         vehiclePointer = PlayerPrefs.GetInt("pointer");
         //PlayerPrefs.SetInt("currency", 951254632);
@@ -216,7 +219,7 @@ public class AwakeManager : MonoBehaviour
         engine.SetActive(false);
         piston.SetActive(false);
         nitro.SetActive(false);
-        aleron.SetActive(false);
+        //aleron.SetActive(false);
         turboCargador.SetActive(false);
         pintura.SetActive(false);
 
@@ -275,7 +278,9 @@ public class AwakeManager : MonoBehaviour
             currency.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
             currency2.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
             currency3.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
+           // currency4.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
             currency5.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
+            currency6.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
 
             return;
 
@@ -283,7 +288,9 @@ public class AwakeManager : MonoBehaviour
         currency.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
         currency2.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
         currency3.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
+       // currency4.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
         currency5.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
+        currency6.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
 
         carInfo.text = listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carName.ToString() + " $ " +
                         listOfVehicles.vehicles[PlayerPrefs.GetInt("pointer")].GetComponent<ControlPosta>().carPrice.ToString();
