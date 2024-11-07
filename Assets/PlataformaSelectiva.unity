@@ -263,12 +263,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 474105462}
+      - m_Target: {fileID: 1244585489}
         m_MethodName: ntla
-        m_Mode: 1
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 23406145}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1979,8 +1979,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: SeleccionArgentina
+      - m_Target: {fileID: 1244585489}
+        m_MethodName: ntla
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 328814056}
@@ -6540,8 +6540,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: SeleccionArgentina
+      - m_Target: {fileID: 1244585489}
+        m_MethodName: ntla
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1002906738}
@@ -7978,6 +7978,7 @@ GameObject:
   - component: {fileID: 1244585486}
   - component: {fileID: 1244585485}
   - component: {fileID: 1244585484}
+  - component: {fileID: 1244585489}
   m_Layer: 5
   m_Name: PinturaG
   m_TagString: Untagged
@@ -8109,6 +8110,38 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1244585489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244585483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c50b05ce8a8b0e9459d4b50e4a726344, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialovich:
+  - {fileID: 2100000, guid: 147a5e84329dc3145a919ec61d92a126, type: 2}
+  - {fileID: 0}
+  - {fileID: 2100000, guid: 787cb25de3401c44b939f2599cda764c, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  autoPadre: {fileID: 223172563}
+  autinho: {fileID: 0}
+  CCR: {fileID: 0}
+  final: {fileID: 0}
+  renderer: {fileID: 0}
+  nuevoMaterial: {fileID: 0}
+  miniDatas:
+  - {fileID: 1287461592}
+  - {fileID: 328814056}
+  - {fileID: 1361890479}
+  - {fileID: 1359046953}
+  - {fileID: 23406145}
+  - {fileID: 1002906738}
 --- !u!1 &1257510278
 GameObject:
   m_ObjectHideFlags: 0
@@ -8464,8 +8497,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: SeleccionArgentina
+      - m_Target: {fileID: 1244585489}
+        m_MethodName: ntla
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1287461592}
@@ -8668,8 +8701,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: SeleccionArgentina
+      - m_Target: {fileID: 1244585489}
+        m_MethodName: ntla
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1359046953}
@@ -8793,8 +8826,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: SeleccionArgentina
+      - m_Target: {fileID: 1244585489}
+        m_MethodName: ntla
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 1361890479}
