@@ -12,7 +12,9 @@ public class PanelDataPinturaPosta : MonoBehaviour
     public GameObject final;
     public Renderer renderer;
     public Material nuevoMaterial;
-    public List<Button> miniDatas;
+    public int MatNum;
+    public MejorasManejador MM;
+    public GeneralManager GM;
 
     private void FixedUpdate()
     {
@@ -20,17 +22,55 @@ public class PanelDataPinturaPosta : MonoBehaviour
         CCR = autinho.transform.Find("Camaro con ruedas").gameObject;
         final = CCR.transform.Find("CUERPO").gameObject;
         renderer = final.GetComponent<Renderer>();
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            nuevoMaterial = null;
+            renderer.material = nuevoMaterial;
+
+        }
     }
 
-    public void ntla(Button clickedButton)
+    public void Tick()
+    {
+        MM.pinturaSalida = true;
+        GM.mat = nuevoMaterial;
+    }
+
+    public void Derecha()
     {
 
-        int buttonIndex = miniDatas.IndexOf(clickedButton);
+        if (MatNum < materialovich.Count - 1)
+        {
+            MatNum++;
+        }
 
-        nuevoMaterial = materialovich[buttonIndex];
+        else
+        {
+            MatNum = 0;
+        }
+
+        nuevoMaterial = materialovich[MatNum];
 
         renderer.material = nuevoMaterial;
+        MM.pinturaSalida = false;
+
     }
 
-  
+    public void Izquierda()
+    {
+        if (MatNum > 0)
+        {
+            MatNum--;
+        }
+
+
+        nuevoMaterial = materialovich[MatNum];
+
+        renderer.material = nuevoMaterial;
+        MM.pinturaSalida = false;
+
+    }
+
+
 }

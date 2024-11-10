@@ -1,11 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GeneralManager : MonoBehaviour
 {
     public static GeneralManager Instance;
     public string carIndex;
+    public Material mat;
+    public Renderer renderer;
+
+    public GameObject autinho;
+    public GameObject CCR;
+    public GameObject final;
+    public PanelDataPinturaPosta PP;
+    public string nombreEscenaObjetivo = "Prueba Manejo"; // Nombre de la escena objetivo
 
 
     // Start is called before the first frame update
@@ -21,11 +30,25 @@ public class GeneralManager : MonoBehaviour
             Instance = this;
         }
         DontDestroyOnLoad(this);
+
+
+    }
+    void Start()
+    {
+        PP = FindObjectOfType<PanelDataPinturaPosta>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+           
+
+        if (SceneManager.GetActiveScene().name == "Prueba Manejo")
+        {
+            autinho = GameObject.Find(carIndex);
+            CCR = autinho.transform.Find("Camaro con ruedas").gameObject;
+            final = CCR.transform.Find("CUERPO").gameObject;
+            renderer = final.GetComponent<Renderer>();
+        }
     }
 }

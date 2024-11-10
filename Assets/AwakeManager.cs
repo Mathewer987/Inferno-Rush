@@ -214,14 +214,18 @@ public class AwakeManager : MonoBehaviour
 
     public void BotonVueltapintura()
     {
-        MM.pintura = false;
-        Modificaciones.SetActive(true);
-        engine.SetActive(false);
-        piston.SetActive(false);
-        nitro.SetActive(false);
-        //aleron.SetActive(false);
-        turboCargador.SetActive(false);
-        pintura.SetActive(false);
+        if (MM.pinturaSalida == true)
+        {
+            MM.pintura = false;
+            Modificaciones.SetActive(true);
+            engine.SetActive(false);
+            piston.SetActive(false);
+            nitro.SetActive(false);
+            //aleron.SetActive(false);
+            turboCargador.SetActive(false);
+            pintura.SetActive(false);
+        }
+       
 
     }
     public void BotonVueltaPosta()

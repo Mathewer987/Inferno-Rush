@@ -11,6 +11,8 @@ public class MejorasManejador : MonoBehaviour
     public bool aleron;
     public bool turbo;
     public bool pintura;
+    public bool pinturaSalida;
+
 
     public Text currencyE;
     public Text currencyP;
@@ -84,6 +86,7 @@ public class MejorasManejador : MonoBehaviour
         AM.Modificaciones.SetActive(false);
         AM.pintura.SetActive(true);
         pintura = true;
+        pinturaSalida = false;
 
     }
 
