@@ -2052,7 +2052,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385804304}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97641247c4a11b2458f5f3f2812ba434, type: 3}
   m_Name: 
@@ -2060,6 +2060,7 @@ MonoBehaviour:
   carIndex: 0
   mat: {fileID: 0}
   renderer: {fileID: 0}
+  autoPadre: {fileID: 0}
   autinho: {fileID: 0}
   CCR: {fileID: 0}
   final: {fileID: 0}
