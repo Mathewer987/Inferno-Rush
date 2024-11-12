@@ -2060,7 +2060,7 @@ MonoBehaviour:
   carIndex: 0
   mat: {fileID: 0}
   renderer: {fileID: 0}
-  autoPadre: {fileID: 0}
+  autoPadre: {fileID: 223172563}
   autinho: {fileID: 0}
   CCR: {fileID: 0}
   final: {fileID: 0}
@@ -4035,7 +4035,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &661999804
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6738,6 +6738,7 @@ GameObject:
   - component: {fileID: 1097526380}
   - component: {fileID: 1097526379}
   - component: {fileID: 1097526378}
+  - component: {fileID: 1097526382}
   m_Layer: 5
   m_Name: Seleccion vehiculos
   m_TagString: Untagged
@@ -6831,6 +6832,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1097526382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097526377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6327e347ce81184686deb6497f41d4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoPadre: {fileID: 223172563}
+  autinho: {fileID: 0}
+  CCR: {fileID: 0}
+  final: {fileID: 0}
+  renderer: {fileID: 0}
+  PP: {fileID: 1244585489}
 --- !u!1 &1102698622
 GameObject:
   m_ObjectHideFlags: 0
@@ -7910,9 +7929,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialovich:
   - {fileID: 2100000, guid: 147a5e84329dc3145a919ec61d92a126, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: d6e7475a477721949a7fa2353ffb7e32, type: 2}
   - {fileID: 2100000, guid: 787cb25de3401c44b939f2599cda764c, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 54eb0a880c35ecd4fa56b3b6c33e8aaa, type: 2}
   - {fileID: 2100000, guid: d8e0e5668c5a56b4cbdb3a7d5375fad5, type: 2}
   - {fileID: 2100000, guid: d4c75380ffe93714f9921c0ee69e7127, type: 2}
   autoPadre: {fileID: 223172563}
@@ -7924,6 +7943,7 @@ MonoBehaviour:
   MatNum: 0
   MM: {fileID: 1628460236}
   GM: {fileID: 385804305}
+  tick: {fileID: 661999805}
 --- !u!1 &1257510278
 GameObject:
   m_ObjectHideFlags: 0

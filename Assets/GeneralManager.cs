@@ -35,12 +35,13 @@ public class GeneralManager : MonoBehaviour
     }
     void Start()
     {
-        PP = FindObjectOfType<PanelDataPinturaPosta>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        int nakdl = PlayerPrefs.GetInt("IndexPintura");
+        mat = PP.materialovich[nakdl];
 
         GameObject miObjeto = GameObject.Find("Autos");
 

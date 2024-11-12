@@ -91,8 +91,12 @@ public class ControlPosta : MonoBehaviour
     public string carName;
     private void Awake()
     {
-       
-        
+
+        float CDF = PlayerPrefs.GetFloat("CFPosta");
+
+        float jsjs = (0.0008366f * CDF)+ 0.6695f;
+
+        motorTorque = jsjs;
 
     }
 

@@ -115,6 +115,8 @@ public class AwakeManager : MonoBehaviour
         Peso = P1 + P2 + P5;
 
         CFPosta = CalcularCaballosDeFuerza(CFSinSuTurbo, PSIBase, CDF5);
+
+        PlayerPrefs.SetFloat("CFPosta", CFPosta);
     }
     public float CalcularCaballosDeFuerza(float hpBase, float psiBase, float psiActual)
     {

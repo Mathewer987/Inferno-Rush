@@ -15,26 +15,33 @@ public class PanelDataPinturaPosta : MonoBehaviour
     public int MatNum;
     public MejorasManejador MM;
     public GeneralManager GM;
+    public Button tick;
 
-    private void FixedUpdate()
+    private void Start()
     {
+        MatNum = PlayerPrefs.GetInt("IndexPintura");
         autinho = autoPadre.transform.GetChild(0).gameObject;
         CCR = autinho.transform.Find("Camaro con ruedas").gameObject;
         final = CCR.transform.Find("CUERPO").gameObject;
         renderer = final.GetComponent<Renderer>();
+        renderer.material = nuevoMaterial;
 
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            nuevoMaterial = null;
-            renderer.material = nuevoMaterial;
+    }
 
-        }
+    private void FixedUpdate()
+    {
+        
+
+        
     }
 
     public void Tick()
     {
         MM.pinturaSalida = true;
         GM.mat = nuevoMaterial;
+        tick.gameObject.SetActive(false);
+        PlayerPrefs.SetInt("IndexPintura", MatNum);
+
     }
 
     public void Derecha()
@@ -55,6 +62,8 @@ public class PanelDataPinturaPosta : MonoBehaviour
         renderer.material = nuevoMaterial;
         MM.pinturaSalida = false;
 
+        tick.gameObject.SetActive(true);
+
     }
 
     public void Izquierda()
@@ -69,6 +78,9 @@ public class PanelDataPinturaPosta : MonoBehaviour
 
         renderer.material = nuevoMaterial;
         MM.pinturaSalida = false;
+
+        tick.gameObject.SetActive(true);
+
 
     }
 
