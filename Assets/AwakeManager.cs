@@ -257,6 +257,10 @@ public class AwakeManager : MonoBehaviour
     {
         SceneManager.LoadScene("Prueba Manejo");
     }
+    public void tiendovich()
+    {
+        SceneManager.LoadScene("Tienda");
+    }
 
     public void BuyButton()
     {

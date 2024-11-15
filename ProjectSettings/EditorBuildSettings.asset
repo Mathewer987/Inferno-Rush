@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/DynoTime.unity
     guid: 070229429e5002649b57396a29d8b6f2
+  - enabled: 1
+    path: Assets/Tienda.unity
+    guid: fe94dbbaad9735e4092c343c2c168f35
   m_configObjects: {}
