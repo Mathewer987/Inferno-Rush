@@ -28,6 +28,7 @@ public class AdminCompras : MonoBehaviour
     public bool trafa;
 
     public TurboTienda TB;
+    public NitroTienda NI;
 
     public Text titulo;
     public Text HP;
@@ -40,6 +41,12 @@ public class AdminCompras : MonoBehaviour
     public Button CP;
     public Button CN;
     public Button CT;
+    public bool panel;
+
+    public GameObject ET;
+    public GameObject PT;
+    public GameObject NT;
+    public GameObject TT;
 
 
 
@@ -51,7 +58,10 @@ public class AdminCompras : MonoBehaviour
     void Start()
     {
         PanelData.SetActive(false);
-
+        ET.SetActive(false);
+        PT.SetActive(false);
+        NT.SetActive(false);
+        TT.SetActive(false);
 
     }
 
@@ -98,6 +108,35 @@ public class AdminCompras : MonoBehaviour
             CP.gameObject.SetActive(false);
             CN.gameObject.SetActive(true);
             CT.gameObject.SetActive(false);
+
+            Base.sprite = NitroImagenes[Index];
+            titulo.text = NI.nom[Index];
+            string jk = NI.HPs[Index].ToString();
+            HP.text = "HP: " + jk;
+
+            string lm = NI.Pesosim[Index].ToString();
+            Peso.text = "Peso: " + lm;
+
+            if (PlayerPrefs.HasKey(NI.nitroKeys[Index]))
+            {
+                Estado.text = "Status: Owned"; // Mostrar que el motor es propiedad
+            }
+            else
+            {
+                Estado.text = "Status: Not Owned"; // Mostrar que el motor no es propiedad
+            }
+
+            titulo.color = NI.colors[Index];
+
+            string agr = NI.Precio[Index].ToString();
+            Precio.text = "$" + agr;
+
+            if (NI.jijijija == false)
+            {
+                string ghj = PlayerPrefs.GetInt("currency").ToString();
+                guita.text = "$" + ghj;
+                guita.color = Color.white;
+            }
         }
 
         else if (Turbo == true)
@@ -129,22 +168,70 @@ public class AdminCompras : MonoBehaviour
             string agr = TB.Precio[Index].ToString();
             Precio.text = "$" + agr;
 
+            if (TB.jijijija == false)
+            {
+                string ghj = PlayerPrefs.GetInt("currency").ToString();
+                guita.text = "$" + ghj;
+                guita.color = Color.white;
+            }
         }
 
-        if (TB.jijijija == false)
-        {
-            string ghj = PlayerPrefs.GetInt("currency").ToString();
-            guita.text = "$" + ghj;
-            guita.color = Color.white;
-        }
         
+        
+    }
+
+    public void EngineKaput()
+    {
+        if (panel == false)
+        {
+            PanelData.SetActive(true);
+            Motor = true;
+            trafa = true;
+            panel = true;
+            ET.SetActive(true); 
+        }
+
+    }
+
+    public void PistonGordo()
+    {
+        if (panel == false)
+        {
+            PanelData.SetActive(true);
+            Piston = true;
+            trafa = true;
+            panel = true; 
+            PT.SetActive(true);
+           
+        }
+
+    }
+
+    public void NitroLargo()
+    {
+        if (panel == false)
+        {
+            PanelData.SetActive(true);
+            Nitro = true;
+            trafa = true;
+            panel = true;
+            NT.SetActive(true);
+            
+        }
+
     }
 
     public void turboManuela()
     {
-        PanelData.SetActive(true);
-        Turbo = true;
-        trafa = true;
+        if (panel == false)
+        {
+            PanelData.SetActive(true);
+            Turbo = true;
+            trafa = true;
+            panel = true;
+            TT.SetActive(true);
+        }
+        
     }
 
     public void cerrarPanel()
@@ -152,7 +239,15 @@ public class AdminCompras : MonoBehaviour
         PanelData.SetActive(false);
         Index = 0;
         trafa = false;
-
+        panel = false;
+        Motor = false;
+        Piston = false;
+        Nitro = false;
+        Turbo = false;
+        ET.SetActive(false);
+        PT.SetActive(false);
+        NT.SetActive(false);
+        TT.SetActive(false);
     }
 
 
@@ -192,11 +287,9 @@ public class AdminCompras : MonoBehaviour
             if (Index < turbosImagenes.Length - 1)
             {
                 Index = Index + 1;
-                Debug.Log("Der turbo");
             }
         }
 
-        Debug.Log("Der norm");
 
      
     }
