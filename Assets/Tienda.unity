@@ -584,6 +584,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 391540322}
+  - component: {fileID: 391540323}
   m_Layer: 0
   m_Name: Engine
   m_TagString: Untagged
@@ -605,6 +606,44 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &391540323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 391540321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21f544591d6811449caff4af2aa0a94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nom:
+  - SR20
+  - RB26
+  - LS
+  - FR9
+  - HEMI
+  - F1X
+  HPs: fa00000022010000f901000090020000c30200001e020000
+  Pesosim: fa000000f00000000e0100000e01000040010000ff000000
+  colors:
+  - {r: 0.14901961, g: 0.7921569, b: 0.12156863, a: 1}
+  - {r: 0.6509804, g: 0, b: 1, a: 1}
+  - {r: 0.9647059, g: 1, b: 0, a: 1}
+  - {r: 0.9647059, g: 1, b: 0, a: 1}
+  - {r: 0.9647059, g: 1, b: 0, a: 1}
+  - {r: 0.9647059, g: 1, b: 0, a: 1}
+  Precio: 50c30000801a060040420f00e0673500404b4c00001bb700
+  jijijija: 0
+  engineKeys:
+  - Motor1
+  - Motor2
+  - Motor3
+  - Motor4
+  - Motor5
+  - Motor6
+  ACV: {fileID: 1778540872}
 --- !u!1001 &429363865
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1941,7 +1980,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1013072585}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 391540323}
+        m_MethodName: BuyEngine
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1013072585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2054,7 +2104,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1018281044}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1350475728}
+        m_MethodName: BuyPiston
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1018281044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2642,6 +2703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1350475727}
+  - component: {fileID: 1350475728}
   m_Layer: 0
   m_Name: Piston
   m_TagString: Untagged
@@ -2663,6 +2725,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1350475728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350475726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 860ba32b74747e841a00b5c46ba83d10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nom:
+  - PRO LIGHTS
+  - VX FORGE+
+  - VX SUPREME+
+  - VX TITAN
+  - VX CONCEPT+
+  HPs: 190000003c000000500000005a00000064000000
+  Pesosim: 1e0000001e0000001e0000001400000014000000
+  colors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 0.050980393, g: 0.26666668, b: 1, a: 1}
+  - {r: 0.84313726, g: 0, b: 1, a: 1}
+  - {r: 0.99215686, g: 0.24705882, b: 0.24705882, a: 1}
+  - {r: 0.9647059, g: 1, b: 0, a: 1}
+  Precio: dc0500007869000080a9030000350c00a02c1000
+  jijijija: 0
+  pistonKeys:
+  - Piston 1
+  - Piston 2
+  - Piston 3
+  - Piston 4
+  - Piston 5
+  ACV: {fileID: 1778540872}
 --- !u!1 &1466442730
 GameObject:
   m_ObjectHideFlags: 0
@@ -3098,9 +3195,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PanelData: {fileID: 881147560}
   Base: {fileID: 1279388971}
-  PeTe: {fileID: 0}
-  MotorImagenes: []
-  PistonImagenes: []
+  MotorImagenes:
+  - {fileID: 21300000, guid: f18742e558a398b449647fc155c4d24c, type: 3}
+  - {fileID: 21300000, guid: 47e35fc7da16fc544b9380718036d665, type: 3}
+  - {fileID: 21300000, guid: 0ba4fee3c349f6f498362bc0e2ffe67d, type: 3}
+  - {fileID: 21300000, guid: d9ccab1c61469a343828fd224bd9975e, type: 3}
+  - {fileID: 21300000, guid: f362c1e8cdedbd647b15e4616375f4e5, type: 3}
+  - {fileID: 21300000, guid: 1166da3da5ff09d42b1fe2b6aee29849, type: 3}
+  PistonImagenes:
+  - {fileID: 21300000, guid: 805aa3fac674e4f499ed81aaf3fc822f, type: 3}
+  - {fileID: 21300000, guid: 6f7ab62853826be4683cdf2fa63fe440, type: 3}
+  - {fileID: 21300000, guid: 90638d27d4bb7c849a6d511ef0fd4489, type: 3}
+  - {fileID: 21300000, guid: 7392f0d93b761214ca2488edf1220d8c, type: 3}
+  - {fileID: 21300000, guid: b610f8c7ba4ef1140825f60074f8dccb, type: 3}
   NitroImagenes:
   - {fileID: 21300000, guid: 90115f6899c1e2a44aa4d77e2d0f2e03, type: 3}
   - {fileID: 21300000, guid: da1ecbb3f841e6443b3e8ad8504b478e, type: 3}
@@ -3121,6 +3228,9 @@ MonoBehaviour:
   trafa: 0
   TB: {fileID: 381835596}
   NI: {fileID: 1066957687}
+  PI: {fileID: 1350475728}
+  EN: {fileID: 391540323}
+  kla: 0
   titulo: {fileID: 2104350147}
   HP: {fileID: 1225894227}
   Peso: {fileID: 1642619389}

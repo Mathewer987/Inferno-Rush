@@ -12,7 +12,6 @@ public class AdminCompras : MonoBehaviour
     public Image Base;
 
 
-    public TurboTienda PeTe;
 
     public Sprite[] MotorImagenes;
     public Sprite[] PistonImagenes;
@@ -29,6 +28,11 @@ public class AdminCompras : MonoBehaviour
 
     public TurboTienda TB;
     public NitroTienda NI;
+    public PistonTienda PI;
+    public EngineTienda EN;
+
+    public bool kla = false;
+
 
     public Text titulo;
     public Text HP;
@@ -62,12 +66,31 @@ public class AdminCompras : MonoBehaviour
         PT.SetActive(false);
         NT.SetActive(false);
         TT.SetActive(false);
+        PlayerPrefs.SetInt("currency", 1900000000);
+
 
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if (TB.jijijija == true || NI.jijijija == true || PI.jijijija == true || EN.jijijija == true)
+        {
+            kla = true;
+        }
+
+        else
+        {
+            kla = false;
+        }
+
+        if (kla == false)
+        {
+            guita.text = "$" + PlayerPrefs.GetInt("currency").ToString();
+
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             cerrarPanel();
@@ -92,6 +115,34 @@ public class AdminCompras : MonoBehaviour
             CN.gameObject.SetActive(false);
             CT.gameObject.SetActive(false);
 
+            Base.sprite = MotorImagenes[Index];
+            titulo.text = EN.nom[Index];
+            string jk = EN.HPs[Index].ToString();
+            HP.text = "HP: " + jk;
+
+            string lm = EN.Pesosim[Index].ToString();
+            Peso.text = "Peso: " + lm;
+
+            if (PlayerPrefs.HasKey(EN.engineKeys[Index]))
+            {
+                Estado.text = "Status: Owned"; // Mostrar que el motor es propiedad
+            }
+            else
+            {
+                Estado.text = "Status: Not Owned"; // Mostrar que el motor no es propiedad
+            }
+
+            titulo.color = EN.colors[Index];
+
+            string agr = EN.Precio[Index].ToString();
+            Precio.text = "$" + agr;
+
+            if (EN.jijijija == false)
+            {
+                string ghj = PlayerPrefs.GetInt("currency").ToString();
+                guita.text = "$" + ghj;
+                guita.color = Color.white;
+            }
 
         }
         else if (Piston == true)
@@ -100,6 +151,35 @@ public class AdminCompras : MonoBehaviour
             CP.gameObject.SetActive(true);
             CN.gameObject.SetActive(false);
             CT.gameObject.SetActive(false);
+
+            Base.sprite = PistonImagenes[Index];
+            titulo.text = PI.nom[Index];
+            string jk = PI.HPs[Index].ToString();
+            HP.text = "HP: " + jk;
+
+            string lm = PI.Pesosim[Index].ToString();
+            Peso.text = "Peso: " + lm;
+
+            if (PlayerPrefs.HasKey(PI.pistonKeys[Index]))
+            {
+                Estado.text = "Status: Owned"; // Mostrar que el motor es propiedad
+            }
+            else
+            {
+                Estado.text = "Status: Not Owned"; // Mostrar que el motor no es propiedad
+            }
+
+            titulo.color = PI.colors[Index];
+
+            string agr = PI.Precio[Index].ToString();
+            Precio.text = "$" + agr;
+
+            if (PI.jijijija == false)
+            {
+                string ghj = PlayerPrefs.GetInt("currency").ToString();
+                guita.text = "$" + ghj;
+                guita.color = Color.white;
+            }
         }
 
         else if (Nitro == true)
@@ -177,7 +257,13 @@ public class AdminCompras : MonoBehaviour
         }
 
         
+
         
+
+
+
+
+
     }
 
     public void EngineKaput()

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NitroTienda : MonoBehaviour
+public class PistonTienda : MonoBehaviour
 {
     public string[] nom;
     public int[] HPs;
@@ -13,7 +13,7 @@ public class NitroTienda : MonoBehaviour
 
     public bool jijijija;
 
-    public string[] nitroKeys;
+    public string[] pistonKeys;
 
     public AdminCompras ACV;
 
@@ -29,29 +29,29 @@ public class NitroTienda : MonoBehaviour
 
     }
 
-    public void BuyNitro(int nitroIndex)
+    public void BuyPiston(int pistonIndex)
     {
 
-        nitroIndex = ACV.Index;
+        pistonIndex = ACV.Index;
 
-        if (PlayerPrefs.GetInt("currency") >= Precio[nitroIndex])
+        if (PlayerPrefs.GetInt("currency") >= Precio[pistonIndex])
         {
 
-            if (PlayerPrefs.GetString(nitroKeys[nitroIndex]) != "owned")
+            if (PlayerPrefs.GetString(pistonKeys[pistonIndex]) != "owned")
             {
                 // Aquí podrías agregar la lógica para verificar monedas o recursos
                 // Por simplicidad, asumimos que siempre se puede comprar
-                PlayerPrefs.SetString(nitroKeys[nitroIndex], "owned");
+                PlayerPrefs.SetString(pistonKeys[pistonIndex], "owned");
 
-                Debug.Log("Nitro " + nitroKeys[nitroIndex] + " ahora es tuyo!");
+                Debug.Log("Piston " + pistonKeys[pistonIndex] + " ahora es tuyo!");
 
                 int jhg = PlayerPrefs.GetInt("currency");
 
-                PlayerPrefs.SetInt("currency", jhg - Precio[nitroIndex]);
+                PlayerPrefs.SetInt("currency", jhg - Precio[pistonIndex]);
             }
             else
             {
-                Debug.Log("Ya posees este nitro!");
+                Debug.Log("Ya posees este piston!");
             }
         }
 
