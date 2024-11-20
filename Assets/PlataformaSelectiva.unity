@@ -1193,7 +1193,7 @@ MonoBehaviour:
   currency: {fileID: 2014839220}
   currency2: {fileID: 1792667059}
   currency3: {fileID: 1544911247}
-  currency4: {fileID: 0}
+  currency4: {fileID: 869050840}
   currency5: {fileID: 514107052}
   currency6: {fileID: 172664934}
   carInfo: {fileID: 172317685}
@@ -1205,7 +1205,7 @@ MonoBehaviour:
   engine: {fileID: 882953487}
   piston: {fileID: 1388053491}
   nitro: {fileID: 1884657626}
-  aleron: {fileID: 0}
+  aleron: {fileID: 1355370266}
   turboCargador: {fileID: 1148009135}
   pintura: {fileID: 1244585483}
   MM: {fileID: 1628460236}
@@ -2449,6 +2449,7 @@ MonoBehaviour:
   final: {fileID: 0}
   PP: {fileID: 1244585489}
   nombreEscenaObjetivo: Prueba Manejo
+  PLA: {fileID: 1244585483}
 --- !u!4 &385804306
 Transform:
   m_ObjectHideFlags: 0
@@ -9102,7 +9103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1355370267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9816,7 +9817,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 161979712}
-        m_MethodName: BotonVueltaPiston
+        m_MethodName: BotonVueltaaleron
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11094,9 +11095,9 @@ MonoBehaviour:
   currencyE: {fileID: 1607340135}
   currencyP: {fileID: 635697076}
   currencyN: {fileID: 1544911247}
-  currencyA: {fileID: 0}
+  currencyA: {fileID: 869050840}
   currencyTC: {fileID: 514107052}
-  currencyPintura: {fileID: 0}
+  currencyPintura: {fileID: 172664934}
   AM: {fileID: 161979712}
 --- !u!4 &1628460237
 Transform:
@@ -11702,7 +11703,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1680857457}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1628460236}
+        m_MethodName: botonAleron
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1680857457
 MonoBehaviour:
   m_ObjectHideFlags: 0

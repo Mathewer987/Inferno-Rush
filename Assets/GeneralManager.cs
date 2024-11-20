@@ -15,6 +15,7 @@ public class GeneralManager : MonoBehaviour
     public GameObject final;
     public PanelDataPinturaPosta PP;
     public string nombreEscenaObjetivo = "Prueba Manejo"; // Nombre de la escena objetivo
+    public GameObject PLA;
 
 
     // Start is called before the first frame update
@@ -31,15 +32,28 @@ public class GeneralManager : MonoBehaviour
         }
         DontDestroyOnLoad(this);
 
+        
 
     }
     void Start()
     {
+        if (PLA != null)
+        {
+            DontDestroyOnLoad(PLA); // Asegúrate de que PLA no se destruya al cambiar de escena
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        string nombreDeEscena = SceneManager.GetActiveScene().name;
+
+        if (nombreDeEscena == "PlataformaSelectiva")
+        {
+            PP = PLA.GetComponent<PanelDataPinturaPosta>();
+
+        }
+
         int nakdl = PlayerPrefs.GetInt("IndexPintura");
         mat = PP.materialovich[nakdl];
 

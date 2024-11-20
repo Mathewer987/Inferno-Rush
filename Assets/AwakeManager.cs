@@ -59,7 +59,7 @@ public class AwakeManager : MonoBehaviour
         engine.SetActive(false);
         piston.SetActive(false);
         nitro.SetActive(false);
-        //aleron.SetActive(false);
+        aleron.SetActive(false);
         turboCargador.SetActive(false);
         pintura.SetActive(false);
 
@@ -169,7 +169,7 @@ public class AwakeManager : MonoBehaviour
         engine.SetActive(false);
         piston.SetActive(false);
         nitro.SetActive(false);
-        //aleron.SetActive(false);
+        aleron.SetActive(false);
         turboCargador.SetActive(false);
         pintura.SetActive(false);
 
@@ -208,7 +208,7 @@ public class AwakeManager : MonoBehaviour
         engine.SetActive(false);
         piston.SetActive(false);
         nitro.SetActive(false);
-        //aleron.SetActive(false);
+        aleron.SetActive(false);
         turboCargador.SetActive(false);
         pintura.SetActive(false);
 
@@ -223,7 +223,7 @@ public class AwakeManager : MonoBehaviour
             engine.SetActive(false);
             piston.SetActive(false);
             nitro.SetActive(false);
-            //aleron.SetActive(false);
+            aleron.SetActive(false);
             turboCargador.SetActive(false);
             pintura.SetActive(false);
         }

@@ -35,9 +35,9 @@ public class MejorasManejador : MonoBehaviour
         currencyE.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
         currencyP.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
         currencyN.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
-        //currencyA.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
+        currencyA.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
         currencyTC.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
-        //currencyPintura.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
+        currencyPintura.text = "$" + PlayerPrefs.GetInt("currency").ToString("");
 
     }
 
