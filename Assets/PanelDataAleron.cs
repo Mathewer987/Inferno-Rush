@@ -25,6 +25,10 @@ public class PanelDataAleron : MonoBehaviour
 
     public int indexRevisar;
 
+    public GameObject autoPadre; // El objeto vacío que contiene el auto instanciado
+    public GameObject autinho;
+    public GameObject Aleron;
+
     private void Awake()
     {
         dataCenter.SetActive(false);
@@ -53,10 +57,22 @@ public class PanelDataAleron : MonoBehaviour
 
 
 
+    public void Poner()
+    {
+        
+        Aleron.SetActive(true);
+    }
 
+    public void Sacar()
+    {
+     
+        Aleron.SetActive(false);
+    }
 
     private void FixedUpdate()
     {
+
+       
 
         bool isHovering = false; // Bandera para verificar si estamos sobre algún botón
 
@@ -126,6 +142,8 @@ public class PanelDataAleron : MonoBehaviour
             ChangeButtonColor(clickedButton, Color.green);
             // Forzar la actualización visual del botón
             ForceButtonUpdate(clickedButton);
+
+            Debug.Log(seleccion);
         }
         else
         {

@@ -52,6 +52,8 @@ public class AwakeManager : MonoBehaviour
     public float PSIBase = 14.7f;
     public int Peso;
 
+    public PanelDataAleron PDA;
+
     private void Awake()
     {
         Modificaciones.SetActive(false);
@@ -93,6 +95,10 @@ public class AwakeManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        PDA.autinho = PDA.autoPadre.transform.GetChild(0).gameObject;
+        PDA.Aleron = PDA.autinho.transform.Find("Aleron").gameObject;
+
         toRotate.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
         childObject.transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
 
@@ -117,6 +123,17 @@ public class AwakeManager : MonoBehaviour
         CFPosta = CalcularCaballosDeFuerza(CFSinSuTurbo, PSIBase, CDF5);
 
         PlayerPrefs.SetFloat("CFPosta", CFPosta);
+
+        int hjkk = PlayerPrefs.GetInt("SeleccionAleron");
+        if (hjkk == 0)
+        {
+            PDA.Sacar();
+        }
+
+        else if (hjkk == 1)
+        {
+            PDA.Poner();
+        }
     }
     public float CalcularCaballosDeFuerza(float hpBase, float psiBase, float psiActual)
     {

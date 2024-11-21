@@ -1221,6 +1221,7 @@ MonoBehaviour:
   CFPosta: 0
   PSIBase: 14.7
   Peso: 0
+  PDA: {fileID: 1355370267}
 --- !u!4 &161979713
 Transform:
   m_ObjectHideFlags: 0
@@ -5164,9 +5165,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vehicles:
-  - {fileID: 3813964040552711044, guid: 110f561184787bf42bdc3a0a4cba3887, type: 3}
-  - {fileID: 8649102698306618385, guid: d3ae234b959c3094485670d0c61b9551, type: 3}
-  - {fileID: 5062951870317464229, guid: 717573342c393f64eb7ed1dc2b39cb7f, type: 3}
+  - {fileID: 7168781397017158789, guid: 5ac4c6f465f3fff4f8b292872a03de61, type: 3}
+  - {fileID: 1026372431889831350, guid: 776e9cf59b0f12443889d01a52b8b09a, type: 3}
+  - {fileID: 8889703031045866920, guid: fa3273fb71102164c84ad8769c7de375, type: 3}
 --- !u!4 &818964543
 Transform:
   m_ObjectHideFlags: 0
@@ -7474,6 +7475,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1355370267}
+        m_MethodName: Poner
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1091600992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9139,6 +9151,9 @@ MonoBehaviour:
   CDF: 0
   PSO: 0
   indexRevisar: 0
+  autoPadre: {fileID: 223172563}
+  autinho: {fileID: 0}
+  Aleron: {fileID: 0}
 --- !u!114 &1355370268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11940,6 +11955,17 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 1725288999}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Button, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1355370267}
+        m_MethodName: Sacar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
