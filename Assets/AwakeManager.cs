@@ -18,7 +18,7 @@ public class AwakeManager : MonoBehaviour
     public Text currency4;
     public Text currency5;
     public Text currency6;
-
+    public GameObject PanelJueguinhos;
 
     public Text carInfo;
     public GeneralManager GM;
@@ -56,6 +56,7 @@ public class AwakeManager : MonoBehaviour
 
     private void Awake()
     {
+        PanelJueguinhos.SetActive(false);
         Modificaciones.SetActive(false);
         Principal.SetActive(true);
         engine.SetActive(false);
@@ -133,6 +134,11 @@ public class AwakeManager : MonoBehaviour
         else if (hjkk == 1)
         {
             PDA.Poner();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SalirJueguinhos();
         }
     }
     public float CalcularCaballosDeFuerza(float hpBase, float psiBase, float psiActual)
@@ -270,10 +276,30 @@ public class AwakeManager : MonoBehaviour
         }
     }
 
-    public void startGameButton()
+    public void tick()
     {
+        PanelJueguinhos.SetActive(true);
+    }
+
+    public void SalirJueguinhos()
+    {
+        PanelJueguinhos.SetActive(false);
+
+    }
+
+    public void Monedas()
+    {
+        PlayerPrefs.SetString("Modo De Juego", "Recoger Cosas");
+        SceneManager.LoadScene("Prueba Manejo");
+    }   
+
+    public void Contrareloj()
+    {
+        PlayerPrefs.SetString("Modo De Juego", "Contra Reloj");
         SceneManager.LoadScene("Prueba Manejo");
     }
+
+
     public void tiendovich()
     {
         SceneManager.LoadScene("Tienda");

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Misiones : MonoBehaviour
@@ -42,25 +43,31 @@ public class Misiones : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if (misionsita == Mision.ContraTiempo)
+        if (PlayerPrefs.GetString("Modo De Juego") == "Contra Reloj")
         {
-            time = startTime;
-            resultados.SetActive(false);
-            Meta.SetActive(true);
-            txtTiempo.gameObject.SetActive(true);
+            misionsita = Mision.ContraTiempo;
+
             
         }
 
-        if (misionsita == Mision.RecogerCosas)
+
+        if (PlayerPrefs.GetString("Modo De Juego") == "Recoger Cosas")
         {
-            LA.enabled = true;
-            GH.enabled = true;
+            misionsita = Mision.RecogerCosas;
 
-            resulatadosSpawneo.SetActive(false);
-            Spawner.SetActive(true);
-            cantidadObjeto.gameObject.SetActive(true);
+            if (misionsita == Mision.RecogerCosas)
+            {
+                LA.enabled = true;
+                GH.enabled = true;
 
+                resulatadosSpawneo.SetActive(false);
+                Spawner.SetActive(true);
+                cantidadObjeto.gameObject.SetActive(true);
+
+            }
         }
+
+            
 
         else if (misionsita != Mision.RecogerCosas)
         {
@@ -72,7 +79,19 @@ public class Misiones : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (misionsita == Mision.ContraTiempo)
+
+        if (misionsita == Mision.ContraTiempo && RR.CalentonJ == true)
+        {
+            time = startTime;
+            resultados.SetActive(false);
+            Meta.SetActive(true);
+            txtTiempo.gameObject.SetActive(true);
+
+        }
+
+       
+
+        if (misionsita == Mision.ContraTiempo && RR.CalentonJ == true)
         {
             if (Colu.ColuTermi == true && nein == false)
             {
@@ -149,5 +168,10 @@ public class Misiones : MonoBehaviour
             cantidadObjeto.gameObject.SetActive(false);
 
         }
+    }
+
+    public void Volver()
+    {
+        SceneManager.LoadScene("PlataformaSelectiva");
     }
 }

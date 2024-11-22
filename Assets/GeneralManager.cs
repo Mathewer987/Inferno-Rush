@@ -16,6 +16,7 @@ public class GeneralManager : MonoBehaviour
     public PanelDataPinturaPosta PP;
     public string nombreEscenaObjetivo = "Prueba Manejo"; // Nombre de la escena objetivo
     public GameObject PLA;
+    public GameObject Aleron;
 
 
     // Start is called before the first frame update
@@ -77,10 +78,21 @@ public class GeneralManager : MonoBehaviour
             }
 
         CCR = autinho.transform.Find("Camaro con ruedas").gameObject;
+        Aleron = autinho.transform.Find("Aleron").gameObject;
         final = CCR.transform.Find("CUERPO").gameObject;
         renderer = final.GetComponent<Renderer>();
         renderer.material = mat;
 
+            int hjkk = PlayerPrefs.GetInt("SeleccionAleron");
+            if (hjkk == 0)
+            {
+                Aleron.SetActive(false);
+            }
+
+            else if (hjkk == 1)
+            {
+                Aleron.SetActive(true);
+            }
 
         }
     }
