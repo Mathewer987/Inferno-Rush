@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class Misiones : MonoBehaviour
 {
-
+    public bool jkiu;
     public float time;
     public float startTime;
     public Text txtTiempo;
@@ -29,7 +29,8 @@ public class Misiones : MonoBehaviour
     public Text cantidadObjeto;
     public ObjectSpawner LA;
     public CollisionObjeto GH;
-
+    public Text Premio;
+    public GameObject newMejor;
 
 
 
@@ -47,7 +48,14 @@ public class Misiones : MonoBehaviour
         {
             misionsita = Mision.ContraTiempo;
 
-            
+            if (misionsita == Mision.ContraTiempo)
+            {
+                time = startTime;
+                resultados.SetActive(false);
+                Meta.SetActive(true);
+                txtTiempo.gameObject.SetActive(true);
+
+            }
         }
 
 
@@ -80,71 +88,91 @@ public class Misiones : MonoBehaviour
     void Update()
     {
 
-        if (misionsita == Mision.ContraTiempo && RR.CalentonJ == true)
-        {
-            time = startTime;
-            resultados.SetActive(false);
-            Meta.SetActive(true);
-            txtTiempo.gameObject.SetActive(true);
-
-        }
+        
 
        
-
-        if (misionsita == Mision.ContraTiempo && RR.CalentonJ == true)
+        if (RR.CalentonJ == true)
         {
-            if (Colu.ColuTermi == true && nein == false)
+            if (misionsita == Mision.ContraTiempo)
             {
-                Ganaste = true;
-            }
-
-            if (termino == false)
-            {
-                time -= Time.deltaTime;
-
-            }
-            //cambia de color cuando llega a cero
-            if (time < 4)
-            {
-                txtTiempo.color = Color.red;
-            }
-
-            else
-            {
-                txtTiempo.color = Color.white;
-
-            }
-            txtTiempo.text = time.ToString();
-
-            if (time <= 0 || Colu.ColuTermi == true)
-            {
-                termino = true;
-                resultados.SetActive(true);
-
-                if (Ganaste == false)
+                if (Colu.ColuTermi == true && nein == false)
                 {
-                    time = 0;
-                    txtEstado.text = "Perdiste";
-                    txtEstado.color = Color.red;
-                    nein = true;
+                    Ganaste = true;
                 }
 
-                else if (Ganaste == true && nein == false)
+                if (termino == false)
                 {
-                    txtEstado.text = "Ganaste";
-                    txtEstado.color = Color.green;
+                    time -= Time.deltaTime;
 
-                    if (Mathf.Abs(time) > Mejor)
+                }
+                //cambia de color cuando llega a cero
+                if (time < 4)
+                {
+                    txtTiempo.color = Color.red;
+                }
+
+                else
+                {
+                    txtTiempo.color = Color.white;
+
+                }
+                txtTiempo.text = time.ToString();
+
+                if (time <= 0 || Colu.ColuTermi == true)
+                {
+                    termino = true;
+                    resultados.SetActive(true);
+
+                    if (Ganaste == false)
                     {
-                        Mejor = time;
-                        RR.Record = Mejor;
+                        time = 0;
+                        txtEstado.text = "Perdiste";
+                        txtEstado.color = Color.red;
+                        nein = true;
                     }
-                }
 
-                txtTempo.text = time.ToString();
-                txtMejorTiempo.text = Mejor.ToString();
+                    else if (Ganaste == true && nein == false)
+                    {
+                        txtEstado.text = "Ganaste";
+                        txtEstado.color = Color.green;
+                        Mejor = PlayerPrefs.GetFloat("MT");
+
+                        if (Mathf.Abs(time) > Mejor)
+                        {
+                            Mejor = time;
+                            RR.Record = Mejor;
+                            PlayerPrefs.SetFloat("MT", time);
+                            newMejor.SetActive(true);
+                        }
+
+                        else
+                        {
+                            newMejor.SetActive(false);
+
+                        }
+
+
+                    }
+
+                    txtTempo.text = time.ToString();
+                    txtMejorTiempo.text = Mejor.ToString();
+                    float jpg = 1888.89f * time + 2111.11f;
+                    Premio.text = "$" + Mathf.Round(jpg).ToString();
+                    int uiy = PlayerPrefs.GetInt("currency");
+
+                    if (jkiu == false)
+                    {
+                        PlayerPrefs.SetInt("currency", uiy + (int)Mathf.Round(jpg));
+                        jkiu = true;
+                    }
+
+
+
+
+                }
             }
         }
+       
 
         else if (misionsita != Mision.ContraTiempo)
         {
