@@ -56,6 +56,7 @@ public class AwakeManager : MonoBehaviour
 
     private void Awake()
     {
+        //PlayerPrefs.SetFloat("MT", 0f);
         PanelJueguinhos.SetActive(false);
         Modificaciones.SetActive(false);
         Principal.SetActive(true);

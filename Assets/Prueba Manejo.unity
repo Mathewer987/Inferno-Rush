@@ -13783,7 +13783,8 @@ MonoBehaviour:
   LA: {fileID: 286754774}
   GH: {fileID: 114188229299982174, guid: 860f8716bdbb43240910c5ed4fbb0dce, type: 3}
   Premio: {fileID: 1051246708}
-  newMejor: {fileID: 0}
+  newMejor: {fileID: 259761844}
+  iop: 0
 --- !u!4 &2070076976
 Transform:
   m_ObjectHideFlags: 0
@@ -14002,6 +14003,11 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 2061569280}
+    - target: {fileID: 5373713740831561836, guid: fa3273fb71102164c84ad8769c7de375,
+        type: 3}
+      propertyPath: gearChange
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7976095035211793119, guid: fa3273fb71102164c84ad8769c7de375,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14091,6 +14097,11 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 2061569280}
+    - target: {fileID: 6309908823758574156, guid: 5ac4c6f465f3fff4f8b292872a03de61,
+        type: 3}
+      propertyPath: gearChange
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7167139135694483879, guid: 5ac4c6f465f3fff4f8b292872a03de61,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14261,5 +14272,10 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 2061569280}
+    - target: {fileID: 4608235383599745138, guid: 776e9cf59b0f12443889d01a52b8b09a,
+        type: 3}
+      propertyPath: gearChange
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 776e9cf59b0f12443889d01a52b8b09a, type: 3}

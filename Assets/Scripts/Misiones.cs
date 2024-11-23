@@ -31,6 +31,8 @@ public class Misiones : MonoBehaviour
     public CollisionObjeto GH;
     public Text Premio;
     public GameObject newMejor;
+    public bool iop;
+
 
 
 
@@ -143,12 +145,18 @@ public class Misiones : MonoBehaviour
                             RR.Record = Mejor;
                             PlayerPrefs.SetFloat("MT", time);
                             newMejor.SetActive(true);
+                            Debug.Log("Es mayor");
+                            iop = true;
                         }
 
                         else
                         {
-                            newMejor.SetActive(false);
-
+                            if (iop == false)
+                            {
+                                newMejor.SetActive(false);
+                                Debug.Log("Es menor");
+                            }
+                            
                         }
 
 
