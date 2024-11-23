@@ -32,8 +32,11 @@ public class Misiones : MonoBehaviour
     public Text Premio;
     public GameObject newMejor;
     public bool iop;
+    public Text guita;
+    public bool jkl;
 
-
+    public int gjh;
+    public int uiy;
 
 
     internal enum Mision
@@ -164,7 +167,11 @@ public class Misiones : MonoBehaviour
 
                     txtTempo.text = time.ToString();
                     txtMejorTiempo.text = Mejor.ToString();
-                    float jpg = 1888.89f * time + 2111.11f;
+                    float jpg = 131.78f * time + 3868.22f;
+                    if (time == 0)
+                    {
+                        jpg = 0;
+                    }
                     Premio.text = "$" + Mathf.Round(jpg).ToString();
                     int uiy = PlayerPrefs.GetInt("currency");
 
@@ -195,6 +202,26 @@ public class Misiones : MonoBehaviour
             {
                 resulatadosSpawneo.SetActive(true);
                 cantidadObjeto.color = Color.green;
+               
+
+                if (jkl == false)
+                {
+                    gjh = Random.Range(2000, 11001);
+                    uiy = PlayerPrefs.GetInt("currency");
+                    jkl = true;
+
+                }
+
+
+                if (jkiu == false)
+                {
+                    PlayerPrefs.SetInt("currency", uiy + gjh);
+                    jkiu = true;
+                }
+
+                guita.text = "$" + gjh.ToString();
+
+
             }
         }
 
@@ -203,6 +230,11 @@ public class Misiones : MonoBehaviour
             resulatadosSpawneo.SetActive(false);
             cantidadObjeto.gameObject.SetActive(false);
 
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Volver();
         }
     }
 

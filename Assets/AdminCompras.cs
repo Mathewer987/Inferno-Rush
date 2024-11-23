@@ -66,7 +66,8 @@ public class AdminCompras : MonoBehaviour
         PT.SetActive(false);
         NT.SetActive(false);
         TT.SetActive(false);
-        PlayerPrefs.SetInt("currency", 1900000000);
+        //PlayerPrefs.SetInt("currency", 1900000000);
+        //PlayerPrefs.SetInt("currency", 1900000000);
 
 
     }
