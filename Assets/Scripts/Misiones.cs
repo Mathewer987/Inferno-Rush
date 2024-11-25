@@ -34,6 +34,8 @@ public class Misiones : MonoBehaviour
     public bool iop;
     public Text guita;
     public bool jkl;
+    public Autinhos auto;
+    public GameObject car;
 
     public int gjh;
     public int uiy;
@@ -93,9 +95,19 @@ public class Misiones : MonoBehaviour
     void Update()
     {
 
-        
+        foreach (GameObject auto in auto.autinhos)
+        {
 
-       
+            if (auto.activeInHierarchy)
+            {
+
+                car = auto;
+
+            }
+        }
+
+        RR = car.GetComponent<ControlPosta>();
+
         if (RR.CalentonJ == true)
         {
             if (misionsita == Mision.ContraTiempo)
