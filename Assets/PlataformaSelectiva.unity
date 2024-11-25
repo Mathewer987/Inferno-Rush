@@ -5659,9 +5659,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vehicles:
-  - {fileID: 7168781397017158789, guid: 5ac4c6f465f3fff4f8b292872a03de61, type: 3}
-  - {fileID: 1026372431889831350, guid: 776e9cf59b0f12443889d01a52b8b09a, type: 3}
-  - {fileID: 8889703031045866920, guid: fa3273fb71102164c84ad8769c7de375, type: 3}
+  - {fileID: 3699279853943173435, guid: f2f066563ed1aee45bd960315e0e1a57, type: 3}
+  - {fileID: 6390882220175254417, guid: 223bf5ccb4510d94e82c3ed538c522dc, type: 3}
+  - {fileID: 2519193966821879674, guid: 36dae0e9636584449918cd6c60d7c6bb, type: 3}
 --- !u!4 &818964543
 Transform:
   m_ObjectHideFlags: 0
