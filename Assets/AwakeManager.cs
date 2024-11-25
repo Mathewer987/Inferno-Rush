@@ -68,7 +68,7 @@ public class AwakeManager : MonoBehaviour
         pintura.SetActive(false);
 
         vehiclePointer = PlayerPrefs.GetInt("pointer");
-        //PlayerPrefs.SetInt("currency", 0);
+        PlayerPrefs.SetInt("currency", 100000000);
 
         // Aquí instancias el vehículo
         childObject = Instantiate(listOfVehicles.vehicles[vehiclePointer], Vector3.zero, Quaternion.identity) as GameObject;

@@ -22,7 +22,22 @@ public class PanelDataPinturaPosta : MonoBehaviour
         MatNum = PlayerPrefs.GetInt("IndexPintura");
         autinho = autoPadre.transform.GetChild(0).gameObject;
         CCR = autinho.transform.Find("Camaro con ruedas").gameObject;
-        final = CCR.transform.Find("CUERPO").gameObject;
+
+
+        //final = CCR.transform.Find("CUERPO").gameObject;
+
+        Transform[] cuerpos = CCR.GetComponentsInChildren<Transform>(true);
+
+        foreach (Transform cuerpo in cuerpos)
+        {
+            // Verificamos si el GameObject está activo
+            if (cuerpo.name == "CUERPO" && cuerpo.gameObject.activeSelf)
+            {
+                final = cuerpo.gameObject;
+                break; // Salimos del bucle al encontrar el activo
+            }
+        }
+
         renderer = final.GetComponent<Renderer>();
         renderer.material = nuevoMaterial;
 
