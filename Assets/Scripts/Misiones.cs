@@ -36,6 +36,7 @@ public class Misiones : MonoBehaviour
     public bool jkl;
     public Autinhos auto;
     public GameObject car;
+    public RawImage MiniMapa;
 
     public int gjh;
     public int uiy;
@@ -51,6 +52,7 @@ public class Misiones : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        MiniMapa.gameObject.SetActive(false);
         if (PlayerPrefs.GetString("Modo De Juego") == "Contra Reloj")
         {
             misionsita = Mision.ContraTiempo;
@@ -110,6 +112,8 @@ public class Misiones : MonoBehaviour
 
         if (RR.CalentonJ == true)
         {
+            MiniMapa.gameObject.SetActive(true);
+
             if (misionsita == Mision.ContraTiempo)
             {
                 if (Colu.ColuTermi == true && nein == false)
@@ -247,6 +251,11 @@ public class Misiones : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Volver();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene("Prueba Manejo");
         }
     }
 
