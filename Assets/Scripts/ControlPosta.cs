@@ -119,18 +119,18 @@ public class ControlPosta : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "PlataformaSelectiva") return;
         AgregarFuerzaAbajo();
         AnimacionRuedas();
-      
-            Movela();
-
-        
+        Movela();
+        CalcularPotencia();
+        Desacelera2();
         Rotala();
         DameFriccion();
-        CalcularPotencia();
         ajustarTraccion();
         enanoBariloche();
-        Desacelera2();
         ActivaNitruvish();
         MV = IM.vertical;
+        
+
+       
 
 
         if (CalentonJ == false && IsGrounded())
@@ -151,6 +151,7 @@ public class ControlPosta : MonoBehaviour
         {
             CalentonJ = !CalentonJ;
         }
+
 
     }
 
