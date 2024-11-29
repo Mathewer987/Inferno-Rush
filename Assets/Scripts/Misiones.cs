@@ -37,6 +37,9 @@ public class Misiones : MonoBehaviour
     public Autinhos auto;
     public GameObject car;
     public RawImage MiniMapa;
+    public RawImage EstadoVolcan;
+    public RawImage CalentamientoLLantas;
+
 
     public int gjh;
     public int uiy;
@@ -53,6 +56,8 @@ public class Misiones : MonoBehaviour
     void Awake()
     {
         MiniMapa.gameObject.SetActive(false);
+        EstadoVolcan.gameObject.SetActive(false);
+        CalentamientoLLantas.gameObject.SetActive(true);
         if (PlayerPrefs.GetString("Modo De Juego") == "Contra Reloj")
         {
             misionsita = Mision.ContraTiempo;
@@ -113,6 +118,20 @@ public class Misiones : MonoBehaviour
         if (RR.CalentonJ == true)
         {
             MiniMapa.gameObject.SetActive(true);
+            CalentamientoLLantas.gameObject.SetActive(false);
+
+
+            if (Input.GetKey(KeyCode.C))
+            {
+                MiniMapa.gameObject.SetActive(false);
+                EstadoVolcan.gameObject.SetActive(true);
+            }
+            // Si la tecla C no está presionada, muestra el MiniMapa y oculta el EstadoVolcan.
+            else
+            {
+                MiniMapa.gameObject.SetActive(true);
+                EstadoVolcan.gameObject.SetActive(false);
+            }
 
             if (misionsita == Mision.ContraTiempo)
             {
@@ -147,7 +166,7 @@ public class Misiones : MonoBehaviour
                     if (Ganaste == false)
                     {
                         time = 0;
-                        txtEstado.text = "Perdiste";
+                        txtEstado.text = "El volcan erupciono!!";
                         txtEstado.color = Color.red;
                         nein = true;
                     }

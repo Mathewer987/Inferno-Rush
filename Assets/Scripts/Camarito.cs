@@ -12,6 +12,7 @@ public class Camarito : MonoBehaviour
     private float Velocidad;
     public float defaltFOV = 0, desiredFOV = 0;
     [Range(0, 5)] public float tiempoFluido = 0;
+    public Vibrala vibrala;
 
     private void Awake()
     {
@@ -23,18 +24,24 @@ public class Camarito : MonoBehaviour
 
     private void FixedUpdate()
     {
-        SeguirConLike();
+        
+            SeguirConLike();
+        
+
+      
         BoosteaFOV();
     }
 
     private void SeguirConLike()
     {
+        
         Velocidad = Mathf.Lerp(Velocidad, RR.KPH / 2, Time.deltaTime);
 
         gameObject.transform.position = Vector3.Lerp(transform.position, Hijito.transform.position, Time.deltaTime * Velocidad);
         gameObject.transform.LookAt(Player.gameObject.transform.position);
     }
 
+   
     private void BoosteaFOV()
     {
         if (Input.GetKey(KeyCode.LeftShift) && !RR.reverse)
